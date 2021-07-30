@@ -6,6 +6,12 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "node-cron": "*",
+    "mqtt": "4.2.8",
+    "log4js": "~6.3.0",
+    "@log4js-node/smtp": "*",
+    "fs": "*",
+    "ejs": "~2.6.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
