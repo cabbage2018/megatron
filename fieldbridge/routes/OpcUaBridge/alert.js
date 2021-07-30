@@ -32,7 +32,11 @@ log4js.configure({
     },
     other: {
       //其他日志
-      type: 'dateFile',
+      type: 'file',
+      maxLogSize: 8388608,
+      backups: 3,
+      compress : true,
+      keepFileExt : true,
       filename: '/logs/other',
       pattern: 'yyyy-MM-dd.log',
       alwaysIncludePattern: true,
@@ -52,10 +56,9 @@ log4js.configure({
         filename: 'latest.log',
         message: 'See the attachment for the latest logs'
       },
-      // sendInterval: 3600*24,
+      sendInterval: 3600*1,
       recipients: config.email.recipients, //接收邮件的邮箱
     },
-
   },
 
   categories: {
@@ -63,11 +66,14 @@ log4js.configure({
     default: { appenders: ['stdout', 'request', 'email'], level: 'error' },
     //default 当你使用log4js.getLogger(level)，level不传，默认使用default
     error: { appenders: ['stdout', 'error', 'email'], level: 'error' },
-    other: { appenders: ['other'], level: 'info' },
+    email: { appenders: ['email', 'stdout'], level: 'error' },
+    other: { appenders: ['other'], level: 'all' },
   },
 });
 
-let log = log4js.getLogger('routes::OpcUaBridge::report')
+let log = log4js.getLogger('routes::OpcUaBridge::alert')
+let track = log4js.getLogger('other')
+
 log.debug('debug Project')
 log.info('info Project')
 log.warn('warn Project')
