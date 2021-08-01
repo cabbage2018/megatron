@@ -57,7 +57,6 @@ if (process.env.NODE_ENV === 'production') {
         type: '@log4js-node/smtp',
         sender: config.email.sender, //发送邮件的邮箱
         subject: config.email.subject, //标题
-        from: config.email.from,
         SMTP: {
           host: config.email.host, 
           port: config.email.port,

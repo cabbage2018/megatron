@@ -2,17 +2,17 @@
 let bridge = require('./bridge')
 let cron = require('node-cron')
 
-let log4js = require('log4js')
-let log = log4js.getLogger('bridge::scheduler')
-
-let email = log4js.getLogger('email')
 let alert = require('./alert')
 let report = require('./report')
+
+let log4js = require('log4js')
+let log = log4js.getLogger('bridge::scheduler')
+let email = log4js.getLogger('email')
 
 // to minimize the downtime of this program, first circle job will initialize a second onion task, which will disappear when finished. 
 let taskRoutine = cron.schedule('57 */1 * * * *', () => {
 
-  // report.postman(new Date())
+  email.fatal(new Date())
   
   var periodicJob4Reading = setTimeout(
     async () => {
