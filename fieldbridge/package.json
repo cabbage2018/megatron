@@ -6,10 +6,13 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "node-opcua": "~2.47.0",
+    "nodemailer-smtp-transport": "*",
+    "nodemailer": "~6.6.2",
     "node-cron": "*",
     "mqtt": "4.2.8",
     "log4js": "~6.3.0",
-    "@log4js-node/smtp": "*",
+    "@log4js-node/smtp": "1.1.0",
     "fs": "*",
     "ejs": "~2.6.1",
     "cookie-parser": "~1.4.4",

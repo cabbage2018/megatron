@@ -1,75 +1,5 @@
 'use strict'
 let log4js = require('log4js')
-let config = require('./options.json')
-
-log4js.configure({
-  appenders: {
-    stdout: {
-      //控制台输出
-      type: 'stdout',
-    }, 
-    request: {
-      //请求日志
-      type: 'dateFile',
-      filename: '/logs/request', // 需要手动建好目录,如图1所示
-      // 指定pattern后无限备份
-      pattern: 'yyyy-MM-dd_access.log',
-      // 不指定pattern时若为true会使用默认值'.yyyy-MM-dd'
-      alwaysIncludePattern: true,
-    },
-    error: {
-      //错误日志
-      type: 'dateFile',
-      filename: '/logs/error',
-      pattern: 'yyyy-MM-dd.log',
-      alwaysIncludePattern: true,
-    },
-    fatal: {
-      type: 'dateFile',
-      filename: '/logs/error',
-      pattern: 'yyyy-MM-dd.log',
-      alwaysIncludePattern: true,
-    },
-    other: {
-      //其他日志
-      type: 'file',
-      maxLogSize: 8388608,
-      backups: 3,
-      compress : true,
-      keepFileExt : true,
-      filename: '/logs/other',
-      pattern: 'yyyy-MM-dd.log',
-      alwaysIncludePattern: true,
-    },
-    email: {
-      //发送错误报告至邮箱
-      type: '@log4js-node/smtp',
-      sender: config.email.sender, //发送邮件的邮箱
-      subject: config.email.subject, //标题
-      SMTP: {
-        host: config.email.host, //smtp.qq.com 这里我使用了QQ邮箱，你可以换成其他
-        port: config.email.port,
-        auth: config.email.auth, //auth { user: 'xxx@qq.com', pass: '密码' }
-      },
-      attachment: {
-        enable: true,
-        filename: 'latest.log',
-        message: 'See the attachment for the latest logs'
-      },
-      sendInterval: 3600*1,
-      recipients: config.email.recipients, //接收邮件的邮箱
-    },
-  },
-
-  categories: {
-    //email 方便得知项目bug
-    default: { appenders: ['stdout', 'request', 'email'], level: 'error' },
-    //default 当你使用log4js.getLogger(level)，level不传，默认使用default
-    error: { appenders: ['stdout', 'error', 'email'], level: 'error' },
-    email: { appenders: ['email', 'stdout'], level: 'error' },
-    other: { appenders: ['other'], level: 'all' },
-  },
-});
 
 let log = log4js.getLogger('routes::OpcUaBridge::alert')
 let track = log4js.getLogger('other')
@@ -111,3 +41,45 @@ SMTP 端口 587
 
 SMTP 加密方法 STARTTLS
 */
+
+var nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
+function email(jsonObject) {
+
+  let messageString = JSON.stringify(jsonObject)
+
+  // 开启一个 SMTP 连接池
+  var transport = nodemailer.createTransport( 
+    smtpTransport( {
+      host: config.email.host, // 主机，各服务商的主机地址不同，比如qq的是smtp.qq.com
+      secure: true, // 使用 SSL
+      secureConnection: true, // 使用 SSL
+      port: config.email.port, // 网易的SMTP端口，各个服务商端口号不同，比如qq的是465
+      auth: config.email.auth
+    }
+  ));
+
+// 设置邮件内容
+var mailOptions = {
+  from: config.email.from, // 发件人地址
+  to: config.email.recipients, // 收件人列表,逗号分隔，可以放多个
+  subject: config.email.sender, // 标题
+  html: messageString // html 内容
+}
+  
+// 发送邮件
+  transport.sendMail(mailOptions, function(error, response){
+    if(error){
+      log.debug(error);
+    }else{
+      log.info("Message send ok");
+    }
+
+    transport.close(); // 如果没用，关闭连接池
+    log.warn(response)
+  });
+}
+
+module.exports = {
+  email: email
+}

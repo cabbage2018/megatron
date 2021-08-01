@@ -2,7 +2,13 @@
 
 let profilingDictionary = new Map()
 const mqtt = require('mqtt')
-
+const {
+  AttributeIds,
+  OPCUAClient,
+  TimestampsToReturn,
+} = require('node-opcua');
+let log4js = require('log4js')
+let email = log4js.getLogger('email')
 
 function deliver(MqttsOptions, signalArray) {
 
@@ -42,7 +48,7 @@ function query(spaceConfigure) {
   let acquisitionPromise = new Promise(async function (resolve, reject) {    
     
     let client = OPCUAClient.create({
-      endpoint_must_exist: false
+      endpointMustExist: false
     })
 
     client.on("backoff", (retry, delay) => {
@@ -91,4 +97,5 @@ async function scan(dataSourceWrapper) {
 module.exports = {
   scan: scan,
   acquire: acquire,
+  query: query,
 }
