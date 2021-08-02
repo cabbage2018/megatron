@@ -1,10 +1,32 @@
 {
   "name": "fieldbridge",
-  "version": "0.0.0",
+  "version": "21.33.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "pkg": "pkg . --out-path=dist/",
+    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 600000"
   },
+
+  "bin": "app.js",
+  "pkg": {
+    "scripts": "routes/**/*.js",
+    "assets": "views/**/*",
+    "targets": [
+      "node10-windows-arm64"
+    ],
+    "outputPath": "dist"
+  },
+
+  "author": "fungi0",
+  "devDependencies": {
+    "node-opcua": "~2.47.0",
+    "mqtt": "4.2.8",
+    "log4js": "~6.3.0",
+    "chai": "^4.2.0",
+    "mocha": "~7.2.0"
+  },
+  "https_proxy": "http://'z0040dne':'123Abc!@#'@19.0.2.235:8083",
   "dependencies": {
     "node-opcua": "~2.47.0",
     "nodemailer-smtp-transport": "*",

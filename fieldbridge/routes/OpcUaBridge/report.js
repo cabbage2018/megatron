@@ -1,8 +1,16 @@
 'use strict'
 let log4js = require('log4js')
-const log = log4js.getLogger('routes::report')
+let log = log4js.getLogger('routes::report')
 let nodemailer  = require('nodemailer')
 let mailoptions = require('../../config/mailoptions.json')
+
+log.debug('debug Project')
+log.info('info Project')
+log.warn('warn Project')
+log.error('error Project')
+log.fatal('fatal Project')
+log.mark('mark Project')
+
 function postman(jsonObject){
   let textString = JSON.stringify(jsonObject) + "@" + __filename
   let transport = nodemailer.createTransport(/*'SMTP', */{

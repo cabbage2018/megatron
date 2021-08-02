@@ -65,4 +65,7 @@ typings/
 config/
 
 ### 
-package-lock*
+package-lock.json*
+
+dist/
+package/

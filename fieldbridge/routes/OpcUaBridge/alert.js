@@ -4,44 +4,6 @@ let log4js = require('log4js')
 let log = log4js.getLogger('routes::OpcUaBridge::alert')
 let track = log4js.getLogger('other')
 
-log.debug('debug Project')
-log.info('info Project')
-log.warn('warn Project')
-log.error('error Project')
-log.fatal('fatal Project')
-log.mark('mark Project')
-
-/*
-Outlook.com 的POP、IMAP 和 SMTP 设置
-如果想将 Outlook.com 帐户添加到支持 POP 或 IMAP 的另一电子邮件程序，将需要进行以下手动服务器设置。
-
-注意: 
-
-传入和传出服务器的详细信息都相同。
-
-POP 访问是被默认禁用的。 若要启用 POP 访问，请参阅在 Outlook.com 中启用 POP 访问。
-
-Outlook.com SPA 帐户不需要安全密码 (身份验证) 。
-
-IMAP 服务器名称 outlook.office365.com
-
-IMAP 端口 993
-
-IMAP 加密方法 TLS
-
-POP 服务器名称 outlook.office365.com
-
-POP 端口 995
-
-POP 加密方法 TLS
-
-SMTP 服务器名称 smtp-mail.outlook.com
-
-SMTP 端口 587
-
-SMTP 加密方法 STARTTLS
-*/
-
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
 function email(jsonObject) {
