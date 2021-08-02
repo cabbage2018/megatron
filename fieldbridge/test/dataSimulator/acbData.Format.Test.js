@@ -24,12 +24,11 @@ log4js.configure({
   },
   categories: {
     default: { appenders: ['stdout', 'request', 'other'], level: 'all' },
-    access: { appenders: ['request'], level: 'info' }
+    access: { appenders: ['request'], level: 'error'}
   }
 })
 let debug = log4js.getLogger('acbData.Format.Test').debug
-let access = log4js.getLogger('request')
-
+let access = log4js.getLogger('access')
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 describe(__filename, function () {
   describe('7.1.1 Prepare a list of acb equipment data', function () {
@@ -61,6 +60,7 @@ describe(__filename, function () {
 
   describe('7.1.2 Prepare a list of acb equipment data', function () {
     it(`7.7.4 generate static data with correct name and internal-name`, function () {
+      ///have to rad from an existing file for verification
       let dataset = {}
       dataset.timestamp = new Date()
       dataset._embedded = {}

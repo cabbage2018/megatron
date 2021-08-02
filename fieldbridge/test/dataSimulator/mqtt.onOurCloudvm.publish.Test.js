@@ -68,25 +68,23 @@ describe(__filename, function () {
         client.end()
 
         done()
-
         log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
       })
     
       client.on('connect', function () {
         //sub
         client.subscribe('powerscada/pm')
-        // client.subscribe('#')
+        client.subscribe('#')
 
         //pub
         client.publish('powerscada/pm', JSON.stringify(signalArray), (err)=>{
-          // done(err)
+          done(err)
         })
         log.warn('mqtt connected successfully~')
       })
     })
 
     after(() => {
-      log.debug('pass->' + '7.7.4 test.mosquitto.org:8883')
     })
   })
 })

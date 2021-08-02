@@ -12,33 +12,24 @@ let email = log4js.getLogger('email')
 let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
-
   let deliverPromise = new Promise(async function (resolve, reject) {
-
-    let client = mqtt.connect(MqttsOptions.url, MqttsOptions.options)
-
-    client.on('report', function () {
-      tracer.debug('report: ', report)
-    })
-
-    client.on('error', function (err) {
-      reject(err)
-      tracer.error('mqtt connect #', err)
-      client.end()
-    })
-
-    client.on('message', function (topic, message) {
-      // console.log(`MQTTs deliver topic=${topic}, message=${message}`)
-    })
-
-    client.on('connect', function () {
-      client.subscribe(MqttsOptions.subscribeTopic)//"/gw"
-    })
-
-    client.subscribe(MqttsOptions.subscribeTopic)
-    client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err)=>{
-      resolve(err)
-    })
+		let client = mqtt.connect(MqttsOptions.url, MqttsOptions.options)	
+		client.on('error', function (err) {
+			log.error('mqtt connect #', err)
+			client.end()
+			reject(err)
+		})	
+		client.on('message', function (topic, message) {
+			log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
+		})	
+		client.on('connect', function () {
+			client.subscribe(MqttsOptions.subscribeTopic)
+			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err)=>{
+				log.error(err)
+				resolve(err)
+			})	
+			resolve('Connected mqtt successfully!')
+		})
   })
   return deliverPromise
 }
@@ -254,27 +245,22 @@ function format(resultObjectArray) {
 function acquire() { }
 
 function query(spaceConfigure, bulksize = 1500, bulkMode = false) {
-
   let acquisitionPromise = new Promise(async function (resolve, reject) {    
     let client = OPCUAClient.create({
       endpointMustExist: false
     })
-
     client.on("backoff", (retry, delay) => {
       profilingDictionary.set('backoff' + spaceConfigure.endpointUrl + retry + delay, "alarm, need human being inter-act")
     })
-
     client.on("error", (e) => {
       let r = e
       r.timestamp = new Date()
       profilingDictionary.set('client.error', r)
       reject(e)
     })
-
     await client.connect(spaceConfigure.endpointUrl)
     const session = await client.createSession()
     console.log(`${session} @ [${new Date().toISOString()}] "session created"`)
-
     try {
       var responseValues = [];
       if(bulkMode) {
@@ -293,67 +279,47 @@ function query(spaceConfigure, bulksize = 1500, bulkMode = false) {
       } else {
         ///discrete reading
         for(var i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
-          let value = await session.readVariableValue(spaceConfigure.nodeIds)
-          responseValues.push(value)
+					let example = {}
+					example.response = await session.readVariableValue(spaceConfigure.nodeIds[i].address)
+					example.name = spaceConfigure.nodeIds[i].deviceId
+          responseValues.push(example)
         }
       }
-
       log.debug(`updated ${responseValues.length} data points`)
       resolve(responseValues)
     }
     catch (err) {
-      reject(err)
-      let r = err
-      r.timestamp = new Date()
-      profilingDictionary.set('session.error', r)
-
       await session.close()
       await client.disconnect()
+      let r = err
+      r.timestamp = new Date()
+			reject(err)
     }
-
     await session.close()
     await client.disconnect()
-
   })
-
   return acquisitionPromise
 }
 
-async function scan(dataSourceWrapper) {
-	
-	let client = mqtt.connect( 'mqtt://47.114.158.70:1883',
-	{
-		username : 'rw',
-		password : 'readwrite',
-		qos:1
-	})
-	log.info(client)
+async function scan() {
+	let dataSourceWrapper = require('../../config/spaces.json')
+	query(dataSourceWrapper)
+	.then((responseValues)=>{
+		log.debug(responseValues)
 
-	client.on('error', function (err) {
-		log.error('mqtt connect #', err)
-		client.end()
-	})
+		let dataset = format(responseValues)
 
-	client.on('message', function (topic, message) {
-		log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
-	})
-
-	client.on('connect', function () {
-		//sub
-		client.subscribe('powerscada_testmachine')
-		client.subscribe('#')
-
-		//pub
-		client.publish('powerscada_testmachine', JSON.stringify({timestamp: new Date(), filename: __dirname}), (err)=>{
-			log.error(err)
+		deliver(mqttOptions, dataset)
+		.then((acknowledge)=>{
+			log.info(acknowledge)
 		})
-
-		log.warn('mqtt connected successfully~')
+		.catch((e)=>{
+			log.error(e)// need email to notify project management if necessary
+		})
 	})
+	.catch((err)=>{log.error(err)})	
 }
-
 scan()
-
 
 module.exports = {
   scan: scan,
