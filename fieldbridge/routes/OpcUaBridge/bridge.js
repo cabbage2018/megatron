@@ -320,8 +320,40 @@ function query(spaceConfigure, bulksize = 1500, bulkMode = false) {
 }
 
 async function scan(dataSourceWrapper) {
+	
+	let client = mqtt.connect( 'mqtt://47.114.158.70:1883',
+	{
+		username : 'rw',
+		password : 'readwrite',
+		qos:1
+	})
+	log.info(client)
 
+	client.on('error', function (err) {
+		log.error('mqtt connect #', err)
+		client.end()
+	})
+
+	client.on('message', function (topic, message) {
+		log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
+	})
+
+	client.on('connect', function () {
+		//sub
+		client.subscribe('powerscada_testmachine')
+		client.subscribe('#')
+
+		//pub
+		client.publish('powerscada_testmachine', JSON.stringify({timestamp: new Date(), filename: __dirname}), (err)=>{
+			log.error(err)
+		})
+
+		log.warn('mqtt connected successfully~')
+	})
 }
+
+scan()
+
 
 module.exports = {
   scan: scan,

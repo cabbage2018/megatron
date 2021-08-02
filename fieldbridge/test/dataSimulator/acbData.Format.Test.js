@@ -1,13 +1,39 @@
 'use strict'
 let expect = require('chai').expect
 let log4js = require('log4js')
-log4js.configure(require('./log'))
+log4js.configure({
+  appenders: {
+    stdout: {
+      type: 'stdout',
+    }, 
+    request: {
+      type: 'dateFile',
+      filename: './logs/request',
+      pattern: 'yyyy-MM-dd_access.log',
+      alwaysIncludePattern: true,
+    },
+    other: {
+      type: 'file',
+      maxLogSize: 8388608,
+      backups: 3,
+      compress : false,
+      keepFileExt : true,
+      filename: './logs/testing.log',
+      alwaysIncludePattern: true,
+    },
+  },
+  categories: {
+    default: { appenders: ['stdout', 'request', 'other'], level: 'all' },
+    access: { appenders: ['request'], level: 'info' }
+  }
+})
 let debug = log4js.getLogger('acbData.Format.Test').debug
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+let access = log4js.getLogger('request')
 
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 describe(__filename, function () {
   describe('7.1.1 Prepare a list of acb equipment data', function () {
-    it(`7.7.4 generate static data without format`, function (done) {
+    it(`7.7.4 generate static data without format`, function () {
       let dataset = {}
       dataset.timestamp = new Date()
       dataset._embedded = {}
@@ -25,15 +51,16 @@ describe(__filename, function () {
         )
       }
       expect(dataset._embedded.item.length >= 773, 'dataset._embedded.item.length >= 773? ').to.be.true
+      access.debug(dataset)
       sleep(3)
     })
     after(() => {
-      debug('pass->' + '7.1.1 Prepare a list of acb equipment data')
+      access.debug('pass->' + '7.1.1 Prepare a list of acb equipment data')
     })
   })
 
   describe('7.1.2 Prepare a list of acb equipment data', function () {
-    it(`7.7.4 generate static data with correct name and internal-name`, function (done) {
+    it(`7.7.4 generate static data with correct name and internal-name`, function () {
       let dataset = {}
       dataset.timestamp = new Date()
       dataset._embedded = {}
@@ -51,12 +78,12 @@ describe(__filename, function () {
         )
       }
       expect(dataset._embedded.item.length >= 773, 'dataset._embedded.item.length >= 773? ').to.be.true
+      access.debug(dataset)
       sleep(3)
     })
     after(() => {
-      debug('pass->' + '7.1.1 Prepare a list of acb equipment data')
+      access.debug('pass->' + '7.1.1 Prepare a list of acb equipment data')
     })
   })
-
 
 })

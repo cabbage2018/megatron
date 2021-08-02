@@ -5,9 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "pkg": "pkg . --out-path=dist/",
-    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 600000"
+    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 14000"
   },
-
   "bin": "app.js",
   "pkg": {
     "scripts": "routes/**/*.js",
@@ -17,7 +16,6 @@
     ],
     "outputPath": "dist"
   },
-
   "author": "fungi0",
   "devDependencies": {
     "node-opcua": "~2.47.0",

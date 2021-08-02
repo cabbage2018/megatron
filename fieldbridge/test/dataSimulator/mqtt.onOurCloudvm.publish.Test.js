@@ -27,19 +27,11 @@ log4js.configure({
     access: { appenders: ['request'], level: 'info' }
   }
 })
-let access = log4js.getLogger('request')
 let log = log4js.getLogger('mqtt.cloudBroker.publish.Test')
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-
-// let mqttOverwsTestFunc = co.wrap(function* () {
-//   console.log("Hey!");
-// });
 
 describe(__filename, function () {
-  
   const mqtt = require('mqtt')
-  describe('7.1.1 Connect to a well known mqtt broker', function () {
-
+  describe('7.1.1 Connect to our own mqtt broker', function () {
     it(`7.7.4 test.mosquitto.org:8091`, /*async*/ function (done) {
       let dataset = {}
       dataset.timestamp = new Date()
@@ -58,17 +50,12 @@ describe(__filename, function () {
         )
       }
       let signalArray = dataset
-      let fs = require('fs')
-      fs.writeFileSync('signalArray.txt', JSON.stringify(signalArray), 'utf-8')
-      ///MQTTs pub
-      let client = mqtt.connect( 'ws://test.mosquitto.org:8080',
+      let client = mqtt.connect( 'mqtt://74.144.136.106:1883',
       {
         username : 'rw',
         password : 'readwrite',
         qos:1
       })
-      log.info(client)
-    
       client.on('error', function (err) {
         done(err)
         log.error('mqtt connect #', err)
@@ -77,28 +64,29 @@ describe(__filename, function () {
     
       client.on('message', function (topic, message) {
         client.unsubscribe('#')
-        done()
-        log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
-        // expect(client !== null, '7.7.4 test.mosquitto.org:8091? ').to.be.true
+        expect(client !== null, '7.7.4 test.mosquitto.org:1883 server is alive? ').to.be.true
         client.end()
+
+        done()
+
+        log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
       })
     
       client.on('connect', function () {
         //sub
-        client.subscribe('powerscada_testmachine')
+        client.subscribe('powerscada/pm')
         // client.subscribe('#')
 
         //pub
-        client.publish('powerscada_testmachine', JSON.stringify({timestamp: new Date(), filename: signalArray}), (err)=>{
+        client.publish('powerscada/pm', JSON.stringify(signalArray), (err)=>{
           // done(err)
         })
         log.warn('mqtt connected successfully~')
       })
-      
     })
 
     after(() => {
-      log.debug('pass->' + '7.7.4 test.mosquitto.org:8091')
+      log.debug('pass->' + '7.7.4 test.mosquitto.org:8883')
     })
   })
 })
