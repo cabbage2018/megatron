@@ -6,3 +6,4 @@ SET DEBUG=fieldbridge * & npm start
 
 npm install -g pkg
 npm install pkg --save-dev
+pkg -t win api.js 

@@ -1,10 +1,10 @@
 {
   "name": "fieldbridge",
-  "version": "21.33.1",
+  "version": "21.34.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "pkg": "pkg . --out-path=dist/",
+    "pkg": "pkg . -t win --out-path=dist/",
     "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 14000"
   },
   "bin": "app.js",
