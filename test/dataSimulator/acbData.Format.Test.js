@@ -27,7 +27,7 @@ log4js.configure({
     access: { appenders: ['request'], level: 'error'}
   }
 })
-let debug = log4js.getLogger('acbData.Format.Test').debug
+let log = log4js.getLogger('acbData.Format.Test')
 let access = log4js.getLogger('access')
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 describe(__filename, function () {
@@ -79,6 +79,9 @@ describe(__filename, function () {
       }
       expect(dataset._embedded.item.length >= 773, 'dataset._embedded.item.length >= 773? ').to.be.true
       access.debug(dataset)
+      log.debug(__dirname)
+      log.debug(__filename)
+
       sleep(3)
     })
     after(() => {

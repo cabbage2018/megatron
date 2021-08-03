@@ -28,11 +28,12 @@ log4js.configure({
   }
 })
 let log = log4js.getLogger('mqtt.cloudBroker.publish.Test')
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 describe(__filename, function () {
   const mqtt = require('mqtt')
   describe('7.1.1 Connect to our own mqtt broker', function () {
-    it(`7.7.4 test.mosquitto.org:8091`, /*async*/ function (done) {
+    it(`7.7.4 test.remote.mqtt:1883`, /*async*/ function (done) {
       let dataset = {}
       dataset.timestamp = new Date()
       dataset._embedded = {}
@@ -50,24 +51,25 @@ describe(__filename, function () {
         )
       }
       let signalArray = dataset
-      let client = mqtt.connect( 'mqtt://74.144.136.106:1883',
+      let client = mqtt.connect( 'mqtt://192.168.2.211:1883',
       {
         username : 'rw',
         password : 'readwrite',
         qos:1
       })
+
       client.on('error', function (err) {
-        done(err)
         log.error('mqtt connect #', err)
         client.end()
+        done()
+        done(err)
       })
     
+      sleep(5)
       client.on('message', function (topic, message) {
-        client.unsubscribe('#')
-        expect(client !== null, '7.7.4 test.mosquitto.org:1883 server is alive? ').to.be.true
-        client.end()
-
-        done()
+        // client.unsubscribe('#')
+        // client.end()
+        // expect(client !== null, '7.7.5 subscribe topic OK and message received? ').to.be.true
         log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
       })
     
@@ -76,11 +78,14 @@ describe(__filename, function () {
         client.subscribe('powerscada/pm')
         client.subscribe('#')
 
+        sleep(15)
         //pub
-        client.publish('powerscada/pm', JSON.stringify(signalArray), (err)=>{
+        client.publish('powerscada/pm', JSON.stringify(/*signalArray*/ new Date()), (err)=>{
           done(err)
         })
-        log.warn('mqtt connected successfully~')
+
+        expect(client !== null, '7.7.5 connect OK? ').to.be.true
+        // done()
       })
     })
 

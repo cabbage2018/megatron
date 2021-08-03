@@ -29,7 +29,6 @@ log4js.configure({
 })
 let access = log4js.getLogger('request')
 let log = log4js.getLogger('mqtt.cloudBroker.publish.Test')
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 // let mqttOverwsTestFunc = co.wrap(function* () {
 //   console.log("Hey!");
 // });
@@ -56,7 +55,7 @@ describe(__filename, function () {
       }
       let signalArray = dataset
       let fs = require('fs')
-      fs.writeFileSync('signalArray.txt', JSON.stringify(signalArray), 'utf-8')
+      fs.writeFileSync('./dist/signalArray.txt', JSON.stringify(signalArray), 'utf-8')
 
       ///MQTTs pub
       let client = mqtt.connect('ws://test.mosquitto.org:8080',
@@ -64,37 +63,35 @@ describe(__filename, function () {
         username : 'rw',
         password : 'readwrite',
         qos:1
-      })    
+      })
+
       client.on('error', function (err) {
-        done(err)
         log.error('mqtt connect #', err)
         client.end()
+        done(err)
       })
     
       client.on('message', function (topic, message) {
         client.unsubscribe('#')
         client.end()
+        done()
         
         log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
 
         expect(client !== null, '7.7.4 test.mosquitto.org:8080? ').to.be.true
-
-        done()
       })
     
       client.on('connect', function () {
         //sub
         client.subscribe('powerscada_testmachine')
         // client.subscribe('#')
-
         //pub
-        client.publish('powerscada_testmachine', JSON.stringify({timestamp: new Date(), filename: signalArray}), (err)=>{
-          done(err)
+        client.publish('powerscada_testmachine', JSON.stringify(signalArray), (err)=>{
         })
-
         log.warn('mqtt connected successfully~')
-      })      
+      })
     })
+
     after(() => {
     })
   })
