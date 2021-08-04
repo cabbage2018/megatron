@@ -4,5 +4,4 @@ module.exports = {
   load: function (filepath) {
     return JSON.parse(fs.readFileSync(filepath, 'utf-8'))
   },
-
 }

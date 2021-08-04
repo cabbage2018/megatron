@@ -1,25 +1,22 @@
 'use strict'
-let alert = require('./alert')
-let scheduler = require('./scheduler')
-let report = require('./report')
-report.postman()
-
 var express = require('express');
 var router = express.Router();
+// let alert = require('./alert')
+let scheduler = require('./scheduler')
 
-/* GET users listing. */
+/* GET web page. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+  res.send('respond with a resource')
+})
 
 router.get('/history', function(req, res, next) {
   console.log(req)
   let list = []
 	res.render('list', {
-        title: __filename + new Date().toISOString(),
-        items: list
-    })
-});
+    title: __filename + new Date().toISOString(),
+    items: list
+  })
+})
 
 router.get('/logs', function(req, res, next) {
   const fs = require('fs')
@@ -31,7 +28,7 @@ router.get('/logs', function(req, res, next) {
   let arr = new Array()    
   objReadline.on('line', line => {
       arr.push(line);
-  })  
+  })
   /// ejs template would display html async---
   objReadline.on('close', () => {
     res.render('list', {
@@ -43,4 +40,4 @@ router.get('/logs', function(req, res, next) {
   // next() //if middleware exists
 })
 
-module.exports = router;
+module.exports = router

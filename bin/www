@@ -5,12 +5,13 @@
 */
 
 let log4js = require('log4js')
+let path = require('path')
+console.log(path.join(path.join(process.cwd(), './config/'), 'config.json'))
 
 if (process.env.NODE_ENV === 'production') {
   log4js.configure(require('../config/log4js_test.json'))
   ;
 } else {
-
   let config = require('../config/mailoptions.json')
 
   log4js.configure({
@@ -61,7 +62,7 @@ if (process.env.NODE_ENV === 'production') {
           host: config.email.host, 
           port: config.email.port,
           // secure: true,
-          secureConnection: true, // 使用 SSL
+          // secureConnection: true, // 使用 SSL
           // tls: {
           //   // do not fail on invalid certs
           //   rejectUnauthorized: false
@@ -79,9 +80,7 @@ if (process.env.NODE_ENV === 'production') {
     },
 
     categories: {
-      //email 方便得知项目bug
-      default: { appenders: ['stdout', 'request', 'other'/*, 'email'*/], level: 'all' },
-      //default 当你使用log4js.getLogger(level)，level不传，默认使用default
+      default: { appenders: ['stdout', 'request', 'other'], level: 'all' },
       error: { appenders: ['stdout', 'error'], level: 'error' },
       email: { appenders: ['stdout', 'email'], level: 'error' },
       other: { appenders: ['other'], level: 'all' },

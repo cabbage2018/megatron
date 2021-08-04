@@ -51,7 +51,7 @@ describe(__filename, function () {
         )
       }
       let signalArray = dataset
-      let client = mqtt.connect( 'mqtt://192.168.2.211:1883',
+      let client = mqtt.connect( 'mqtt://47.114.158.70:1883',
       {
         username : 'rw',
         password : 'readwrite',
@@ -61,8 +61,8 @@ describe(__filename, function () {
       client.on('error', function (err) {
         log.error('mqtt connect #', err)
         client.end()
-        done()
         done(err)
+        done()
       })
     
       sleep(5)
@@ -75,12 +75,12 @@ describe(__filename, function () {
     
       client.on('connect', function () {
         //sub
-        client.subscribe('powerscada/pm')
-        client.subscribe('#')
+        // client.subscribe('powerscada/pm')
+        client.subscribe('poc3000')
 
         sleep(15)
         //pub
-        client.publish('powerscada/pm', JSON.stringify(/*signalArray*/ new Date()), (err)=>{
+        client.publish('powerscada/pm', JSON.stringify(signalArray/*new Date()*/ ), (err)=>{
           done(err)
         })
 
