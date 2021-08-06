@@ -7,8 +7,9 @@
 let log4js = require('log4js')
 let path = require('path')
 console.log(path.join(path.join(process.cwd(), './config/'), 'config.json'))
+console.log(process.cwd(), '= process.cwd() ***')
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   log4js.configure(require('../config/log4js_test.json'))
   ;
 } else {
@@ -25,16 +26,20 @@ if (process.env.NODE_ENV === 'production') {
         type: 'dateFile',
         filename: './logs/request', // 需要手动建好目录,如图1所示
         // 指定pattern后无限备份
-        pattern: 'yyyy-MM-dd_access.log',
+        pattern: 'yyyy-MM-dd',
         // 不指定pattern时若为true会使用默认值'.yyyy-MM-dd'
         alwaysIncludePattern: true,
       },
       error: {
         //错误日志
-        type: 'dateFile',
-        filename: './logs/error',
-        pattern: 'yyyy-MM-dd.log',
-        alwaysIncludePattern: true,
+        type: 'file',
+        maxLogSize: 8388608/8,
+        backups: 4,
+        compress : false,
+        keepFileExt : true,
+        filename: './logs/errors.trp',
+        // pattern: 'yyyy-MM-dd.log',
+        // alwaysIncludePattern: true,
       },
       fatal: {
         type: 'dateFile',
@@ -80,16 +85,15 @@ if (process.env.NODE_ENV === 'production') {
     },
 
     categories: {
-      default: { appenders: ['stdout', 'request', 'other'], level: 'all' },
+      default: { appenders: ['stdout', 'request', 'other', 'error'], level: 'all' },
       error: { appenders: ['stdout', 'error'], level: 'error' },
-      email: { appenders: ['stdout', 'email'], level: 'error' },
+      email: { appenders: ['email'], level: 'error' },
       other: { appenders: ['other'], level: 'all' },
     },
   })
 }
 const tracer = log4js.getLogger('bin:www')
 tracer.info(process.env.NODE_ENV || 'production', 'mode for logging')
-
 
 /**
  * Module dependencies.

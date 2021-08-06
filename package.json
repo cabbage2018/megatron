@@ -1,45 +1,44 @@
 {
   "name": "fieldbridge",
+  "email": "mindspherebasic@126.com",
   "version": "21.34.2",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cabbage2018/megatron.git"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "pkg": "pkg . -t win --out-path=dist/",
-    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 12000"
+    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
   },
   "bin": "app.js",
   "pkg": {
-    "scripts": "routes/**/*.js",
-    "assets": "views/**/*",
+    "assets": [
+      "logs/*.*"
+    ],
     "targets": [
       "node10-windows-arm64"
     ],
-    "outputPath": "dist"
+    "outputPath": "pkg/"
   },
   "author": "fungi0",
   "devDependencies": {
-    "node-opcua": "~2.47.0",
-    "mqtt": "4.2.8",
-    "log4js": "~6.3.0",
     "chai": "^4.2.0",
     "mocha": "~7.2.0"
   },
-  "https_proxy": "http://'z0040dne':'123Abc!@#'@19.0.2.235:8083",
+  "https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
   "dependencies": {
     "node-opcua": "~2.47.0",
-    "nodemailer-smtp-transport": "*",
     "nodemailer": "~6.6.2",
-    "node-cron": "*",
+    "node-cron": "^3.0.0",
     "mqtt": "4.2.8",
     "log4js": "~6.3.0",
     "@log4js-node/smtp": "1.1.0",
-    "fs": "*",
     "ejs": "~2.6.1",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "cookie-parser": "~1.4.5",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "http-errors": "~1.8.0",
     "morgan": "~1.9.1"
   }
 }

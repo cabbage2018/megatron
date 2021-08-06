@@ -32,29 +32,27 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 describe(__filename, function () {
   const mqtt = require('mqtt')
-  describe('7.1.1 Connect to our own mqtt broker', function () {
+  describe.skip('7.1.1 Connect to our own mqtt broker', function () {
     it(`7.7.4 test.remote.mqtt:1883`, /*async*/ function (done) {
       let dataset = {}
       dataset.timestamp = new Date()
       dataset._embedded = {}
       dataset._embedded.item = []
       let max = 65535
-      for(var i = 0; i < 774; i = i + 1) {
+      for(var i = 0; i < 4; i = i + 1) {
         dataset._embedded.item.push(
           {
             name: 'DEVICE_ID' + Math.ceil(Math.random()*max),
             internal_name: 'obj.nodeId' + Math.round(Math.random()*max), 
             value: Math.floor(Math.random()*max),
-            unit: '%$^&#',
+            unit: '$',
             quality: (Math.random()*max) > (max / 2) ? 'good':'bad'
           }
         )
       }
       let signalArray = dataset
-      let client = mqtt.connect( 'mqtt://47.114.158.70:1883',
+      let client = mqtt.connect( 'mqtt://74.144.136.106:1883',
       {
-        username : 'rw',
-        password : 'readwrite',
         qos:1
       })
 
@@ -62,21 +60,27 @@ describe(__filename, function () {
         log.error('mqtt connect #', err)
         client.end()
         done(err)
-        done()
       })
     
       sleep(5)
       client.on('message', function (topic, message) {
-        // client.unsubscribe('#')
-        // client.end()
-        // expect(client !== null, '7.7.5 subscribe topic OK and message received? ').to.be.true
+        if(client) {
+          done()
+
+          client.unsubscribe('#')
+          client.end()
+          client = null
+        }
+
+        expect(client !== null, '7.7.5 subscribe topic OK and message received? ').to.be.true
+
         log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
       })
     
       client.on('connect', function () {
         //sub
-        // client.subscribe('powerscada/pm')
         client.subscribe('poc3000')
+        client.subscribe('#')
 
         sleep(15)
         //pub
@@ -84,8 +88,7 @@ describe(__filename, function () {
           done(err)
         })
 
-        expect(client !== null, '7.7.5 connect OK? ').to.be.true
-        // done()
+        expect(client !== null, '7.7.5 connected OK? ').to.be.true
       })
     })
 

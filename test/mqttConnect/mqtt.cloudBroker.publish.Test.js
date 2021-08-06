@@ -35,7 +35,7 @@ let log = log4js.getLogger('mqtt.cloudBroker.publish.Test')
 describe(__filename, function () {
   
   const mqtt = require('mqtt')
-  describe('7.1.1 Connect to a well known mqtt broker', function () {
+  describe.skip('7.1.1 Connect to a well known mqtt broker', function () {
     it(`7.7.4 test.mosquitto.org:8091`, /*async*/ function (done) {
       let dataset = {}
       dataset.timestamp = new Date()
@@ -72,13 +72,13 @@ describe(__filename, function () {
       })
     
       client.on('message', function (topic, message) {
+        // log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
+        expect(client !== null, '7.7.4 test.mosquitto.org:8080? ').to.be.true
+
         client.unsubscribe('#')
         client.end()
+        client = null
         done()
-        
-        log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
-
-        expect(client !== null, '7.7.4 test.mosquitto.org:8080? ').to.be.true
       })
     
       client.on('connect', function () {

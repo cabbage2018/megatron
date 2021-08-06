@@ -50,7 +50,6 @@ describe(__filename, function () {
         )
       }
       expect(dataset._embedded.item.length >= 773, 'dataset._embedded.item.length >= 773? ').to.be.true
-      access.debug(dataset)
       sleep(3)
     })
     after(() => {
@@ -78,7 +77,6 @@ describe(__filename, function () {
         )
       }
       expect(dataset._embedded.item.length >= 773, 'dataset._embedded.item.length >= 773? ').to.be.true
-      access.debug(dataset)
       log.debug(__dirname)
       log.debug(__filename)
 

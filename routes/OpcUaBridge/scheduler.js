@@ -2,47 +2,53 @@
 let bridge = require('./bridge')
 let cron = require('node-cron')
 let log4js = require('log4js')
-let email = log4js.getLogger('bridge::scheduler')
+let log = log4js.getLogger('bridge::scheduler')
+let critical = log4js.getLogger('error')
 let report = require('./report')
-report.postman('Hello email!')
+var taskRoutine = null
 
-// to minimize the downtime of this program, first circle job will initialize a second onion task, which will disappear when finished. 
-let taskRoutine = cron.schedule('57 */1 * * * *', () => {
-  var periodicJob4Reading = setTimeout(
-    async () => {
-      try{
-        let spaceIndicator = require('./spaces.json')
-        let spacesAddress = spaceIndicator
+module.exports = {
+  setup: function setup(spacesAddress, mqttConnections) {
+    // to minimize the downtime of this program, first level job will initialize a second onion task, which will disappear when finished.
+    taskRoutine = cron.schedule('57 */1 * * * *', () => {
+      var periodicJob4Reading = setTimeout(
+        async () => {
+          try{
+            let resultsJSONObject = bridge.begin(spacesAddress, mqttConnections)
+            console.log(resultsJSONObject)
+          }
+          catch(e){
+            critical.fatal(e)
+          }
+        },
+        3000
+      )
+      // log4js.shutdown()
+    })
+  
+    taskRoutine.start()
+  }
+}
 
-        // let resultsJSONObject = bridge.query(spacesAddress)
-        // .then(async (responseValues)=>{
-        //   let deliverRecords = await bridge.deliver(responseValues)
-        //   log.info(deliverRecords)
-        // })
-        // .catch((err)=>{
-        //   // email.fatal(err)
-        // })
+let hourlyReport = cron.schedule('58 39 */2 * * *', () => {
+  let fs = require("fs")
 
-      }
-      catch(e){
-        // report.postman(e)
-        // email.fatal(e)
-      }
-    },
-    3000
-  )
-  // log4js.shutdown()
-})
-taskRoutine.start()
-
-let profilePerformance = bridge.profilingDictionary
-let alarmString = JSON.stringify([...profilePerformance])
-email.error(alarmString)
-console.log(alarmString)
-let hourlyReport = cron.schedule('30 30 */1 * * *', () => {
+  if(fs.existsSync(path.join(process.cwd(), './logs/errors.trp'))){
+    const alarmString = fs.readFileSync(path.join(process.cwd(), './logs/errors.trp'))
+    console.log(alarmString)
+    report.postman('Emergency! Alarm fatal is coming!' + alarmString + ';\r\n then this source is deleted.')
+    fs.unlinkSync(path.join(process.cwd(), './logs/errors.trp'))
+    console.log('deleting: ', path.join(process.cwd(), './logs/errors.trp'))
+  } else {
+    report.postman('No communications error happened until now:)')
+  }
 })
 hourlyReport.start()
 
-let dailyReport = cron.schedule('59 59 */24 * * *', () => {
+let dailyReport = cron.schedule('29 59 */24 * * *', () => {
+  const profilePerformance = bridge.profilingDictionary
+  const profileString = JSON.stringify([...profilePerformance])
+  console.log(profileString)
+  report.postman('Hello performance profile is coming!' + profileString)
 })
 dailyReport.start()

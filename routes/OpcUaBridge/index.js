@@ -1,8 +1,8 @@
 'use strict'
 var express = require('express');
 var router = express.Router();
-// let alert = require('./alert')
-let scheduler = require('./scheduler')
+let opcua = require('./opcua')
+let configure = require('./configure')
 
 /* GET web page. */
 router.get('/', function(req, res, next) {
@@ -20,8 +20,9 @@ router.get('/history', function(req, res, next) {
 
 router.get('/logs', function(req, res, next) {
   const fs = require('fs')
-  const readline = require('readline')  
-  let fRead = fs.createReadStream('./logs/livre.log')
+  const readline = require('readline')
+
+  let fRead = fs.createReadStream(path.join(process.cwd(), './logs/livre.log'))
   let objReadline = readline.createInterface({
       input: fRead
   })
@@ -29,7 +30,7 @@ router.get('/logs', function(req, res, next) {
   objReadline.on('line', line => {
       arr.push(line);
   })
-  /// ejs template would display html async---
+  /// ejs template would display log as a html async
   objReadline.on('close', () => {
     res.render('list', {
       title: __filename + new Date().toISOString(),
@@ -39,5 +40,21 @@ router.get('/logs', function(req, res, next) {
   })
   // next() //if middleware exists
 })
+
+
+///https://stackoverflow.com/questions/27688804/how-do-i-debug-error-spawn-enoent-on-node-js
+// (function() {
+//   var childProcess = require("child_process");
+//   var oldSpawn = childProcess.spawn;
+//   function mySpawn() {
+//       console.log('spawn called');
+//       console.log(arguments);
+//       var result = oldSpawn.apply(this, arguments);
+//       return result;
+//   }
+//   childProcess.spawn = mySpawn;
+// })();  
+
+
 
 module.exports = router
