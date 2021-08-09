@@ -1,5 +1,5 @@
 {
-  "name": "fieldbridge",
+  "name": "acq0",
   "email": "mindspherebasic@126.com",
   "version": "21.36.1",
   "private": true,
@@ -8,17 +8,18 @@
     "url": "https://github.com/cabbage2018/megatron.git"
   },
   "engines": {
-    "node": ">=0.10.3 <11"
+    "node": ">=12"
   },
   "scripts": {
     "start": "node ./bin/www",
-    "pkg": "pkg . -t win --out-path=dist/",
+    "pkg": "pkg ./bin/www  -t win --out-path=dist/",
     "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
   },
-  "bin": "app.js",
+  "bin": "./bin/www",
   "pkg": {
     "assets": [
-      "logs/*.*"
+      "views/**/*",
+      "public/**/*"
     ],
     "targets": [
       "node10-windows-arm64"
@@ -26,8 +27,7 @@
     "outputPath": "pkg/"
   },
   "author": "fungi0",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
   "dependencies": {
     "node-opcua": "~2.47.0",

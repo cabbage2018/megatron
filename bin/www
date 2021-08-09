@@ -1,106 +1,41 @@
 #!/usr/bin/env node
 
-/*
-  set up log4js
-*/
+let path = require("path")
+// let log4js = require('log4js')
+// log4js.configure(
+//   {
+//     "appenders": {
+//       "app": {
+//         "type": "file",
+//         "filename": path.join(process.cwd(), "./app-log4js.txt"),
+//         "maxLogSize": 5485760,
+//         "numBackups": 1,
+//         "compress": false
+//       },
+//       "out": {
+//         "type": "console",
+//         "layout": {
+//           "type": "pattern",
+//           "pattern": '%d %p %c %X{user} %m%n'
+//           }
+//         }
+//     },
+//     "categories": {
+//       "default": { "appenders": ["app", "out"], "level": "ALL" }
+//     }
+//   }
+// )
+// let track = log4js.getLogger('')
+// track.addContext('user', 'charlie');
+// track.info('program is beginning. doing something.');
 
-let log4js = require('log4js')
-let path = require('path')
-console.log(path.join(path.join(process.cwd(), './config/'), 'config.json'))
-console.log(process.cwd(), '= process.cwd() ***')
-
-if (process.env.NODE_ENV === 'development') {
-  log4js.configure(require('../config/log4js_test.json'))
-  ;
-} else {
-  let config = require('../config/mailoptions.json')
-
-  log4js.configure({
-    appenders: {
-      stdout: {
-        //控制台输出
-        type: 'stdout',
-      }, 
-      request: {
-        //请求日志
-        type: 'dateFile',
-        filename: './logs/request', // 需要手动建好目录,如图1所示
-        // 指定pattern后无限备份
-        pattern: 'yyyy-MM-dd',
-        // 不指定pattern时若为true会使用默认值'.yyyy-MM-dd'
-        alwaysIncludePattern: true,
-      },
-      error: {
-        //错误日志
-        type: 'file',
-        maxLogSize: 8388608/8,
-        backups: 4,
-        compress : false,
-        keepFileExt : true,
-        filename: './logs/errors.trp',
-        // pattern: 'yyyy-MM-dd.log',
-        // alwaysIncludePattern: true,
-      },
-      fatal: {
-        type: 'dateFile',
-        filename: './logs/error',
-        pattern: 'yyyy-MM-dd.log',
-        alwaysIncludePattern: true,
-      },
-      other: {
-        //其他日志
-        type: 'file',
-        maxLogSize: 8388608,
-        backups: 3,
-        compress : false,
-        keepFileExt : true,
-        filename: './logs/livre.log',
-        // pattern: 'yyyy-MM-dd.log',
-        alwaysIncludePattern: true,
-      },
-      email: {
-        //发送错误报告至邮箱
-        type: '@log4js-node/smtp',
-        sender: config.email.sender, //发送邮件的邮箱
-        subject: config.email.subject, //标题
-        SMTP: {
-          host: config.email.host, 
-          port: config.email.port,
-          // secure: true,
-          // secureConnection: true, // 使用 SSL
-          // tls: {
-          //   // do not fail on invalid certs
-          //   rejectUnauthorized: false
-          // },
-          auth: config.email.auth //auth { user: 'xxx@qq.com', pass: '密码' }
-        },
-        // attachment: {
-        //   enable: true,
-        //   filename: './livre.log',
-        //   message: 'See the attachment for the latest logs'
-        // },
-        // sendInterval: 3600*1,
-        recipients: config.email.recipients, //接收邮件的邮箱
-      },
-    },
-
-    categories: {
-      default: { appenders: ['stdout', 'request', 'other', 'error'], level: 'all' },
-      error: { appenders: ['stdout', 'error'], level: 'error' },
-      email: { appenders: ['email'], level: 'error' },
-      other: { appenders: ['other'], level: 'all' },
-    },
-  })
-}
-const tracer = log4js.getLogger('bin:www')
-tracer.info(process.env.NODE_ENV || 'production', 'mode for logging')
 
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
-var debug = require('debug')('fieldbridge:server');
+// var debug = require('debug')('fieldbridge:server');
 var http = require('http');
 
 /**
@@ -180,5 +115,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  /*debug*/console.log('Listening on ' + bind);
 }
