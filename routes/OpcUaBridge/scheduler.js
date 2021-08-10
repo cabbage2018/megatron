@@ -37,6 +37,7 @@ let taskRoutine = cron.schedule('57 */1 * * * *', () => {
 // }
 
 let hourlyReport = cron.schedule('58 39 */2 * * *', () => {
+
   if(fs.existsSync(path.join(process.cwd(), './logs/errors.trp'))){
     let alarmString = fs.readFileSync(path.join(process.cwd(), './logs/errors.trp'))
     console.log(alarmString)
@@ -46,13 +47,18 @@ let hourlyReport = cron.schedule('58 39 */2 * * *', () => {
   } else {
     report.postman('No communications error happened until now:)')
   }
+
 })
+
 hourlyReport.start()
 
 let dailyReport = cron.schedule('29 59 */24 * * *', () => {
+
   let profilePerformance = bridge.profilingDictionary
   let profileString = JSON.stringify([...profilePerformance])
   console.log(profileString)
   report.postman('Hello performance profile is coming!' + profileString)
+
 })
+
 dailyReport.start()

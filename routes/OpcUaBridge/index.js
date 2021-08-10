@@ -32,4 +32,13 @@ router.get('/logs', function(req, res, next) {
   // next() //if middleware exists
 })
 
+router.get('/acq', function(req, res, next) {
+  let bridge = require('./bridge')
+  let dict = bridge.profilingDictionary
+  res.render('dictionary', {
+    title: __filename + new Date().toISOString(),
+    items: dict
+  })
+})
+
 module.exports = router

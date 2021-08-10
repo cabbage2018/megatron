@@ -22,11 +22,11 @@ function deliver(MqttsOptions, signalArray) {
 		})	
 
 		client.on('message', function (topic, message) {
-			log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
+			// log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
 		})	
 
 		client.on('connect', function () {
-			client.subscribe(MqttsOptions.subscribeTopic)
+			// client.subscribe(MqttsOptions.subscribeTopic)
 			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err)=>{
 				log.error(err)
 				resolve(err)
@@ -43,10 +43,12 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
     let client = OPCUAClient.create({
       endpointMustExist: false
     })
-    client.on("backoff", (retry, delay) => {
+
+		client.on("backoff", (retry, delay) => {
       profilingDictionary.set('backoff' + spaceConfigure.endpointUrl + retry + delay, "alarm, need human being inter-act")
     })
-    client.on("error", (e) => {
+
+		client.on("error", (e) => {
       reject(e)
     })
     await client.connect(spaceConfigure.endpointUrl)
@@ -210,23 +212,65 @@ function format(dataSourceWrapper, resultObjectArray) {
   return pattern 
 }
 
+/// final version, @Aug 10th,
+function aggregate(dataSourceWrapper, resultObjectArray) {
+	let devices = new Map()
+
+	if(resultObjectArray !== null && resultObjectArray.length > 0
+		&& dataSourceWrapper !== null && dataSourceWrapper.nodeIds.length === resultObjectArray.length) {
+		
+    for(var i = 0; i < resultObjectArray.length; i = i + 1) {
+			let resp = resultObjectArray[i]			
+			if(devices.get(dataSourceWrapper.nodeIds[i].name)){
+				let queue = devices.get(dataSourceWrapper.nodeIds[i].name)
+				queue.push({
+          internal_name: dataSourceWrapper.nodeIds[i].address, 
+          value: resp.value.value,
+          quality: resp.statusCode._name
+				})
+			} else {
+				let queue = []
+				queue.push({
+          internal_name: dataSourceWrapper.nodeIds[i].address, 
+          value: resp.value.value,
+          quality: resp.statusCode._name
+				})
+				devices.set(dataSourceWrapper.nodeIds[i].name, queue)
+			}
+
+			/// don't log big volume data but profile to a single map to save space
+			profilingDictionary.set(dataSourceWrapper.nodeIds[i].address, resp.value.value + ', @ ' + new Date().toISOString())
+    }
+  }
+  return devices
+}
+
 async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 	acquire(dataSourceWrapper, 125, false)
 	.then((responseValues)=>{
 		log.info(responseValues)
 		// let myPattern = integrate(spaceConfigure, responseValues)
-		let dataset = format(dataSourceWrapper, responseValues)
+		let dataset = aggregate(dataSourceWrapper, responseValues)
 
-		/* MQTTs North-bound*/
-		deliver(mqttConnectionOptions, dataset)
-		.then((acknowledge)=>{
-			log.warn(acknowledge)
-		})
-		.catch((e)=>{
-			/* MQTTs North-bound failure*/
-			log.error(e)
-		})
+		for (var x of dataset) {
+			log.debug(x[0] + '=' + x[1]);
+			let dev = {}
+			dev.item_id = x[0]
+			dev.timestamp = new Date()
+			dev.count = x[1].length
+			dev._embedded = {}
+			dev._embedded.item = x[1]
 
+			///
+			deliver(mqttConnectionOptions, dev)
+			.then((acknowledge)=>{
+				log.debug(acknowledge)
+			})
+			.catch((e)=>{
+				log.error(e)
+			})
+
+		}
 	})
 	.catch((err)=>{
 		// South-bound machine hardware failure
@@ -236,7 +280,5 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 
 module.exports = {
 	runOnce: runOnce,
-  // acquire: acquire,
-	// deliver: deliver,
 	profilingDictionary: profilingDictionary
 }

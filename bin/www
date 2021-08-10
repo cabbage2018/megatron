@@ -83,7 +83,7 @@ if (process.env.NODE_ENV === 'development') {
       default: { appenders: ['stdout', 'request', 'other', 'error'], level: 'all' },
       error: { appenders: ['stdout', 'error'], level: 'error' },
       email: { appenders: ['email'], level: 'error' },
-      other: { appenders: ['other'], level: 'all' },
+      other: { appenders: ['other'], level: 'info' },
     },
   })
 }

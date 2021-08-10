@@ -7,9 +7,9 @@ let mailoptions = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/
 module.exports = {
   postman: function postman(mailContent){
     let transport = nodemailer.createTransport({
-      host: mailoptions.email.host, 
-      // secure: true, 
-      secureConnection: false, 
+      host: mailoptions.email.host,
+      // secure: true,
+      secureConnection: false,
       port: mailoptions.email.port,
       auth: mailoptions.email.auth
     })

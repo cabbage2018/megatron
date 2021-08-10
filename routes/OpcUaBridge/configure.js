@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 
 } else {
   
-  let report = require('./report')
-  report.postman(new Date().toISOString() + '; SI-MAC softgateway now is starting...')
+  // let report = require('./report')
+  // report.postman(new Date().toISOString() + '; SI-MAC softgateway now is starting...')
   critical.error(new Date().toISOString() + '; SI-MAC softgateway now is starting...')
 }
