@@ -1,39 +1,48 @@
 'use strict'
-let bridge = require('./bridge')
 let cron = require('node-cron')
-let report = require('./report')
-let taskRoutine = null
+let path = require('path')
+let fs = require('fs')
 
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
 let critical = log4js.getLogger('error')
 
-module.exports = {
-  setup: function setup(spacesAddress, mqttConnections) {
-    // to minimize the downtime of this program, first level job will initialize a second onion task, which will disappear when finished.
-    taskRoutine = cron.schedule('57 */1 * * * *', () => {
-      var periodicJob4Reading = setTimeout(
-        async () => {
-          try{
-            let resultsJSONObject = bridge.begin(spacesAddress, mqttConnections)
-            console.log(resultsJSONObject)
-          }
-          catch(e){
-            critical.fatal(e)
-          }
-        },
-        3000
-      )
-      // log4js.shutdown()
-    })
-  
-    taskRoutine.start()
-  }
-}
+let bridge = require('./bridge')
+let report = require('./report')
+
+let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/opcuaspaces.json')))
+log.debug(dataSourceWrapper)
+
+let mqttConnectionOptions = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/mqttoptions.json'))) 
+log.debug(mqttConnectionOptions)
+
+  // to minimize the downtime of this program, first level job will initialize a second onion task, which will disappear when finished.
+const taskRoutine = cron.schedule('57 */1 * * * *', () => {
+    let periodicJob4Reading = setTimeout(
+      async () => {
+        try{
+          let results = bridge.runOnce(dataSourceWrapper, mqttConnectionOptions)
+          log.warn(results)
+        }
+        catch(e){
+          critical.fatal(e)
+        }
+      },
+      3000
+    )
+    periodicJob4Reading.start()
+    
+    // log4js.shutdown()
+  })
+
+  taskRoutine.start()
+
+// module.exports = {
+//   setup: function setup(spacesAddress, mqttConnections) {
+//   }
+// }
 
 let hourlyReport = cron.schedule('58 39 */2 * * *', () => {
-  let fs = require("fs")
-
   if(fs.existsSync(path.join(process.cwd(), './logs/errors.trp'))){
     const alarmString = fs.readFileSync(path.join(process.cwd(), './logs/errors.trp'))
     console.log(alarmString)
