@@ -1,8 +1,8 @@
 'use strict'
 
 let profilingDictionary = new Map()
-const mqtt = require('mqtt')
-const {
+let mqtt = require('mqtt')
+let {
   AttributeIds,
   OPCUAClient,
   TimestampsToReturn,
@@ -12,15 +12,19 @@ let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
   let deliverPromise = new Promise(async function (resolve, reject) {
-		let client = mqtt.connect(MqttsOptions.url, MqttsOptions.options)	
+
+		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)	
+
 		client.on('error', function (err) {
 			log.error('mqtt connect #', err)
 			client.end()
 			reject(err)
 		})	
+
 		client.on('message', function (topic, message) {
 			log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
 		})	
+
 		client.on('connect', function () {
 			client.subscribe(MqttsOptions.subscribeTopic)
 			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err)=>{
@@ -29,6 +33,7 @@ function deliver(MqttsOptions, signalArray) {
 			})	
 			resolve('Connected mqtt successfully!')
 		})
+		
   })
   return deliverPromise
 }
@@ -45,8 +50,8 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
       reject(e)
     })
     await client.connect(spaceConfigure.endpointUrl)
-    const session = await client.createSession()
-    console.log(`${session} @ [${new Date().toISOString()}] "session created"`)
+    let session = await client.createSession()
+    log.info(`${session} @ [${new Date().toISOString()}] "session created"`)
 	
 		try {
 			let responseArray = [];
@@ -56,7 +61,7 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
           EACH OPC UA SERVER HAS ITS OWN MAXIMUM DATA POINTS LIMIT
           FOR EXAMPLE BULK OF SIMOCODE = 130
         */
-        const BULKSIZE = 1000;
+        let BULKSIZE = 1000;
 				var segmentValues = [];
 				let nodeIds = []
 				for(let i = 0; i < spaceConfigure.nodeIds.length; i = i+ 1) {
@@ -64,8 +69,8 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
 				}
 
         for(var i = 0; i < nodeIds.length / BULKSIZE; i += 1) {
-          const start = i * BULKSIZE;
-          const stop = (i === nodeIds.length / BULKSIZE) ? nodeIds.length : (i + 1) * BULKSIZE;
+          let start = i * BULKSIZE;
+          let stop = (i === nodeIds.length / BULKSIZE) ? nodeIds.length : (i + 1) * BULKSIZE;
 					var values = await session.readVariableValue(nodeids.slice(start, stop));
 					
 					for(let j = 0; j < values.length; j = j + 1){
@@ -79,11 +84,11 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
         for(var i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
 					let resp = await session.readVariableValue(spaceConfigure.nodeIds[i].address)
 					responseArray.push(resp)
-					log.mark(resp)
+					// log.mark(resp)
         }
 			}
 
-      log.debug(`updated ${responseValues.length} data points`)
+      log.debug(`updated ${responseArray.length} data points`)
       resolve(responseArray)
     }
     catch (err) {

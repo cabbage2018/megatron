@@ -9,9 +9,9 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/logs', function(req, res, next) {
-  const fs = require('fs')
-  const path = require('path')
-  const readline = require('readline')
+  let fs = require('fs')
+  let path = require('path')
+  let readline = require('readline')
 
   let fRead = fs.createReadStream(path.join(process.cwd(), './logs/livre.log'))
   let objReadline = readline.createInterface({
