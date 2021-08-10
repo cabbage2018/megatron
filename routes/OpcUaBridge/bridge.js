@@ -58,6 +58,11 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
         */
         const BULKSIZE = 1000;
 				var segmentValues = [];
+				let nodeIds = []
+				for(let i = 0; i < spaceConfigure.nodeIds.length; i = i+ 1) {
+					nodeIds.push(spaceConfigure.nodeIds[i].address)
+				}
+
         for(var i = 0; i < nodeIds.length / BULKSIZE; i += 1) {
           const start = i * BULKSIZE;
           const stop = (i === nodeIds.length / BULKSIZE) ? nodeIds.length : (i + 1) * BULKSIZE;
@@ -70,16 +75,11 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
 				responseArray = segmentValues
 				
       } else {
-        ///discrete reading
+        ///discrete
         for(var i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
 					let resp = await session.readVariableValue(spaceConfigure.nodeIds[i].address)
-					// let example = {}
-					// example.value = resp.value
-					// example.unit = resp.unit
-					// example.quality = resp.qualityCode
-					// example.name = spaceConfigure.nodeIds[i].name
-					// example.internal_name = resp.address
 					responseArray.push(resp)
+					log.mark(resp)
         }
 			}
 
@@ -206,7 +206,7 @@ function format(dataSourceWrapper, resultObjectArray) {
 }
 
 async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
-	acquire(dataSourceWrapper)
+	acquire(dataSourceWrapper, 125, false)
 	.then((responseValues)=>{
 		log.info(responseValues)
 		// let myPattern = integrate(spaceConfigure, responseValues)
@@ -216,7 +216,6 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 		deliver(mqttConnectionOptions, dataset)
 		.then((acknowledge)=>{
 			log.warn(acknowledge)
-			return acknowledge
 		})
 		.catch((e)=>{
 			/* MQTTs North-bound failure*/

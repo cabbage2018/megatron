@@ -10,28 +10,25 @@ let critical = log4js.getLogger('error')
 let bridge = require('./bridge')
 let report = require('./report')
 
-let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/opcuaspaces.json')))
-log.debug(dataSourceWrapper)
-
-let mqttConnectionOptions = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/mqttoptions.json'))) 
-log.debug(mqttConnectionOptions)
-
   // to minimize the downtime of this program, first level job will initialize a second onion task, which will disappear when finished.
 const taskRoutine = cron.schedule('57 */1 * * * *', () => {
-    let periodicJob4Reading = setTimeout(
-      async () => {
-        try{
-          let results = bridge.runOnce(dataSourceWrapper, mqttConnectionOptions)
-          log.warn(results)
-        }
-        catch(e){
-          critical.fatal(e)
-        }
-      },
-      3000
-    )
-    periodicJob4Reading.start()
+    let periodicJob4Reading = setTimeout(async function () {  
+      let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/opcuaspaces.json')))
+      log.debug(dataSourceWrapper)
+
+      let mqttConnectionOptions = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/mqttoptions.json'))) 
+      log.debug(mqttConnectionOptions)
+
+      try{
+        await bridge.runOnce(dataSourceWrapper, mqttConnectionOptions)
+      }
+      catch(e){
+        critical.fatal(e)
+      }
+    }, 3000); 
     
+    // log.debug("==", periodicJob4Reading); 
+
     // log4js.shutdown()
   })
 
