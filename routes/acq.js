@@ -9,10 +9,10 @@ const {
   OPCUAClient,
   TimestampsToReturn,
 } = require('node-opcua')
-let log = (txt)=>{fs.appendFileSync(path.join(process.cwd(), './log.fs.txt'), JSON.stringify(txt) + '\r\n')}
-// let log4js = require('log4js')
-// let track = log4js.getLogger('routes::acq')
-// track.info(new Date())
+// let log = (txt)=>{fs.appendFileSync(path.join(process.cwd(), './log.fs.txt'), JSON.stringify(txt) + '\r\n')}
+let log4js = require('log4js')
+let track = log4js.getLogger('routes::acq')
+track.info(new Date())
 // track.warn(`process.cwd() ${process.cwd()}`)
 
 function acquire(spaceConfigure) {
@@ -25,7 +25,7 @@ function acquire(spaceConfigure) {
         endpointMustExist: false
       })
       client.on("backoff", (retry, delay) => {
-        log(retry, delay, 'backoff...')
+        track.debug(retry, delay, 'backoff...')
         reject({r: retry, d: delay, t: 'backoff'})
       })
       client.on("error", (e) => {
@@ -33,17 +33,19 @@ function acquire(spaceConfigure) {
       })
       await client.connect(spaceConfigure.endpointUrl)
       session = await client.createSession()
-      log(`${session} @ [${new Date().toISOString()}] "session created"`)
+      track.debug(`${session} @ [${new Date().toISOString()}] "session created"`)
       
       
       /*below it brings out data response*/
       let responseValues = [];
-      for(var i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
+      for(let i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
         let resp = await session.readVariableValue(spaceConfigure.nodeIds[i].address)
-        log(resp)
+
+        track.debug(`\r\n${resp}\r\n`)
+
         responseValues.push(resp)
       }
-      log(`updated ${responseValues.length} data points`)
+      track.debug(`updated ${responseValues.length} data points\r\n ${responseValues}`)
       resolve(responseValues)
     } catch (err) {
       
@@ -74,24 +76,31 @@ function acquire(spaceConfigure) {
 /* GET web page. */
 router.get('/', function(req, res, next) {
   let configure = JSON.parse(fs.readFileSync(path.join(process.cwd(), './opcua.json')))
-  log(configure)
+  track.debug(configure)
 
   acquire(configure)
-  .then((res)=>{
+  .then((respValues)=>{
 
-    let list = res
-    res.render('list', {
+    let list = respValues
+    res.render('page/list', {
       title: __filename + new Date().toISOString(),
       items: list
     })
+
+    // for(let i = 0; i < list.length; i = i + 1) {
+    //   track.warn(list[i])
+    //   track.fatal(list[i].value.value)
+    //   track.fatal(list[i].statusCode._name)
+    //   track.fatal(list[i].serverTimestamp)
+    // }
+
     // fs.writeFileSync(path.join(process.cwd(), './acq.json'), JSON.stringify(res))
-    log(res)
-    
+    track.debug(respValues)    
   })
   .catch((err)=>{
     res.send(__filename + JSON.stringify(err))
     // fs.appendFileSync(path.join(process.cwd(), './log.md'), JSON.stringify(err) + '\r\n\r\n')
-    log(err)
+    track.debug(err)
   })
 
   // res.send('running...')

@@ -1,33 +1,33 @@
 #!/usr/bin/env node
 
 let path = require("path")
-// let log4js = require('log4js')
-// log4js.configure(
-//   {
-//     "appenders": {
-//       "app": {
-//         "type": "file",
-//         "filename": path.join(process.cwd(), "./app-log4js.txt"),
-//         "maxLogSize": 5485760,
-//         "numBackups": 1,
-//         "compress": false
-//       },
-//       "out": {
-//         "type": "console",
-//         "layout": {
-//           "type": "pattern",
-//           "pattern": '%d %p %c %X{user} %m%n'
-//           }
-//         }
-//     },
-//     "categories": {
-//       "default": { "appenders": ["app", "out"], "level": "ALL" }
-//     }
-//   }
-// )
-// let track = log4js.getLogger('')
-// track.addContext('user', 'charlie');
-// track.info('program is beginning. doing something.');
+let log4js = require('log4js')
+log4js.configure(
+  {
+    "appenders": {
+      "app": {
+        "type": "file",
+        "filename": path.join(process.cwd(), "./app-log4js.txt"),
+        "maxLogSize": 5485760,
+        "numBackups": 1,
+        "compress": false
+      },
+      "out": {
+        "type": "console",
+        "layout": {
+          "type": "pattern",
+          "pattern": '%d %p %c %X{user} %m%n'
+          }
+        }
+    },
+    "categories": {
+      "default": { "appenders": ["app", "out"], "level": "ALL" }
+    }
+  }
+)
+let track = log4js.getLogger('')
+track.addContext('user', 'charlie');
+track.info('program is beginning. doing something.');
 
 
 /**
