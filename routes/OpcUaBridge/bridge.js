@@ -42,9 +42,6 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
       profilingDictionary.set('backoff' + spaceConfigure.endpointUrl + retry + delay, "alarm, need human being inter-act")
     })
     client.on("error", (e) => {
-      let r = e
-      r.timestamp = new Date()
-      profilingDictionary.set('client.error', r)
       reject(e)
     })
     await client.connect(spaceConfigure.endpointUrl)
@@ -52,7 +49,7 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
     console.log(`${session} @ [${new Date().toISOString()}] "session created"`)
 	
 		try {
-			let responseValues = [];
+			let responseArray = [];
       if(bulkMode) {
         /*
           BE VERT CAREFUL ABOUT THE BULK SIZE
@@ -60,43 +57,57 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
           FOR EXAMPLE BULK OF SIMOCODE = 130
         */
         const BULKSIZE = 1000;
-
-				/// integrate all available data points
 				var segmentValues = [];
         for(var i = 0; i < nodeIds.length / BULKSIZE; i += 1) {
           const start = i * BULKSIZE;
           const stop = (i === nodeIds.length / BULKSIZE) ? nodeIds.length : (i + 1) * BULKSIZE;
-          var values = await session.readVariableValue(nodeids.slice(start, stop));
-          segmentValues.push(values);
+					var values = await session.readVariableValue(nodeids.slice(start, stop));
+					
+					for(let j = 0; j < values.length; j = j + 1){
+						segmentValues.push(values[j]);
+					}
 				}
-				responseValues = integrate(spaceConfigure, segmentValues)
+				responseArray = segmentValues
+				
       } else {
         ///discrete reading
         for(var i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
 					let resp = await session.readVariableValue(spaceConfigure.nodeIds[i].address)
-
-					let example = {}
-					example.value = resp.value
-					example.unit = resp.unit
-					example.quality = resp.qualityCode
-					example.name = spaceConfigure.nodeIds[i].name
-					example.internal_name = resp.address
-					responseValues.push(example)					
-					/// statistics on identification of each data point
-					profilingDictionary.set(resp.address, new Date())
+					// let example = {}
+					// example.value = resp.value
+					// example.unit = resp.unit
+					// example.quality = resp.qualityCode
+					// example.name = spaceConfigure.nodeIds[i].name
+					// example.internal_name = resp.address
+					responseArray.push(resp)
         }
-      }
+			}
+
       log.debug(`updated ${responseValues.length} data points`)
-      resolve(responseValues)
+      resolve(responseArray)
     }
     catch (err) {
-      await session.close()
-			await client.disconnect()						
+      if(session) {
+        await session.close()
+        session = null  
+      }
+      if(client) {
+        await client.disconnect()
+        client = null  
+      }
+      
 			reject(err)
-    }
-    await session.close()
-    await client.disconnect()
-  })
+		}
+		
+		if(session) {
+			await session.close()
+			session = null  
+		}
+		if(client) {
+			await client.disconnect()
+			client = null  
+		}		
+	})
   return acquisitionPromise
 }
 
@@ -143,61 +154,68 @@ function integrate(spaceConfigure, responseValues){
 	for(let i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
 		spaceDictionary.set(spaceConfigure.nodeIds[i].address, spaceConfigure.nodeIds[i])
 	}
-	let responseArray = []
-	for(let i = 0; i < responseValues.length; i = i + 1) {
-		if(spaceDictionary.get(responseValues[i].address) != null) {
-			let resp = spaceDictionary.get(responseValues[i].address)
-			let example = {}
-			example.value = resp.value
-			example.unit = resp.unit
-			example.quality = resp.qualityCode
-			example.name = resp.name
-			example.internal_name = resp.address
-			responseArray.push(example)
-			/// statistics on identification of each data point
-			profilingDictionary.set(resp.address, new Date())
+
+	if(	spaceConfigure.nodeIds.length !== responseValues.length	){
+		log.warn('space length <> response values length')
+		return []
+	}
+
+	let comboArray = []
+	for(let i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
+		if(spaceDictionary.get(spaceConfigure.nodeIds[i].address) != null) {
+			let addr = spaceConfigure.nodeIds[i]	///spaceDictionary.get(responseValues[i].address)
+			let dataset = {}
+			dataset.value = responseValues[i].value.value
+			dataset.quality = responseValues[i].statusCode._name
+			dataset.name = addr.name
+			dataset.internal_name = addr.address
+			comboArray.push(dataset)
+
+			/// statistics on last acquisition for identification of presence for each data point
+			profilingDictionary.set(spaceConfigure.nodeIds[i].address, responseValues[i].value.value + ', @ ' + new Date().toISOString())
 		}
 	}
-	return responseArray;
+	return comboArray;
 }
 
 ///mock power center3000 7KN's
 function format(dataSourceWrapper, resultObjectArray) {
   let pattern = {}
-  if(resultObjectArray !== null && resultObjectArray.length > 0) {
+	if(resultObjectArray !== null && resultObjectArray.length > 0
+		&& dataSourceWrapper !== null && dataSourceWrapper.nodeIds.length === resultObjectArray.length) {
     pattern.item_id = dataSourceWrapper.item_id || 'Node.js softgatewat #001'
-    pattern.timestamp = resultObjectArray[0].timestamp ///use machine time
+    pattern.timestamp = new Date()///resultObjectArray[0].timestamp ///use machine time
     pattern.count = resultObjectArray.length
-    pattern._embedded = {}
+		pattern._embedded = {}
+		
     pattern._embedded.item = []
     for(var i = 0; i < resultObjectArray.length; i = i + 1) {
-      let obj = resultObjectArray[i]
-      pattern._embedded.item.push(
-        {
-					name: 'shebei bianhao id',
-          internal_name: obj.nodeId, 
-          value: 'v',
-          unit: 'u',
-          quality: 'q'
-        }
-      )
+			let resp = resultObjectArray[i]
+      pattern._embedded.item.push({
+					name: dataSourceWrapper.nodeIds[i].name,
+          internal_name: dataSourceWrapper.nodeIds[i].address, 
+          value: resp.value.value,
+          quality: resp.statusCode._name
+			})
+			
+			/// statistics on last acquisition for identification of presence for each data point
+			profilingDictionary.set(dataSourceWrapper.nodeIds[i].address, resp.value.value + ', @ ' + new Date().toISOString())
     }
   }
   return pattern 
 }
 
-async function begin(dataSourceWrapper, mqttConnectionOptions) {
-
+async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 	acquire(dataSourceWrapper)
 	.then((responseValues)=>{
 		log.info(responseValues)
+		// let myPattern = integrate(spaceConfigure, responseValues)
 		let dataset = format(dataSourceWrapper, responseValues)
 
 		/* MQTTs North-bound*/
 		deliver(mqttConnectionOptions, dataset)
 		.then((acknowledge)=>{
 			log.warn(acknowledge)
-
 			return acknowledge
 		})
 		.catch((e)=>{
@@ -213,7 +231,7 @@ async function begin(dataSourceWrapper, mqttConnectionOptions) {
 }
 
 module.exports = {
-	begin: begin,
+	runOnce: runOnce,
   // acquire: acquire,
 	// deliver: deliver,
 	profilingDictionary: profilingDictionary

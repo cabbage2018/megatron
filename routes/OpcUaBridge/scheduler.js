@@ -1,11 +1,12 @@
 'use strict'
 let bridge = require('./bridge')
 let cron = require('node-cron')
+let report = require('./report')
+let taskRoutine = null
+
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
 let critical = log4js.getLogger('error')
-let report = require('./report')
-var taskRoutine = null
 
 module.exports = {
   setup: function setup(spacesAddress, mqttConnections) {

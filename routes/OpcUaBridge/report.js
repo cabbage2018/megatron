@@ -1,7 +1,8 @@
 'use strict'
 let nodemailer  = require('nodemailer')
 let path = require('path')
-let mailoptions = require(path.join(process.cwd(), './config/mailoptions.json'))
+let fs = require('fs')
+let mailoptions = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mailoptions.json')))
 
 module.exports = {
   postman: function postman(mailContent){

@@ -6,14 +6,15 @@
 
 let log4js = require('log4js')
 let path = require('path')
-console.log(path.join(path.join(process.cwd(), './config/'), 'config.json'))
-console.log(process.cwd(), '= process.cwd() ***')
+let fs = require('fs')
+console.log(process.cwd(), '= process.cwd()', ': runtime dir')
+console.log(__dirname, '= __dirname', ': static dir before compile')
 
 if (process.env.NODE_ENV === 'development') {
-  log4js.configure(require('../config/log4js_test.json'))
-  ;
+  let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
+  log4js.configure(config);
 } else {
-  let config = require('../config/mailoptions.json')
+  let mailconfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mailoptions.json')))
 
   log4js.configure({
     appenders: {
@@ -24,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
       request: {
         //请求日志
         type: 'dateFile',
-        filename: './logs/request', // 需要手动建好目录,如图1所示
+        filename: path.join(process.cwd(), './logs/request'), // 需要手动建好目录,如图1所示
         // 指定pattern后无限备份
         pattern: 'yyyy-MM-dd',
         // 不指定pattern时若为true会使用默认值'.yyyy-MM-dd'
@@ -37,42 +38,36 @@ if (process.env.NODE_ENV === 'development') {
         backups: 4,
         compress : false,
         keepFileExt : true,
-        filename: './logs/errors.trp',
+        filename: path.join(process.cwd(), './logs/errors.trp'),
         // pattern: 'yyyy-MM-dd.log',
         // alwaysIncludePattern: true,
-      },
-      fatal: {
-        type: 'dateFile',
-        filename: './logs/error',
-        pattern: 'yyyy-MM-dd.log',
-        alwaysIncludePattern: true,
       },
       other: {
         //其他日志
         type: 'file',
-        maxLogSize: 8388608,
+        maxLogSize: 8388608/4,
         backups: 3,
         compress : false,
         keepFileExt : true,
-        filename: './logs/livre.log',
+        filename: path.join(process.cwd(), './logs/livre.log'),
         // pattern: 'yyyy-MM-dd.log',
         alwaysIncludePattern: true,
       },
       email: {
         //发送错误报告至邮箱
         type: '@log4js-node/smtp',
-        sender: config.email.sender, //发送邮件的邮箱
-        subject: config.email.subject, //标题
+        sender: mailconfig.email.sender, //发送邮件的邮箱
+        subject: mailconfig.email.subject, //标题
         SMTP: {
-          host: config.email.host, 
-          port: config.email.port,
+          host: mailconfig.email.host, 
+          port: mailconfig.email.port,
           // secure: true,
           // secureConnection: true, // 使用 SSL
           // tls: {
           //   // do not fail on invalid certs
           //   rejectUnauthorized: false
           // },
-          auth: config.email.auth //auth { user: 'xxx@qq.com', pass: '密码' }
+          auth: mailconfig.email.auth //auth { user: 'xxx@qq.com', pass: '密码' }
         },
         // attachment: {
         //   enable: true,
@@ -80,7 +75,7 @@ if (process.env.NODE_ENV === 'development') {
         //   message: 'See the attachment for the latest logs'
         // },
         // sendInterval: 3600*1,
-        recipients: config.email.recipients, //接收邮件的邮箱
+        recipients: mailconfig.email.recipients, //接收邮件的邮箱
       },
     },
 
