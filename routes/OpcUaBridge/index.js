@@ -8,17 +8,9 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource')
 })
 
-router.get('/history', function(req, res, next) {
-  console.log(req)
-  let list = []
-	res.render('list', {
-    title: __filename + new Date().toISOString(),
-    items: list
-  })
-})
-
 router.get('/logs', function(req, res, next) {
   const fs = require('fs')
+  const path = require('path')
   const readline = require('readline')
 
   let fRead = fs.createReadStream(path.join(process.cwd(), './logs/livre.log'))
