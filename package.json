@@ -3,7 +3,6 @@
   "email": "mindspherebasic@126.com",
   "version": "21.36.2",
   "private": true,
-  "env": "development",
   "repository": {
     "type": "git",
     "url": "https://github.com/cabbage2018/megatron.git"

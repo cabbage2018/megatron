@@ -46,8 +46,7 @@ function deliver(MqttsOptions, signalArray) {
 
 				if(packet){
 					log.mark(packet)
-				}
-				
+				}				
 			})	
 			// resolve('Connected mqtt successfully!')
 		})
@@ -273,7 +272,8 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 		// let myPattern = integrate(spaceConfigure, responseValues)
 		let dataset = aggregate(dataSourceWrapper, responseValues)
 		for (var x of dataset) {
-			log.debug(x[0] + '=' + x[1]);
+			log.debug(x[0] + '=' + JSON.stringify(x[1]));
+
 			let dev = {}
 			dev.item_id = x[0]
 			dev.timestamp = new Date()
@@ -281,12 +281,11 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 			dev._embedded = {}
 			dev._embedded.item = x[1]
 
-			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){
-				
+			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){				
 				let mqttConnectionOptions = mqttConnectionOptionArray[j]
 				await deliver(mqttConnectionOptions, dev)
 				.then((acknowledge)=>{
-					log.mark(acknowledge)
+					// log.mark(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)
@@ -331,7 +330,7 @@ async function quickCheck(dataSourceWrapper, mqttConnectionOptionArray) {
 				let mqttConnectionOptions = mqttConnectionOptionArray[j]
 				await deliver(mqttConnectionOptions, dev)
 				.then((acknowledge)=>{
-					log.mark(acknowledge)
+					// log.mark(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)

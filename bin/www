@@ -11,9 +11,9 @@ let fs = require('fs')
 if (process.env.NODE_ENV === 'development') {
   let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
   log4js.configure(config);
+
 } else {
   let mailconfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mailoptions.json')))
-
   log4js.configure({
     appenders: {
       stdout: {
@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
       }, 
       request: {
         type: 'dateFile',
-        filename: path.join(process.cwd(), './logs/request'), // 需要手动建好目录,如图1所示
+        filename: path.join(process.cwd(), './logs/request'),
         pattern: 'yyyy-MM-dd',
         alwaysIncludePattern: true,
       },
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
       },
       other: {
         type: 'file',
-        maxLogSize: 8388608/4,
+        maxLogSize: 8388608,
         backups: 8,
         compress : true,
         keepFileExt : true,
@@ -79,7 +79,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const log = log4js.getLogger('bin:www')
 
-if (process.env.npm_package_env === 'development') {
+if (process.env.NODE_ENV === 'development') {
   log.mark(`${process.env.NODE_ENV}`)
   log.mark(`${process.env.npm_package_env}`)
 } else {
