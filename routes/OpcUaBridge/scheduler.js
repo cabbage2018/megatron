@@ -6,9 +6,9 @@ let fs = require('fs')
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
 
-let bridge = require('./bridge')
-
 async function triggerOnce(dataSourceWrapper, mqttConnectionOptionArray) {
+  let bridge = require('./bridge')
+
   try{
     if (process.env.NODE_ENV/*process.env.npm_package_env*/ === 'development') {
       await bridge.quickCheck(dataSourceWrapper, mqttConnectionOptionArray)
@@ -21,14 +21,25 @@ async function triggerOnce(dataSourceWrapper, mqttConnectionOptionArray) {
   }
 }
 
-function initializeTimer(minutesSeries, dataSourceWrapper, mqttConnectionOptionArray){
-  for(let i = 0; i < minutesSeries; i = i+ 1) {
-    let periodicJob4Reading = setTimeout(async function () {
-      log.fatal( i + '\'th round: cron.schedule(\'45 */60 * * * *\', () => {...........')
-      await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)
-    }, 1000*60*i);
-  }
-}
+let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+log.debug(dataSourceWrapper.updateIntervalMillisecond)
+
+let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+log.debug(mqttConnectionOptionArray)
+
+let intervalObj = setInterval(async() => {
+  dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+  log.debug(dataSourceWrapper.updateIntervalMillisecond)
+
+  mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+  log.debug(mqttConnectionOptionArray)
+
+  await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)  
+  log.fatal( ' setInterval(() => { ' + new Date().toISOString())
+}, dataSourceWrapper.updateIntervalMillisecond || 300000);
+
+
+
   /*
    to minimize the downtime of this program, 
    first level job will initialize a second onion task, [deleted]
@@ -41,37 +52,29 @@ function initializeTimer(minutesSeries, dataSourceWrapper, mqttConnectionOptionA
    recover the privious version, big circle is 60 min,
    and then set up a series of timer from 1 min to 60 min range.
 
+   August 12: finally apply setInterval to an cron task to adjust interval job every hour
+
   */
+
 let taskRoutine = cron.schedule('45 */60 * * * *', () => {
 
-  /// update settings properties every big interval = 60 min
-  let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-  log.debug(dataSourceWrapper.updateIntervalMillisecond)
+  clearInterval(intervalObj);
 
-  let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-  log.debug(mqttConnectionOptionArray)
+  if(fs.existsSync(path.join(process.cwd(), './config/opcuaspaces.json')) 
+    && fs.existsSync(path.join(process.cwd(), './config/mqttoptions.json'))) {
 
-  let ms = dataSourceWrapper.updateIntervalMillisecond || 300000
-  let intervalSeconds = (ms)/ 1000
-  if(intervalSeconds < 60) {
-    intervalSeconds = 60
-    let howManyMinutes = intervalSeconds / 60
-    let iteratesWithin60Minutes = 60 / howManyMinutes
-    initializeTimer(iteratesWithin60Minutes, dataSourceWrapper, mqttConnectionOptionArray)
-
-  } else if (intervalSeconds > 3599) {
-    /// execute at once, 1 time
-    let periodicJob4Reading = setTimeout(async function () {
-      await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)
-    }, 10000);
-
-  } else {
-    /// between 1 and 60 min
-    let howManyMinutes = intervalSeconds / 60    
-    let iteratesWithin60Minutes = 60 / howManyMinutes
-    initializeTimer(iteratesWithin60Minutes, dataSourceWrapper, mqttConnectionOptionArray)
+      intervalObj = setInterval(async() => {
+        dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+        log.debug(dataSourceWrapper.updateIntervalMillisecond)
+      
+        mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+        log.debug(mqttConnectionOptionArray)
+      
+        await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)
+        log.fatal( ' setInterval(() => { ' + new Date().toISOString())
     
-  }
+      }, dataSourceWrapper.updateIntervalMillisecond || 300000);
+    }
 
   // log4js.shutdown()
 })
