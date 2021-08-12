@@ -7,57 +7,46 @@
 let log4js = require('log4js')
 let path = require('path')
 let fs = require('fs')
-console.log(process.cwd(), '= process.cwd()', ': runtime dir')
-console.log(__dirname, '= __dirname', ': static dir before compile')
 
 if (process.env.NODE_ENV === 'development') {
   let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
   log4js.configure(config);
 } else {
-  let mailconfig = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mailoptions.json')))
+  let mailconfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mailoptions.json')))
 
   log4js.configure({
     appenders: {
       stdout: {
-        //控制台输出
         type: 'stdout',
       }, 
       request: {
-        //请求日志
         type: 'dateFile',
         filename: path.join(process.cwd(), './logs/request'), // 需要手动建好目录,如图1所示
-        // 指定pattern后无限备份
         pattern: 'yyyy-MM-dd',
-        // 不指定pattern时若为true会使用默认值'.yyyy-MM-dd'
         alwaysIncludePattern: true,
       },
       error: {
-        //错误日志
         type: 'file',
-        maxLogSize: 8388608/8,
-        backups: 4,
+        maxLogSize: 8388608/2,
+        backups: 24,
         compress : false,
         keepFileExt : true,
         filename: path.join(process.cwd(), './logs/errors.trp'),
-        // pattern: 'yyyy-MM-dd.log',
-        // alwaysIncludePattern: true,
       },
       other: {
-        //其他日志
         type: 'file',
         maxLogSize: 8388608/4,
-        backups: 3,
-        compress : false,
+        backups: 8,
+        compress : true,
         keepFileExt : true,
         filename: path.join(process.cwd(), './logs/livre.log'),
-        // pattern: 'yyyy-MM-dd.log',
         alwaysIncludePattern: true,
       },
       email: {
         //发送错误报告至邮箱
         type: '@log4js-node/smtp',
-        sender: mailconfig.email.sender, //发送邮件的邮箱
-        subject: mailconfig.email.subject, //标题
+        sender: mailconfig.email.sender, 
+        subject: mailconfig.email.subject, 
         SMTP: {
           host: mailconfig.email.host, 
           port: mailconfig.email.port,
@@ -69,26 +58,33 @@ if (process.env.NODE_ENV === 'development') {
           // },
           auth: mailconfig.email.auth //auth { user: 'xxx@qq.com', pass: '密码' }
         },
-        // attachment: {
-        //   enable: true,
-        //   filename: './livre.log',
-        //   message: 'See the attachment for the latest logs'
-        // },
+        attachment: {
+          enable: true,
+          filename: path.join(process.cwd(), './logs/errors.trp'),
+          message: `See the attachment for the latest logs ${__filename}, ${new Date().toISOString()};`
+        },
         // sendInterval: 3600*1,
-        recipients: mailconfig.email.recipients, //接收邮件的邮箱
+        recipients: mailconfig.email.recipients,
       },
     },
 
     categories: {
-      default: { appenders: ['stdout', 'request', 'other', 'error'], level: 'all' },
+      default: { appenders: ['stdout', 'request', 'other', 'error'], level: 'fatal' },
       error: { appenders: ['stdout', 'error'], level: 'error' },
       email: { appenders: ['email'], level: 'error' },
       other: { appenders: ['other'], level: 'info' },
     },
   })
 }
-const tracer = log4js.getLogger('bin:www')
-tracer.info(process.env.NODE_ENV || 'production', 'mode for logging')
+
+const log = log4js.getLogger('bin:www')
+
+if (process.env.npm_package_env === 'development') {
+  log.mark(`${process.env.NODE_ENV}`)
+  log.mark(`${process.env.npm_package_env}`)
+} else {
+  log.debug(process.env)
+}
 
 /**
  * Module dependencies.

@@ -7,10 +7,12 @@ let {
   OPCUAClient,
   TimestampsToReturn,
 } = require('node-opcua')
+
 let log4js = require('log4js')
 let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
+
   let deliverPromise = new Promise(async function (resolve, reject) {
 
 		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)	
@@ -22,16 +24,32 @@ function deliver(MqttsOptions, signalArray) {
 		})	
 
 		client.on('message', function (topic, message) {
-			// log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
-		})	
+			log.info(`MQTTs deliver topic=${topic}, message=${message}`)
+
+			setTimeout(async function () {
+				resolve(`task due to timer time out/MQTTs deliver topic=${topic}, message=${message}`)
+			}, 3000);
+
+			// client.unsubscribe(topic, (err, packet)=>{
+			// 	// client.end()
+			// 	// client = null
+			// })
+		})
 
 		client.on('connect', function () {
-			// client.subscribe(MqttsOptions.subscribeTopic)
-			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err)=>{
-				log.error(err)
-				resolve(err)
+			client.subscribe(MqttsOptions.subscribeTopic)
+			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err, packet)=>{
+				if(err){
+					log.error(err)
+					reject(err)
+				}
+
+				if(packet){
+					log.mark(packet)
+				}
+				
 			})	
-			resolve('Connected mqtt successfully!')
+			// resolve('Connected mqtt successfully!')
 		})
 		
   })
@@ -245,13 +263,15 @@ function aggregate(dataSourceWrapper, resultObjectArray) {
   return devices
 }
 
-async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
+async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
+
 	acquire(dataSourceWrapper, 125, false)
-	.then((responseValues)=>{
-		log.info(responseValues)
+	
+	.then(async (responseValues)=>{
+
+		log.debug(responseValues)
 		// let myPattern = integrate(spaceConfigure, responseValues)
 		let dataset = aggregate(dataSourceWrapper, responseValues)
-
 		for (var x of dataset) {
 			log.debug(x[0] + '=' + x[1]);
 			let dev = {}
@@ -261,14 +281,18 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 			dev._embedded = {}
 			dev._embedded.item = x[1]
 
-			///
-			deliver(mqttConnectionOptions, dev)
-			.then((acknowledge)=>{
-				log.debug(acknowledge)
-			})
-			.catch((e)=>{
-				log.error(e)
-			})
+			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){
+				
+				let mqttConnectionOptions = mqttConnectionOptionArray[j]
+				await deliver(mqttConnectionOptions, dev)
+				.then((acknowledge)=>{
+					log.mark(acknowledge)
+				})
+				.catch((e)=>{
+					log.error(e)
+				})
+	
+			}
 
 		}
 	})
@@ -278,7 +302,48 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptions) {
 	})
 }
 
+/* check MQTTs Connectivity */
+async function quickCheck(dataSourceWrapper, mqttConnectionOptionArray) {
+  let periodicJob4Reading = setTimeout(async function () {
+		let dataset = new Map()
+		for(let i = 0; i < 3; i += 1){
+			let responseValues = []
+			for(let j = 0; j < 1; j = j + 1){
+				responseValues.push({
+					internal_name: 'internal_name' + j,
+					value: Math.random()*65535,
+					quality: 'Unkonwn Questionmark'
+				})
+			}
+			dataset.set('device-ID-' + i, responseValues)
+		}
+		// let dataset = aggregate(dataSourceWrapper, responseValues)
+		for (var x of dataset) {
+			log.debug(x[0] + '=' + JSON.stringify(x[1]));
+			let dev = {}
+			dev.item_id = x[0]
+			dev.timestamp = new Date()
+			dev.count = x[1].length
+			dev._embedded = {}
+			dev._embedded.item = x[1]
+
+			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){				
+				let mqttConnectionOptions = mqttConnectionOptionArray[j]
+				await deliver(mqttConnectionOptions, dev)
+				.then((acknowledge)=>{
+					log.mark(acknowledge)
+				})
+				.catch((e)=>{
+					log.error(e)
+				})
+			}
+		}
+	}, 3000);	
+}
+
+
 module.exports = {
 	runOnce: runOnce,
-	profilingDictionary: profilingDictionary
+	profilingDictionary: profilingDictionary,
+	quickCheck: quickCheck,
 }

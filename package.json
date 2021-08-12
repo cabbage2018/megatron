@@ -3,6 +3,7 @@
   "email": "mindspherebasic@126.com",
   "version": "21.36.2",
   "private": true,
+  "env": "development",
   "repository": {
     "type": "git",
     "url": "https://github.com/cabbage2018/megatron.git"
@@ -12,6 +13,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
+    "build": "set NODE_ENV=production",
     "pkg": "pkg ./bin/www  -t win --out-path=dist/",
     "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
   },

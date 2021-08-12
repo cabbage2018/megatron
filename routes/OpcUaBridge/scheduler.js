@@ -5,60 +5,60 @@ let fs = require('fs')
 
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
-let critical = log4js.getLogger('error')
 
 let bridge = require('./bridge')
-let report = require('./report')
 
-  // to minimize the downtime of this program, first level job will initialize a second onion task, which will disappear when finished.
-let taskRoutine = cron.schedule('57 */1 * * * *', () => {
-    let periodicJob4Reading = setTimeout(async function () {
-      
-      let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-      log.debug(dataSourceWrapper)
+  /*
+   to minimize the downtime of this program, 
+   first level job will initialize a second onion task, 
+   which will disappear when finished.
+  */
+let taskRoutine = cron.schedule('45 */5 * * * *', () => {
 
-      let mqttConnectionOptions = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-      log.debug(mqttConnectionOptions)
+  let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+  log.debug(dataSourceWrapper.updateIntervalMillisecond)
 
+  let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+  log.debug(mqttConnectionOptionArray)
+
+  let ms = dataSourceWrapper.updateIntervalMillisecond || 300000
+  let intervalSeconds = (ms)/ 1000
+  if(intervalSeconds < 60 || intervalSeconds > 900){
+    intervalSeconds = 300
+  }
+  let howManyMinutes = intervalSeconds / 60
+  if(howManyMinutes > 5) {
+    let periodicJob4Reading = setTimeout(async function () {  
+      log.fatal('cron.schedule(\'45 */5 * * * *\', () => {...........')  
       try{
-        await bridge.runOnce(dataSourceWrapper, mqttConnectionOptions)
+        if (/*process.env.NODE_ENV*/ process.env.npm_package_env === 'development') {
+          await bridge.quickCheck(dataSourceWrapper, mqttConnectionOptionArray)
+        } else {
+          await bridge.runOnce(dataSourceWrapper, mqttConnectionOptionArray)
+        }        
       }
       catch(e){
-        critical.fatal(e)
+        log.fatal(e)
       }
-    }, 3000);    
-    // log4js.shutdown()
-  })
-  
-  taskRoutine.start()
-// module.exports = {
-//   setup: function setup(spacesAddress, mqttConnections) {
-//   }
-// }
-
-let hourlyReport = cron.schedule('58 39 */2 * * *', () => {
-
-  if(fs.existsSync(path.join(process.cwd(), './logs/errors.trp'))){
-    let alarmString = fs.readFileSync(path.join(process.cwd(), './logs/errors.trp'))
-    console.log(alarmString)
-    report.postman('Emergency! Alarm fatal is coming!' + alarmString + ';\r\n then this source is deleted.')
-    fs.unlinkSync(path.join(process.cwd(), './logs/errors.trp'))
-    console.log('deleting: ', path.join(process.cwd(), './logs/errors.trp'))
+    }, 1000*60*2.5);
   } else {
-    report.postman('No communications error happened until now:)')
+    let cyclesIn15Minutes = 15 / howManyMinutes
+    for(let i = 0; i < cyclesIn15Minutes; i = i+ 1) {
+      let periodicJob4Reading = setTimeout(async function () {  
+        log.fatal('cron.schedule(\'45 */15 * * * *\', () => {...........')  
+        try{  
+          if (/*process.env.NODE_ENV*/ process.env.npm_package_env === 'development') {
+            await bridge.quickCheck(dataSourceWrapper, mqttConnectionOptionArray)
+          } else {
+            await bridge.runOnce(dataSourceWrapper, mqttConnectionOptionArray)
+          }        
+        }
+        catch(e){
+          log.fatal(e)
+        }
+      }, 1000*60*i*howManyMinutes);
+    }
   }
-
+  // log4js.shutdown()
 })
-
-hourlyReport.start()
-
-let dailyReport = cron.schedule('29 59 */24 * * *', () => {
-
-  let profilePerformance = bridge.profilingDictionary
-  let profileString = JSON.stringify([...profilePerformance])
-  console.log(profileString)
-  report.postman('Hello performance profile is coming!' + profileString)
-
-})
-
-dailyReport.start()
+taskRoutine.start()

@@ -1,8 +1,25 @@
 'use strict'
 let nodemailer  = require('nodemailer')
+let cron = require('node-cron')
 let path = require('path')
 let fs = require('fs')
-let mailoptions = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mailoptions.json')))
+
+let mailoptions = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/mailoptions.json')))
+let hourlyReport = cron.schedule('56 39 */1 * * *', () => {
+
+  let bridge = require('./bridge')
+  let profilePerformance = bridge.profilingDictionary
+  // let profileString = JSON.stringify([...profilePerformance])
+  var jsonArray = {}
+  for (var x of profilePerformance) {
+    log.debug(x[0] + '=' + x[1]);
+    jsonArray[x[0]]= x[1];
+  }
+  let jsonString=JSON.stringify(jsonArray)
+  console.log(jsonString)
+  postman('Hello performance profile is reporting.' + jsonString)
+})
+hourlyReport.start()
 
 module.exports = {
   postman: function postman(mailContent){
@@ -25,16 +42,16 @@ module.exports = {
       contentType   : "text/plain;charset=utf-8",
       attachments : 
       [
-          // {
-          //     filename: 'errors.trp', 
-          //     path: path.join(process.cwd(), './logs/errors.trp'),
-          //     cid : '00000001'
-          // },
           {
-              filename: 'mailoptions.json',   
-              path: path.join(process.cwd(), './config/mailoptions.json'),
-              cid : '00000002'
+              filename: 'errors.trp', 
+              path: path.join(process.cwd(), './logs/errors.trp'),
+              cid : '00000001'
           },
+          // {
+          //     filename: 'mailoptions.json',   
+          //     path: path.join(process.cwd(), './config/mailoptions.json'),
+          //     cid : '00000002'
+          // },
       ]                
     }
     transport.sendMail(options, function(err, response){
