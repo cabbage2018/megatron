@@ -14,3 +14,5 @@ sc create acqopcua binpath= D:\Siemens\mac_pkg\acq.exe type= own start= auto dis
 net start acqopcua 
 net stop acqopcua
 sc delete "acqopcua"
+
+process.env.NODE_ENV need setup Windows environment varialbe NODE_ENV = development!
