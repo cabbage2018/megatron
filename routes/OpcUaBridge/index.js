@@ -3,9 +3,13 @@ var express = require('express');
 var router = express.Router();
 let configure = require('./configure')
 
+let log4js = require('log4js')
+let log = log4js.getLogger('request')
+
 /* GET web page. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource')
+  log.debug(req)
 })
 
 router.get('/logs', function(req, res, next) {
@@ -29,6 +33,8 @@ router.get('/logs', function(req, res, next) {
     })
     objReadline.close();
   })
+
+  log.debug(req)
   // next() //if middleware exists
 })
 
@@ -39,6 +45,8 @@ router.get('/acq', function(req, res, next) {
     title: __filename + new Date().toISOString(),
     items: dict
   })
+
+  log.debug(req)
 })
 
 module.exports = router

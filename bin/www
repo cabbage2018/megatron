@@ -9,27 +9,57 @@ let path = require('path')
 let fs = require('fs')
 
 if (process.env.NODE_ENV === 'development') {
-  let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
-  log4js.configure(config);
+  // as much as possible for debug
+  // let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
+  log4js.configure({
+    "appenders": {
+
+      "console": {
+        "type": "console",
+        "pattern": "%d %p %c %m%n"
+      },
+
+      "debug": {
+        "type": "dateFile",
+        "filename": path.join(__dirname, '../logs/debug'),
+        "pattern": "yyyy-MM-dd",
+        "compress": true,
+        "alwaysIncludePattern": true,
+      },
+
+      "out": {
+        "type": "stdout",
+        "layout": {
+          "type": "pattern",
+          "pattern": "%d %p %c %m%n"
+          }
+        }
+      },
+      "categories": {
+        "default": { "appenders": ["console", "debug"], "level": "all" }
+      }
+    });
 
 } else {
+
+  // as minimum as possible to save disk
   let mailconfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/mailoptions.json')))
+  
   log4js.configure({
     appenders: {
-      stdout: {
-        type: 'stdout',
-      }, 
+
       request: {
         type: 'dateFile',
         filename: path.join(process.cwd(), './logs/request'),
         pattern: 'yyyy-MM-dd',
+        compress : true,
         alwaysIncludePattern: true,
       },
       error: {
         type: 'file',
-        maxLogSize: 8388608/2,
-        backups: 24,
-        compress : false,
+        maxLogSize: 8388608,
+        backups: 7,
+        compress : true,
         keepFileExt : true,
         filename: path.join(process.cwd(), './logs/errors.trp'),
       },
@@ -46,7 +76,7 @@ if (process.env.NODE_ENV === 'development') {
         //发送错误报告至邮箱
         type: '@log4js-node/smtp',
         sender: mailconfig.email.sender, 
-        subject: mailconfig.email.subject, 
+        subject: mailconfig.email.subject,
         SMTP: {
           host: mailconfig.email.host, 
           port: mailconfig.email.port,
@@ -61,7 +91,7 @@ if (process.env.NODE_ENV === 'development') {
         attachment: {
           enable: true,
           filename: path.join(process.cwd(), './logs/errors.trp'),
-          message: `See the attachment for the latest logs ${__filename}, ${new Date().toISOString()};`
+          message: `See the attached latest runtime report ${__filename}, ${process.cwd()}, ${new Date().toISOString()};`
         },
         // sendInterval: 3600*1,
         recipients: mailconfig.email.recipients,
@@ -69,10 +99,11 @@ if (process.env.NODE_ENV === 'development') {
     },
 
     categories: {
-      default: { appenders: ['other', 'stdout', 'error'], level: 'all' },
-      error: { appenders: ['stdout', 'error'], level: 'error' },
-      email: { appenders: ['email'], level: 'error' },
-      other: { appenders: ['other', 'request'], level: 'info' },
+      default: { appenders: ['other'], level: 'warn' },
+      error: { appenders: ['error'], level: 'error' },
+      email: { appenders: ['email'], level: 'warn' },
+      other: { appenders: ['other'], level: 'fatal' },
+      request: { appenders: ['request'], level: 'debug' }
     },
   })
 }
@@ -83,7 +114,7 @@ if (process.env.NODE_ENV === 'development') {
   log.mark(`${process.env.NODE_ENV}`)
   log.mark(`${process.env.npm_package_env}`)
 } else {
-  log.debug(process.env)
+  log.warn(process.env)
 }
 
 /**

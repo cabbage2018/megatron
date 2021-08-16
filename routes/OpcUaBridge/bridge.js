@@ -9,6 +9,7 @@ let {
 } = require('node-opcua')
 
 let log4js = require('log4js')
+let alert = log4js.getLogger('error')
 let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
@@ -18,7 +19,7 @@ function deliver(MqttsOptions, signalArray) {
 		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)	
 
 		client.on('error', function (err) {
-			log.error('mqtt connect #', err)
+			alert.error('mqtt connect #', err)
 			client.end()
 			reject(err)
 		})	
@@ -28,12 +29,17 @@ function deliver(MqttsOptions, signalArray) {
 
 			setTimeout(async function () {
 				resolve(`task due to timer time out/MQTTs deliver topic=${topic}, message=${message}`)
-			}, 3000);
 
-			// client.unsubscribe(topic, (err, packet)=>{
-			// 	// client.end()
-			// 	// client = null
-			// })
+			client.unsubscribe(topic, (err, packet)=>{
+				client.end(true, (err)=>{
+					alert.error('mqtt close #', err)
+				})
+				log.info(`unsubscribe.`)
+
+				// client = null
+			})
+
+			}, 3000);
 		})
 
 		client.on('connect', function () {
@@ -285,7 +291,7 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 				let mqttConnectionOptions = mqttConnectionOptionArray[j]
 				await deliver(mqttConnectionOptions, dev)
 				.then((acknowledge)=>{
-					// log.mark(acknowledge)
+					log.mark(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)
@@ -330,7 +336,7 @@ async function quickCheck(dataSourceWrapper, mqttConnectionOptionArray) {
 				let mqttConnectionOptions = mqttConnectionOptionArray[j]
 				await deliver(mqttConnectionOptions, dev)
 				.then((acknowledge)=>{
-					// log.mark(acknowledge)
+					log.mark(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)

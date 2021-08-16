@@ -11,7 +11,9 @@
     "node": ">=0.10 <=14"
   },
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node bin/www",
+    "pm2": "pm2 start bin/www",
+    "pm2-stop": "pm2 stop all",
     "build": "set NODE_ENV=production",
     "pkg": "pkg ./bin/www  -t win --out-path=dist/",
     "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
