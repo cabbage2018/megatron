@@ -6,24 +6,23 @@ let fs = require('fs')
 
 let mailoptions = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config/mailoptions.json')))
 
-let hourlyReport = cron.schedule('16 39 */8 * * *', () => {
-
+let hourlyReport = cron.schedule('* * 8,16,0 * * *', () => {
   let bridge = require('./bridge')
   let profilePerformance = bridge.profilingDictionary
   // let profileString = JSON.stringify([...profilePerformance])
-  
+
   var jsonArray = {}
   for (var x of profilePerformance) {
     log.debug(x[0] + '=' + x[1]);
     jsonArray[x[0]]= x[1];
   }
   let jsonString=JSON.stringify(jsonArray)
-  console.log(jsonString)
-  
-  postman('Hello performance profile is reporting.' + jsonString)
+  // console.log(jsonString)
+    postman('Hello performance profile is reporting: ' + jsonString)
 })
 
 hourlyReport.start()
+
 
 module.exports = {
   postman: function postman(mailContent){

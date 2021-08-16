@@ -1,9 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+'use strict'
+let logs = require('./logs')
+let procedure = require('./OpcUaBridge/index')

@@ -14,10 +14,8 @@ let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
 
-  let deliverPromise = new Promise(async function (resolve, reject) {
-
-		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)	
-
+  let deliverPromise = new Promise(async function (resolve, reject) {		
+		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)
 		client.on('error', function (err) {
 			alert.error('mqtt connect #', err)
 			client.end()
@@ -29,16 +27,13 @@ function deliver(MqttsOptions, signalArray) {
 
 			setTimeout(async function () {
 				resolve(`task due to timer time out/MQTTs deliver topic=${topic}, message=${message}`)
-
-			client.unsubscribe(topic, (err, packet)=>{
-				client.end(true, (err)=>{
-					alert.error('mqtt close #', err)
+				client.unsubscribe(topic, (err, packet)=>{
+					client.end(true, (err)=>{
+						alert.error('mqtt close #', err)
+					})
+					log.warn(`unsubscribe.`)
+					// client = null
 				})
-				log.info(`unsubscribe.`)
-
-				// client = null
-			})
-
 			}, 3000);
 		})
 
@@ -46,7 +41,7 @@ function deliver(MqttsOptions, signalArray) {
 			client.subscribe(MqttsOptions.subscribeTopic)
 			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err, packet)=>{
 				if(err){
-					log.error(err)
+					alert.error(err)
 					reject(err)
 				}
 
@@ -62,13 +57,29 @@ function deliver(MqttsOptions, signalArray) {
 }
 
 function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
+
   let acquisitionPromise = new Promise(async function (resolve, reject) {
     let client = OPCUAClient.create({
       endpointMustExist: false
     })
 
-		client.on("backoff", (retry, delay) => {
-      profilingDictionary.set('backoff' + spaceConfigure.endpointUrl + retry + delay, "alarm, need human being inter-act")
+		client.on("backoff", async (retry, delay) => {
+			if (retry > 128){
+				reject({c: 'backoff failure', r: retry, d: delay, t: new Date()})
+				alert(`network access error makes OPCUA backoff and cannot remedy, give up for save error log size`)
+
+				/// must clean resource
+				if(session) {
+					await session.close()
+					session = null
+				}
+				if(client) {
+					await client.disconnect()
+					// client = null
+				}
+
+			}
+      profilingDictionary.set('backoff' + spaceConfigure.endpointUrl + retry, delay)
     })
 
 		client.on("error", (e) => {
@@ -86,16 +97,16 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
           EACH OPC UA SERVER HAS ITS OWN MAXIMUM DATA POINTS LIMIT
           FOR EXAMPLE BULK OF SIMOCODE = 130
         */
-        let BULKSIZE = 1000;
+        // let bulksize = 1000;
 				var segmentValues = [];
 				let nodeIds = []
 				for(let i = 0; i < spaceConfigure.nodeIds.length; i = i+ 1) {
 					nodeIds.push(spaceConfigure.nodeIds[i].address)
 				}
 
-        for(var i = 0; i < nodeIds.length / BULKSIZE; i += 1) {
-          let start = i * BULKSIZE;
-          let stop = (i === nodeIds.length / BULKSIZE) ? nodeIds.length : (i + 1) * BULKSIZE;
+        for(var i = 0; i < nodeIds.length / bulksize; i += 1) {
+          let start = i * bulksize;
+          let stop = (i === nodeIds.length / bulksize) ? nodeIds.length : (i + 1) * bulksize;
 					var values = await session.readVariableValue(nodeids.slice(start, stop));
 					
 					for(let j = 0; j < values.length; j = j + 1){
@@ -179,75 +190,19 @@ function acquire(spaceConfigure, bulksize = 1500, bulkMode = false) {
 }
 */
 
-function integrate(spaceConfigure, responseValues){
-	let spaceDictionary = new Map()
-	for(let i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
-		spaceDictionary.set(spaceConfigure.nodeIds[i].address, spaceConfigure.nodeIds[i])
-	}
-
-	if(	spaceConfigure.nodeIds.length !== responseValues.length	){
-		log.warn('space length <> response values length')
-		return []
-	}
-
-	let comboArray = []
-	for(let i = 0; i < spaceConfigure.nodeIds.length; i = i + 1) {
-		if(spaceDictionary.get(spaceConfigure.nodeIds[i].address) != null) {
-			let addr = spaceConfigure.nodeIds[i]	///spaceDictionary.get(responseValues[i].address)
-			let dataset = {}
-			dataset.value = responseValues[i].value.value
-			dataset.quality = responseValues[i].statusCode._name
-			dataset.name = addr.name
-			dataset.internal_name = addr.address
-			comboArray.push(dataset)
-
-			/// statistics on last acquisition for identification of presence for each data point
-			profilingDictionary.set(spaceConfigure.nodeIds[i].address, responseValues[i].value.value + ', @ ' + new Date().toISOString())
-		}
-	}
-	return comboArray;
-}
-
-///mock power center3000 7KN's
-function format(dataSourceWrapper, resultObjectArray) {
-  let pattern = {}
-	if(resultObjectArray !== null && resultObjectArray.length > 0
-		&& dataSourceWrapper !== null && dataSourceWrapper.nodeIds.length === resultObjectArray.length) {
-    pattern.item_id = dataSourceWrapper.item_id || 'Node.js softgatewat #001'
-    pattern.timestamp = new Date()///resultObjectArray[0].timestamp ///use machine time
-    pattern.count = resultObjectArray.length
-		pattern._embedded = {}
-		
-    pattern._embedded.item = []
-    for(var i = 0; i < resultObjectArray.length; i = i + 1) {
-			let resp = resultObjectArray[i]
-      pattern._embedded.item.push({
-					name: dataSourceWrapper.nodeIds[i].name,
-          internal_name: dataSourceWrapper.nodeIds[i].address, 
-          value: resp.value.value,
-          quality: resp.statusCode._name
-			})
-			
-			/// statistics on last acquisition for identification of presence for each data point
-			profilingDictionary.set(dataSourceWrapper.nodeIds[i].address, resp.value.value + ', @ ' + new Date().toISOString())
-    }
-  }
-  return pattern 
-}
-
 /// final version, @Aug 10th,
 function aggregate(dataSourceWrapper, resultObjectArray) {
+	
 	let devices = new Map()
-
 	if(resultObjectArray !== null && resultObjectArray.length > 0
 		&& dataSourceWrapper !== null && dataSourceWrapper.nodeIds.length === resultObjectArray.length) {
-		
+
     for(var i = 0; i < resultObjectArray.length; i = i + 1) {
-			let resp = resultObjectArray[i]			
+			let resp = resultObjectArray[i]
 			if(devices.get(dataSourceWrapper.nodeIds[i].name)){
 				let queue = devices.get(dataSourceWrapper.nodeIds[i].name)
 				queue.push({
-          internal_name: dataSourceWrapper.nodeIds[i].address, 
+          internal_name: dataSourceWrapper.nodeIds[i].address,
           value: resp.value.value,
           quality: resp.statusCode._name
 				})
@@ -260,9 +215,8 @@ function aggregate(dataSourceWrapper, resultObjectArray) {
 				})
 				devices.set(dataSourceWrapper.nodeIds[i].name, queue)
 			}
-
 			/// don't log big volume data but profile to a single map to save space
-			profilingDictionary.set(dataSourceWrapper.nodeIds[i].address, resp.value.value + ', @ ' + new Date().toISOString())
+			profilingDictionary.set(dataSourceWrapper.nodeIds[i].address, resp.value.value + ', ' + new Date().toISOString())
     }
   }
   return devices
@@ -270,31 +224,32 @@ function aggregate(dataSourceWrapper, resultObjectArray) {
 
 async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 
-	acquire(dataSourceWrapper, 125, false)
-	
+	acquire(dataSourceWrapper, 1250, true)
 	.then(async (responseValues)=>{
-
 		log.debug(responseValues)
 		// let myPattern = integrate(spaceConfigure, responseValues)
 		let dataset = aggregate(dataSourceWrapper, responseValues)
 		for (var x of dataset) {
 			log.debug(x[0] + '=' + JSON.stringify(x[1]));
 
-			let dev = {}
-			dev.item_id = x[0]
-			dev.timestamp = new Date()
-			dev.count = x[1].length
-			dev._embedded = {}
-			dev._embedded.item = x[1]
+			let dev = {
+				item_id: x[0],
+				timestamp: new Date(),
+				count: x[1].length,
+				_embedded:{
+					item: x[1]
+				}
+			}
 
-			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){				
+			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){
+				
 				let mqttConnectionOptions = mqttConnectionOptionArray[j]
 				await deliver(mqttConnectionOptions, dev)
 				.then((acknowledge)=>{
-					log.mark(acknowledge)
+					alert.mark(acknowledge)
 				})
 				.catch((e)=>{
-					log.error(e)
+					alert.error(e)
 				})
 	
 			}
@@ -303,7 +258,7 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 	})
 	.catch((err)=>{
 		// South-bound machine hardware failure
-		log.fatal(err)
+		alert.fatal(err)
 	})
 }
 
@@ -343,7 +298,7 @@ async function quickCheck(dataSourceWrapper, mqttConnectionOptionArray) {
 				})
 			}
 		}
-	}, 3000);	
+	}, 3000);
 }
 
 

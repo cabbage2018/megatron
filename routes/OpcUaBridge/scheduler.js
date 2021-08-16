@@ -6,12 +6,22 @@ let fs = require('fs')
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
 
-async function triggerOnce(dataSourceWrapper, mqttConnectionOptionArray) {
+let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+log.debug(dataSourceWrapper.updateIntervalMillisecond)
+
+let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+log.debug(mqttConnectionOptionArray[0])
+
+async function scanDiskConfig() {
+  dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
+  log.debug(dataSourceWrapper.updateIntervalMillisecond)
+
+  mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
+  log.debug(mqttConnectionOptionArray[0])
 
   let bridge = require('./bridge')
-
   try{
-    if (process.env.NODE_ENV/*process.env.npm_package_env*/ === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       await bridge.quickCheck(dataSourceWrapper, mqttConnectionOptionArray)
     } else {
       await bridge.runOnce(dataSourceWrapper, mqttConnectionOptionArray)
@@ -22,24 +32,10 @@ async function triggerOnce(dataSourceWrapper, mqttConnectionOptionArray) {
   }
 }
 
-let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-log.debug(dataSourceWrapper.updateIntervalMillisecond)
-
-let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-log.debug(mqttConnectionOptionArray[0])
-
 let intervalObj = setInterval(async() => {
-  dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-  log.debug(dataSourceWrapper.updateIntervalMillisecond)
-
-  mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-  log.debug(mqttConnectionOptionArray[0])
-
-  await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)  
-  log.fatal( ' setInterval(() => { ' + new Date().toISOString())
+  await scanDiskConfig()
+  log.info( `standard procedure: ${__filename} scan's cmopleted @ ${ new Date() }`)
 }, dataSourceWrapper.updateIntervalMillisecond || 300000);
-
-
 
   /*
    to minimize the downtime of this program, 
@@ -57,23 +53,18 @@ let intervalObj = setInterval(async() => {
 
   */
 let taskRoutine = cron.schedule('45 */60 * * * *', () => {
-
-  clearInterval(intervalObj);
-
   if(fs.existsSync(path.join(process.cwd(), './config/opcuaspaces.json')) 
     && fs.existsSync(path.join(process.cwd(), './config/mqttoptions.json'))) {
 
+      clearInterval(intervalObj);
+
       intervalObj = setInterval(async() => {
-        dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-        log.debug(dataSourceWrapper.updateIntervalMillisecond)
-      
-        mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-        log.debug(mqttConnectionOptionArray[0])
-      
-        await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)
-        log.info( ' setInterval(() => { ' + new Date().toISOString())
+        await scanDiskConfig()
     
       }, dataSourceWrapper.updateIntervalMillisecond || 300000);
+  
+      log.warn( `standard procedure: ${__filename} scan's been planned @ ${ new Date() }`)
+
     }
 
   // log4js.shutdown()
