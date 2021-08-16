@@ -11,14 +11,14 @@
     "node": ">=0.10 <=14"
   },
   "scripts": {
-    "start": "node ./routes/index.js",
+    "start": "node ./windows_service.js",
     "pm2": "pm2 start routes/index.js",
     "pm2-stop": "pm2 stop all",
     "build": "set NODE_ENV=production",
     "pkg": "pkg ./bin/www  -t win --out-path=dist/",
     "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
   },
-  "bin": "./routes/index.js",
+  "bin": "./windows_service.js",
   "pkg": {
     "scripts": "routes/**/*.js",
     "assets": [
@@ -28,7 +28,7 @@
     "targets": [
       "node8-windows-x64"
     ],
-    "outputPath": "install/"
+    "outputPath": "pkg/"
   },
   "author": "fungi0",
   "devDependencies": {
@@ -37,6 +37,7 @@
   },
   "https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
   "dependencies": {
+    "node-windows": "1.0.0-beta.5",
     "node-opcua": "~2.47.0",
     "nodemailer": "~6.6.2",
     "node-cron": "^3.0.0",

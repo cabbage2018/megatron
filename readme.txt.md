@@ -10,7 +10,8 @@ pkg -t win app.js --out-path=dist/
 pkg ./package.json  ##must run in corporate intranet
 
 //register as a service on Windows
-sc create acqopcua binpath= D:\Siemens\mac_pkg\acq.exe type= own start= auto displayname= acq(opcua)
+sc create acqopcua binpath= D:\Siemens\mac_pkg\acq.exe type= own start= auto displayname= acq(opcua) 
+sc description acqopcua "Creates and manages OPCUA IEC62541 data bridge/broker server for specific project user."
 net start acqopcua 
 net stop acqopcua
 sc delete "acqopcua"
