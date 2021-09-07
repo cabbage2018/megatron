@@ -32,7 +32,6 @@ function sleep(ms) {
     })
   }
 
-
 let modbusTCPDictionary = new Map()
 
 setTimeout( async function() {

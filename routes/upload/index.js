@@ -2,8 +2,10 @@
 var express = require('express');
 var router = express.Router();
 module.exports = router
+
 const fs = require('fs')
 const path = require('path')
+
 // https://zhuanlan.zhihu.com/p/266957206
 function splitDelimiter(buffer, separator) {
   const array = []
@@ -15,7 +17,6 @@ function splitDelimiter(buffer, separator) {
     index = buffer.indexOf(separator, index + separator.length)
   }
   array.push(buffer.slice(offset))
-  
   console.log(array.length)
   return array
 }
