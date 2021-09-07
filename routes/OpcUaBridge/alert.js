@@ -9,13 +9,14 @@ let log = log4js.getLogger('routes::alert')
 log.info('There will not be any alert if system has generated no log equal to and above error')
 
 function scan(){
-  if(fs.existsSync(path.join(process.cwd(), './logs/errors.trp'))) {
-    let alarmString = fs.readFileSync(path.join(process.cwd(), './logs/errors.trp'))
+  let textFilename = './logs/errors.log'
+  if(fs.existsSync(path.join(process.cwd(), textFilename))) {
+    let alarmString = fs.readFileSync(path.join(process.cwd(), textFilename))
     email.error(`${new Date().toISOString()} :\r\n\r\n ${alarmString} and;\r\n then this source is deleted.`)
-    fs.unlinkSync(path.join(process.cwd(), './logs/errors.trp'))
-    log.warn('deleting: ', path.join(process.cwd(), './logs/errors.trp'))
+    fs.unlinkSync(path.join(process.cwd(), textFilename))
+    log.warn('deleting: ', path.join(process.cwd(), textFilename))
   } else {
-    log.debug('what a nice day.')
+    log.mark('what a nice day.')
   }
 }
 // scan();

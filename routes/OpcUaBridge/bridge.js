@@ -9,7 +9,6 @@ let {
 } = require('node-opcua')
 
 let log4js = require('log4js')
-let alert = log4js.getLogger('error')
 let log = log4js.getLogger('routes::bridge')
 
 function deliver(MqttsOptions, signalArray) {
@@ -19,40 +18,36 @@ function deliver(MqttsOptions, signalArray) {
 		let client = mqtt.connect(MqttsOptions.endpointUrl, MqttsOptions.options)	
 
 		client.on('error', function (err) {
-			alert.error('mqtt connect #', err)
-			client.end()
+			log.error('mqtt connect #', err)
 			reject(err)
-		})	
-
+			client.end()
+		})
 		client.on('message', function (topic, message) {
-			log.info(`MQTTs deliver topic=${topic}, message=${message}`)
+			log.debug(`MQTTs deliver topic=${topic}, message=${message}`)
 
-			setTimeout(async function () {
-				resolve(`task due to timer time out/MQTTs deliver topic=${topic}, message=${message}`)
-
-			client.unsubscribe(topic, (err, packet)=>{
-				client.end(true, (err)=>{
-					alert.error('mqtt close #', err)
-				})
-				log.info(`unsubscribe.`)
-
-				// client = null
-			})
-
-			}, 3000);
+			// setTimeout(async function () {
+			// 	// resolve(`task due to timer time out/MQTTs deliver topic=${topic}, message=${message}`)
+			// 	// client.unsubscribe(topic, (err, packet)=>{
+			// 	// 	client.end(true, (e)=>{
+			// 	// 		log.error('mqtt close #', e)
+			// 	// 	})
+			// 	// log.info(`unsubscribe.`, err, packet)
+			// 	// // client = null
+			// 	// })
+			// }, 4000);
 		})
 
-		client.on('connect', function () {
+		client.on('connect', function (packet) {
 			client.subscribe(MqttsOptions.subscribeTopic)
 			client.publish(MqttsOptions.publishTopic, JSON.stringify(signalArray), (err, packet)=>{
 				if(err){
 					log.error(err)
 					reject(err)
+				} else {					
+					resolve(packet)
 				}
 
-				if(packet){
-					log.mark(packet)
-				}				
+				client.end()
 			})	
 			// resolve('Connected mqtt successfully!')
 		})
@@ -288,10 +283,11 @@ async function runOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 			dev._embedded.item = x[1]
 
 			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){				
-				let mqttConnectionOptions = mqttConnectionOptionArray[j]
-				await deliver(mqttConnectionOptions, dev)
+				let mqttoptions = mqttConnectionOptionArray[j]
+				await deliver(mqttoptions, dev)
 				.then((acknowledge)=>{
-					log.mark(acknowledge)
+					// log.debug(mqttConnectionOptions)
+					log.debug(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)
@@ -333,10 +329,11 @@ async function quickCheck(dataSourceWrapper, mqttConnectionOptionArray) {
 			dev._embedded.item = x[1]
 
 			for(let j = 0; j < mqttConnectionOptionArray.length; j = j + 1){				
-				let mqttConnectionOptions = mqttConnectionOptionArray[j]
-				await deliver(mqttConnectionOptions, dev)
+				let mqttoptions = mqttConnectionOptionArray[j]
+				await deliver(mqttoptions, dev)
 				.then((acknowledge)=>{
-					log.mark(acknowledge)
+					log.mark(mqttoptions, dev)
+					// log.mark(acknowledge)
 				})
 				.catch((e)=>{
 					log.error(e)

@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
       "debug": {
         "type": "dateFile",
-        "filename": path.join(__dirname, '../logs/debug'),
+        "filename": path.join(process.cwd(), './logs/livre.log'),
         "pattern": "yyyy-MM-dd",
         "compress": true,
         "alwaysIncludePattern": true,
@@ -58,19 +58,11 @@ if (process.env.NODE_ENV === 'development') {
       error: {
         type: 'file',
         maxLogSize: 8388608,
-        backups: 7,
-        compress : true,
+        backups: 2,
+        compress : false,
         keepFileExt : true,
-        filename: path.join(process.cwd(), './logs/errors.trp'),
-      },
-      other: {
-        type: 'file',
-        maxLogSize: 8388608,
-        backups: 8,
-        compress : true,
-        keepFileExt : true,
-        filename: path.join(process.cwd(), './logs/livre.log'),
-        alwaysIncludePattern: true,
+        filename: path.join(process.cwd(), './logs/errors.log'),
+        alwaysIncludePattern: false,
       },
       email: {
         //发送错误报告至邮箱
@@ -90,7 +82,7 @@ if (process.env.NODE_ENV === 'development') {
         },
         attachment: {
           enable: true,
-          filename: path.join(process.cwd(), './logs/errors.trp'),
+          filename: path.join(process.cwd(), './logs/errors.log'),
           message: `See the attached latest runtime report ${__filename}, ${process.cwd()}, ${new Date().toISOString()};`
         },
         // sendInterval: 3600*1,
@@ -99,10 +91,9 @@ if (process.env.NODE_ENV === 'development') {
     },
 
     categories: {
-      default: { appenders: ['other'], level: 'warn' },
+      default: { appenders: ['error'], level: 'info' },
       error: { appenders: ['error'], level: 'error' },
       email: { appenders: ['email'], level: 'warn' },
-      other: { appenders: ['other'], level: 'fatal' },
       request: { appenders: ['request'], level: 'debug' }
     },
   })
@@ -111,10 +102,11 @@ if (process.env.NODE_ENV === 'development') {
 const log = log4js.getLogger('bin:www')
 
 if (process.env.NODE_ENV === 'development') {
-  log.mark(`${process.env.NODE_ENV}`)
+  log.error(`${process.env.NODE_ENV}`)
   log.mark(`${process.env.npm_package_env}`)
 } else {
-  log.warn(process.env)
+  log.error(process.env)  
+  // log4js.shutdown()
 }
 
 /**

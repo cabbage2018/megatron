@@ -11,6 +11,7 @@ let hourlyReport = cron.schedule('16 39 */8 * * *', () => {
   let bridge = require('./bridge')
   let profilePerformance = bridge.profilingDictionary
   // let profileString = JSON.stringify([...profilePerformance])
+  // console.log(profileString)
   
   var jsonArray = {}
   for (var x of profilePerformance) {

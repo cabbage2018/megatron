@@ -5,6 +5,7 @@ let configure = require('./configure')
 
 let log4js = require('log4js')
 let log = log4js.getLogger('request')
+log.mark(process.env)
 
 /* GET web page. */
 router.get('/', function(req, res, next) {
@@ -17,23 +18,26 @@ router.get('/logs', function(req, res, next) {
   let path = require('path')
   let readline = require('readline')
 
-  let fRead = fs.createReadStream(path.join(process.cwd(), './logs/livre.log'))
-  let objReadline = readline.createInterface({
-      input: fRead
-  })
-  let arr = new Array()    
-  objReadline.on('line', line => {
-      arr.push(line);
-  })
-  /// ejs template would display log as a html async
-  objReadline.on('close', () => {
-    res.render('list', {
-      title: __filename + new Date().toISOString(),
-      items: arr
+  if(fs.existsSync(path.join(process.cwd(), './logs/errors.log'))) {
+    let fRead = fs.createReadStream(path.join(process.cwd(), './logs/errors.log'))
+    let objReadline = readline.createInterface({
+        input: fRead
     })
-    objReadline.close();
-  })
-
+    let arr = new Array()    
+    objReadline.on('line', line => {
+        arr.push(line);
+    })
+    /// ejs template would display log as a html async
+    objReadline.on('close', () => {
+      res.render('list', {
+        title: __filename + new Date().toISOString(),
+        items: arr
+      })
+      objReadline.close();
+    })
+  } else {
+    res.send('./logs/errors.log' + ' is empty~')
+  }
   log.debug(req)
   // next() //if middleware exists
 })

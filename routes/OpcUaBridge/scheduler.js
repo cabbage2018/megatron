@@ -23,21 +23,23 @@ async function triggerOnce(dataSourceWrapper, mqttConnectionOptionArray) {
 }
 
 let dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-log.debug(dataSourceWrapper.updateIntervalMillisecond)
+let basicInterval = dataSourceWrapper.updateIntervalMillisecond || 60000
+log.debug(basicInterval)
 
 let mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
 log.debug(mqttConnectionOptionArray[0])
 
 let intervalObj = setInterval(async() => {
   dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-  log.debug(dataSourceWrapper.updateIntervalMillisecond)
+  basicInterval = dataSourceWrapper.updateIntervalMillisecond || 60000
+  log.debug(basicInterval)
 
   mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
   log.debug(mqttConnectionOptionArray[0])
 
   await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)  
   log.fatal( ' setInterval(() => { ' + new Date().toISOString())
-}, dataSourceWrapper.updateIntervalMillisecond || 300000);
+}, basicInterval);
 
 
 
@@ -56,7 +58,7 @@ let intervalObj = setInterval(async() => {
    August 12: finally apply setInterval to an cron task to adjust interval job every hour
 
   */
-let taskRoutine = cron.schedule('45 */60 * * * *', () => {
+let reaperRoutine = cron.schedule('45 */60 * * * *', () => {
 
   clearInterval(intervalObj);
 
@@ -65,17 +67,13 @@ let taskRoutine = cron.schedule('45 */60 * * * *', () => {
 
       intervalObj = setInterval(async() => {
         dataSourceWrapper = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/opcuaspaces.json')))
-        log.debug(dataSourceWrapper.updateIntervalMillisecond)
+        basicInterval = dataSourceWrapper.updateIntervalMillisecond || 60000
       
         mqttConnectionOptionArray = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/mqttoptions.json'))) 
-        log.debug(mqttConnectionOptionArray[0])
       
-        await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)
-        log.info( ' setInterval(() => { ' + new Date().toISOString())
-    
-      }, dataSourceWrapper.updateIntervalMillisecond || 300000);
+        await triggerOnce(dataSourceWrapper, mqttConnectionOptionArray)    
+      }, basicInterval);
     }
 
-  // log4js.shutdown()
 })
-taskRoutine.start()
+reaperRoutine.start()

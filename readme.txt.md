@@ -16,3 +16,5 @@ net stop acqopcua
 sc delete "acqopcua"
 
 process.env.NODE_ENV need setup Windows environment varialbe NODE_ENV = development!
+PS D:\> Start-Process -WindowStyle hidden -FilePath "D:\git\finetune\megatron\gitlab"
+start /min /b "100" D:\git\finetune\megatron\gitlab\acq     
