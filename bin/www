@@ -9,16 +9,14 @@ let path = require('path')
 let fs = require('fs')
 
 if (process.env.NODE_ENV === 'development') {
-  // as much as possible for debug
-  // let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
+  // as much as possible for debug, especially the log level is not checked
+  let config = JSON.parse(fs.readFileSync(path.join(process.cwd(), './config/log4js_test.json')))
   log4js.configure({
     "appenders": {
-
       "console": {
         "type": "console",
         "pattern": "%d %p %c %m%n"
       },
-
       "debug": {
         "type": "dateFile",
         "filename": path.join(process.cwd(), './logs/livre.log'),
@@ -26,7 +24,6 @@ if (process.env.NODE_ENV === 'development') {
         "compress": true,
         "alwaysIncludePattern": true,
       },
-
       "out": {
         "type": "stdout",
         "layout": {
@@ -36,7 +33,10 @@ if (process.env.NODE_ENV === 'development') {
         }
       },
       "categories": {
-        "default": { "appenders": ["console", "debug"], "level": "all" }
+        "default": { "appenders": ["console", "debug"], "level": "all" },
+        "error": { "appenders": ["out"], "level": "all" },
+        "email": { "appenders": ["out"], "level": "all" },
+        "request": { "appenders": ["out"], "level": "debug" }
       }
     });
 
@@ -62,7 +62,7 @@ if (process.env.NODE_ENV === 'development') {
         compress : false,
         keepFileExt : true,
         filename: path.join(process.cwd(), './logs/errors.log'),
-        alwaysIncludePattern: false,
+        alwaysIncludePattern: true,
       },
       email: {
         //发送错误报告至邮箱
@@ -93,7 +93,7 @@ if (process.env.NODE_ENV === 'development') {
     categories: {
       default: { appenders: ['error'], level: 'info' },
       error: { appenders: ['error'], level: 'error' },
-      email: { appenders: ['email'], level: 'warn' },
+      email: { appenders: ['email'], level: 'all' },
       request: { appenders: ['request'], level: 'debug' }
     },
   })

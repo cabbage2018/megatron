@@ -38,6 +38,8 @@
   },
   "https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
   "dependencies": {
+    "jsmodbus": "~4.0.6",
+    "net": "~1.0.2",
     "node-opcua": "~2.47.0",
     "nodemailer": "~6.6.2",
     "node-cron": "^3.0.0",

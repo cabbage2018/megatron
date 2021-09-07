@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+    <title><%= title %></title>
+</head>
+
+<body class="container">
+    <header>
+        <% include ./partials/header %>
+    </header>
+    <main>
+        
+        <span> --- </span>
+
+        <div>
+            <table class="table table-hover usertable">
+                <tr>
+                    <th>Index</th>
+                    <th>Dictionary Key</th>
+                    <th>Value</th>
+                    <th>Value(Hex)</th>
+                    <th>Value(Bin)</th>
+                    <th>Last Updated</th>
+                    <th>Function Code</th>
+                </tr>
+
+                <% let index = 0 %>
+
+                <% for(var item of items){ %>
+                    <% index = index + 1 %>
+
+                    <tr>
+                        <td><%= index %></td>
+                        <td><%= item[0] %></td> <!-- first column = datapoint's Id like ".TariffActiveExport01", with certain meanings-->
+                        <td><%= item[1]._val %></td> <!-- second column = datapoint's value--> 
+                        
+                        <td><%= item[1]._valHex %></td> <!-- second column = datapoint's value--> 
+                        <td><%= item[1]._valBin %></td> <!-- second column = datapoint's value--> 
+                        <td><%= item[1]._ts %></td> <!-- third column = datapoint's timestamp or "-"-->
+                        <td><%= item[1]._fc %></td> <!-- third column = datapoint's quality code or "-"-->
+                    </tr>
+                <%} %>
+
+            </table>
+        </div>
+        
+        <span> --- </span>
+        
+        <h1>
+            Array of List <%= items.size %>
+        </h1>
+
+    </main>
+
+    <footer>
+        <% include ./partials/footer %>
+    </footer>
+</body>
+</html>
