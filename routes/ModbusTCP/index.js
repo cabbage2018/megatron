@@ -2,6 +2,7 @@
 let express = require('express');
 let router = express.Router();
 let scan = require('./scan')
+let models = require('./models')
 let address = require('./address')
 
 let log4js = require('log4js')
@@ -31,6 +32,26 @@ router.get('/stop', function(req, res, next) {
   let result = scan.stopAcquireTask()
   log.debug(req)
   res.send(`stop result: ${result}`)
+})
+
+router.get('/models', function(req, res, next) {
+  let obj = models.list('/bootstrap', '.json', '*models*')
+  log.debug(req)
+
+  res.render('list', {
+    title: __filename + new Date().toISOString(),
+    items: obj
+  })
+})
+
+router.get('/address', function(req, res, next) {
+  let obj = address.list('/bootstrap', '.json', '*address*')
+  log.debug(req)
+  
+  res.render('list', {
+    title: __filename + new Date().toISOString(),
+    items: obj
+  })
 })
 
 module.exports = router;

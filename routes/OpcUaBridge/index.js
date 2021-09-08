@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 let configure = require('./configure')
+let models = require('./models')
+let address = require('./address')
 
 let log4js = require('log4js')
 let log = log4js.getLogger('request')
@@ -56,6 +58,27 @@ router.get('/acq', function(req, res, next) {
   })
 
   log.debug(req)
+})
+
+
+router.get('/models', function(req, res, next) {
+  let obj = models.list('/bootstrap', '.json', '*models*')
+  log.debug(req)
+
+  res.render('list', {
+    title: __filename + new Date().toISOString(),
+    items: obj
+  })
+})
+
+router.get('/address', function(req, res, next) {
+  let obj = address.list('/bootstrap', '.json', '*address*')
+  log.debug(req)
+  
+  res.render('list', {
+    title: __filename + new Date().toISOString(),
+    items: obj
+  })
 })
 
 module.exports = router

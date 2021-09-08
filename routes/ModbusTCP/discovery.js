@@ -5,6 +5,12 @@ let modbustcp = require("./modbus")
 let log4js = require('log4js')
 let tracer = log4js.getLogger('routes::discovery')
 
+/*
+  possible way 1: try to connect to specific IP address/port 
+  possbile way 2: UDP broadcast to SENTRON / EP-E
+  possible way 3: MAC broadcast to SIRIUS / EP-I(more like SIMATIC)
+  
+*/
 let candidateIpAddress = {
     channel: "modbustcp",
     repeatIntervalMs: 6000,
