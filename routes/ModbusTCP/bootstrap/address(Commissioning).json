@@ -1,0 +1,23 @@
+{
+  "description": "another way to create this file is scan; and user upload.",
+  
+  "array": [
+    {
+      "desc": "device#1",
+      "ip": "192.168.2.136",
+      "port": 502,
+      "subordinatorNumber": 127,
+      "model": "SENTRON3WL",
+      "timeoutMillisecond": 5000
+    },
+    {
+      "desc": "device#2",
+      "ip": "192.168.2.137",
+      "port": 502,
+      "subordinatorNumber": 127,
+      "model": "SENTRON3WL",
+      "timeoutMillisecond": 5000
+    }
+  ]
+
+}

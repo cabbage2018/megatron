@@ -88,10 +88,13 @@ function acquireOnce(){
     accumulatedSpace = require("./bootstrap/scan_config")
     accumulatedSpace = require('./SENTRON3WL-SIGNAL.json')
     log.warn(accumulatedSpace)
+
     const startTimestamp = new Date().getTime()
     log.debug("------>>>")
     for(var j = 0; j < accumulatedSpace.physicalAddress.registerGrid.length; j ++){
         let grid = accumulatedSpace.physicalAddress.registerGrid[j]
+        grid.protocolData = addressSpace.protocolData
+
         /// RTU & TCP
         let internalSn = accumulatedSpace.protocolData.ip + '_' + accumulatedSpace.protocolData.port + '_' + accumulatedSpace.protocolData.subordinatorNumber + '_' + j
         accumulatedSpace.physicalAddress.start = Number(grid.register)
@@ -99,7 +102,7 @@ function acquireOnce(){
         accumulatedSpace.physicalAddress.functioncode = Number(grid.functioncode)
 
         //await
-         sleep(0).
+        sleep(0).
         then(async()=>{
             modbustcp.acquire(accumulatedSpace)
             .then((_response)=>{
@@ -109,6 +112,11 @@ function acquireOnce(){
             .catch((error)=>{
                 log.fatal(accumulatedSpace.physicalAddress.start, accumulatedSpace.physicalAddress.count)
                 log.error(error)
+                if(grid.unreachable){
+                    grid.unreachable += 1
+                } else {
+                    grid.unreachable = 1
+                }
                 profilingDictionary.set(`${internalSn}_${grid.register}_${grid.quantity}_${grid.functioncode}`, error)
             })
         })
@@ -133,12 +141,6 @@ function startAcquireTask(){
     }
 }
 
-/// this may work with profile/performance purpose
-function startAcquireTask2(){
-    for(let i = 0; i < 1000; i = i + 1){
-        acquireOnce();
-    }
-}
 
 function stopAcquireTask(){
     if(acquireTask){

@@ -3,153 +3,143 @@ let modbus = require('jsmodbus')
 let net = require('net')
 /*
 let accumulatedSpace = {
-    channel: "modbustcp",
-    repeatIntervalMs: 6000,
-    protocolData: {
+    "channel": "modbustcp",
+    "repeatIntervalMs": 6000,
+    "protocolData": {
         ip: "127.0.0.1",
         port: 502,
         subordinatorNumber: 127,
-        timeoutMs: 6000,
-        functionType: 3
+        timeoutMillisecond: 6000,
+        functioncode: 3
     },
-    physicalAddress: {
-        start: 23309,
-        count:100,
-        registerGrid: [
-            {start: 23309, count: 30},
-            {start: 23309, count: 30},
-            {start: 23309, count: 30},
-            {start: 23309, count: 30}
-        ],
+	"array": [
+		{
+            "protocolData": {
+                "ip": "127.0.0.1",
+                "port": 502,
+                "subordinatorNumber": 127,
+                "timeoutMillisecond": 6000,
+                },
+
+			"register": 13056,
+			"quantity": 119,
+			"signals": "4.5.2 Data set DS 51: Main overview",
+            "functioncode": 3
+		},...
     }
 }
 */
-function acquire(addressSpace){
+function acquire(ensembleAddress){
   let promisePhysicalLayer = new Promise(function (resolve,reject){
     var socket = new net.Socket();
-    const client = new modbus.client.TCP(socket, addressSpace.protocolData.subordinatorNumber, addressSpace.protocolData.timeoutMs);
+    const client = new modbus.client.TCP(socket, ensembleAddress.protocolData.subordinatorNumber||502, ensembleAddress.protocolData.timeoutMillisecond||3000);
     socket.on('connect', function () {
-      switch(addressSpace.protocolData.functionType)
+      switch(ensembleAddress.functioncode)
       {
           case 1:
-              client.readCoils(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.count)).then(function (resp) {
+              client.readCoils(Number(ensembleAddress.register), Number(ensembleAddress.quantity)).then(function (resp) {
                   socket.end()
                   resolve(resp)
               }).catch(function (error) {
-                  error.start =  Number(addressSpace.physicalAddress.start)
-                  error.count = Number(addressSpace.physicalAddress.count)
-                  error.fc = addressSpace.protocolData.functionType
+                  error.detail = ensembleAddress
                   socket.end()
                   reject(error)
               })
               break;
 
           case 2:
-            client.readDiscreteInputs(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.count)).then(function (resp) {
+            client.readDiscreteInputs(Number(ensembleAddress.register), Number(ensembleAddress.quantity)).then(function (resp) {
                 socket.end()
                 resolve(resp)
             }).catch(function (error) {
-                error.start =  Number(addressSpace.physicalAddress.start)
-                error.count = Number(addressSpace.physicalAddress.count)
-                error.fc = addressSpace.protocolData.functionType
+                error.detail = ensembleAddress
                 socket.end()
                 reject(error)
             })
             break;
 
           case 3:
-              client.readHoldingRegisters(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.count)).then(function (resp) {
+              client.readHoldingRegisters(Number(ensembleAddress.register), Number(ensembleAddress.quantity)).then(function (resp) {
                   socket.end()
                   resolve(resp)
               }).catch(function (error) {
-                  error.start =  Number(addressSpace.physicalAddress.start)
-                  error.count = Number(addressSpace.physicalAddress.count)
-                  error.fc = addressSpace.protocolData.functionType
+                  error.detail = ensembleAddress
+
+                  if (ensembleAddress.unreachable) {
+                      ensembleAddress.unreachable += 1
+                  } else {
+                      ensembleAddress.unreachable = 1
+                  }
+                  ensembleAddress.lastError = new Date()
+
                   socket.end()
                   reject(error)
               });
           break;
 
           case 4:
-              client.readInputRegisters(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.count)).then(function (resp) {
+              client.readInputRegisters(Number(ensembleAddress.register), Number(ensembleAddress.quantity)).then(function (resp) {
                   socket.end()
                   resolve(resp)
               }).catch(function (error) {
-                  error.start =  Number(addressSpace.physicalAddress.start)
-                  error.count = Number(addressSpace.physicalAddress.count)
-                  error.fc = addressSpace.protocolData.functionType
+                  error.detail = ensembleAddress
                   socket.end()
                   reject(error)
               });
           break;
 
           case 5:
-            client.writeSingleCoil(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.target0_1)).then(function (resp) {
+            client.writeSingleCoil(Number(ensembleAddress.register), Number(ensembleAddress.target0_1)).then(function (resp) {
                 socket.end()
                 resolve(resp)
             }).catch(function (error) {
-                error.start =  Number(addressSpace.physicalAddress.start)
-                error.count = Number(addressSpace.physicalAddress.count)
-                error.fc = addressSpace.protocolData.functionType
-                error.write = Number(addressSpace.physicalAddress.target0_1)
+                error.detail = ensembleAddress
+                error.write = Number(ensembleAddress.target0_1)
                 socket.end()
                 reject(error)
             });
         break;
 
         case 6:
-            client.writeSingleRegister(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.registerValue)).then(function (resp) {
+            client.writeSingleRegister(Number(ensembleAddress.register), Number(ensembleAddress.registerValue)).then(function (resp) {
                 socket.end()
                 resolve(resp)
             }).catch(function (error) {
-                error.start =  Number(addressSpace.physicalAddress.start)
-                error.count = Number(addressSpace.physicalAddress.count)
-                error.fc = addressSpace.protocolData.functionType
-                error.write = Number(addressSpace.physicalAddress.registerValue)
+                error.detail = ensembleAddress
+                // error.write = Number(ensembleAddress.registerValue)
                 socket.end()
                 reject(error)
             });
         break;
 
         case 15:
-            client.writeMultipleCoils(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.targets0_1)).then(function (resp) {
+            client.writeMultipleCoils(Number(ensembleAddress.register), Number(ensembleAddress.targets0_1 || 1)).then(function (resp) {
                 socket.end()
                 resolve(resp)
             }).catch(function (error) {
-                error.start =  Number(addressSpace.physicalAddress.start)
-                error.count = Number(addressSpace.physicalAddress.count)
-                error.fc = addressSpace.protocolData.functionType
-                error.write = ([...addressSpace.physicalAddress.targets0_1])
+                error.detail = ensembleAddress
+                // error.write = ([...ensembleAddress.targets0_1])
                 socket.end()
                 reject(error)
             });
         break;
 
         case 16:
-            client.writeMultipleRegisters(Number(addressSpace.physicalAddress.start), Number(addressSpace.physicalAddress.registerValues)).then(function (resp) {
+            client.writeMultipleRegisters(Number(ensembleAddress.register), Number(ensembleAddress.registerValues)||[0xffff]).then(function (resp) {
                 socket.end()
                 resolve(resp)
             }).catch(function (error) {
-                error.start =  Number(addressSpace.physicalAddress.start)
-                error.count = Number(addressSpace.physicalAddress.count)
-                error.fc = addressSpace.protocolData.functionType
-                error.write = ([...addressSpace.physicalAddress.registerValues])
+                error.detail = ensembleAddress
+                // error.write = ([...ensembleAddress.registerValues])
                 socket.end()
                 reject(error)
             });
         break;
 
-/*
-    writeSingleCoil(address: number, value: boolean | 0 | 1): Promise<import("./user-request").IUserRequestResolve<CastRequestBody<Req, WriteSingleCoilRequestBody>>>;
-    writeSingleRegister(address: number, value: number): Promise<import("./user-request").IUserRequestResolve<CastRequestBody<Req, WriteSingleRegisterRequestBody>>>;
-    writeMultipleCoils(start: number, values: boolean[]): PromiseUserRequest<CastRequestBody<Req, WriteMultipleCoilsRequestBody>>;
-    writeMultipleCoils(start: number, values: Buffer, quantity: number): PromiseUserRequest<CastRequestBody<Req, WriteMultipleCoilsRequestBody>>;
-    writeMultipleRegisters(start: number, values: number[] | Buffer): Promise<import("./user-request").IUserRequestResolve<CastRequestBody<Req, WriteMultipleRegistersRequestBody>>>;
-
-*/
           default:
               socket.end()
-              reject("unsupported: " + addressSpace.protocolData.functionType + "; " + Number(addressSpace.physicalAddress.start) + "; " + Number(addressSpace.physicalAddress.count));
+              ensembleAddress.wrongfunctioncode = true
+              reject(ensembleAddress)
           break;
 
           }//switch()
@@ -157,16 +147,15 @@ function acquire(addressSpace){
     )
 
     socket.on('error', (error)=>{
-        error.ip = addressSpace.protocolData.ip
-        error.port = Number(addressSpace.protocolData.port)
+        error.ip = ensembleAddress.protocolData.ip
+        error.port = Number(ensembleAddress.protocolData.port)
         socket.end()
-        // client.close()
         reject(error)
     })
 
     socket.connect({
-        'host': addressSpace.protocolData.ip,                       //'192.168.2.42',
-        'port': Number(addressSpace.protocolData.port),             //'502'
+        'host': ensembleAddress.protocolData.ip,                       //'192.168.2.42',
+        'port': Number(ensembleAddress.protocolData.port),             //'502'
     })
   })
   return promisePhysicalLayer

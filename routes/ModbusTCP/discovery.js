@@ -1,9 +1,7 @@
 'use strict'
-var express = require('express');
-var router = express.Router();
 let modbustcp = require("./modbus")
 let log4js = require('log4js')
-let tracer = log4js.getLogger('routes::discovery')
+let log = log4js.getLogger('routes::discovery')
 
 /*
   possible way 1: try to connect to specific IP address/port 
@@ -11,26 +9,23 @@ let tracer = log4js.getLogger('routes::discovery')
   possible way 3: MAC broadcast to SIRIUS / EP-I(more like SIMATIC)
   
 */
+
 let candidateIpAddress = {
-    channel: "modbustcp",
-    repeatIntervalMs: 6000,
-    protocolData: {
-        ip: "192.168.2.139",
-        port: 502,
-        subordinatorNumber: 127,
-        timeoutMs: 600,
-        functionType: 1
-    },
+  repeatIntervalMillisecond: 6000,
 
-    physicalAddress: {
-        start: 23309,
-        count: 2,
-        registerGrid: [
-            {start: 23309, count: 1}
-        ],
-    }
+  protocolData: {
+    "desc": "ACB#1",
+    ip: "192.168.2.139",
+    port: 502,
+    subordinatorNumber: 127,
+    timeoutMillisecond: 600
+  },
+
+  "register": 42240,
+  "quantity": 97,
+  "signals": "4.5.27 Data set DS 165: Identification comment",
+  "functioncode": 3
 }
-
 
 function sleep(ms) {
     return new Promise(function(resolve, reject) {
@@ -51,41 +46,30 @@ setTimeout( async function() {
         then(async()=>{
 
           candidateIpAddress.protocolData.ip = refip + "." + j
+            
+          await modbustcp.acquire(candidateIpAddress)
+            .then((_response) => {
 
-            modbustcp.acquire(candidateIpAddress)
-            .then((_response)=>{
+              modbusTCPDictionary.set(error.connected.ip, "target connectable.")
+
             })
-            .catch((error)=>{
-              if(error.connected !== null && error.connected !== undefined){
-                modbusTCPDictionary.set(error.connected.ip, error.connected.port)
-
-                tracer.fatal(error.connected)
-
-              }
-                // tracer.debug(error)
+            .catch((error) => {
+              log.fatal(candidateIpAddress, error)
             })
         })
     }
     const endMoment = new Date().getTime()
-    tracer.warn("Profiling: ", endMoment-startMoment, " millisecond")
+    log.warn("Profiling: ", endMoment-startMoment, " millisecond")
 
-}, candidateIpAddress.repeatIntervalMs)
+}, 30000)
 
-sleep(30000)
+sleep(130000)
 .then( async ()=>{
-  tracer.fatal(modbusTCPDictionary)
+  log.fatal(modbusTCPDictionary.size)
+  for (let entry in modbusTCPDictionary) {
+    log.debug(entry[0], entry[1])
+   }
 })
 .catch((error)=>{
 })
-
-router.get('/', (req, res) => {
-
-  const obj = modbusTCPDictionary
-	res.render('dic', {
-        title: __filename + new Date().toISOString(),
-        items: obj
-    })
-})
-
-module.exports = router;
 
