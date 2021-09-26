@@ -23,7 +23,7 @@ log4js.configure({
 let log = log4js.getLogger('mustFail.WhenMoved.toYourComputer.Test')
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-describe(__filename, function () {
+describe.skip(__filename, function () {
   const mqtt = require('mqtt')
   describe('8.1.1 Connect to OPCUA', function () {
     const {

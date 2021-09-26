@@ -2,6 +2,7 @@
 let fs = require("fs")
 let log4js = require('log4js')
 let log = log4js.getLogger('routes::modbustcp::discover')
+
 let listener = require('./listener')  ///listen on another port before sending
 
 var dgram = require("dgram")

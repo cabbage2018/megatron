@@ -1,3 +1,4 @@
+'use strict'
 const redis = require("redis")
 const options = {
   host: "127.0.0.1",
@@ -101,4 +102,5 @@ function httpsSynchronize(body, options) {
       request.end()
   })
 }
+
 module.exports = {acquire}

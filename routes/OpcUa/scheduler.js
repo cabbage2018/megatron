@@ -3,6 +3,8 @@ let cron = require('node-cron')
 let path = require('path')
 let fs = require('fs')
 
+let report = require('../report')
+
 let log4js = require('log4js')
 let log = log4js.getLogger('bridge::scheduler')
 
@@ -77,3 +79,38 @@ let reaperRoutine = cron.schedule('45 */60 * * * *', () => {
 
 })
 reaperRoutine.start()
+
+function toJSON(map1) {
+  const myJson = {}
+  for (let [k,v] of map1)
+  myJson[k] = v
+  return myJson
+}
+
+let hourlyReport = cron.schedule('17 39 */1 * * *', () => {
+  let bridge = require('./bridge')
+  let map1 = bridge.profilingDictionary
+
+  if(map1){
+    var myJson = toJSON(map1)
+    console.log(myJson)
+  
+    // using ES6 syntax:
+    // JSON.stringify([...myMap]);
+    // https://stackoverflow.com/questions/44740423/create-json-string-from-js-map-and-string 
+    
+    let jsonString = JSON.stringify(myJson)
+    console.log(jsonString)
+  
+    report.postman(jsonString)
+    .then((response)=>{
+      console.log(response)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+  }
+})
+
+hourlyReport.start()

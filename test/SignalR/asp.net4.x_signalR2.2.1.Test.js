@@ -9,7 +9,7 @@ describe(__filename, function () {
   let hostname = 'desktop-eka5vdd'
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
   
-  describe('Labs desigoCC server: DESKTOP-EKA5VDD', function () {
+  describe.skip('Labs desigoCC server: DESKTOP-EKA5VDD', function () {
     let request = require('supertest')
     let access_token = undefined    
   

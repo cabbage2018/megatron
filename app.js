@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 let opcuaBridgeRouter = require('./routes/OpcUaBridge/index')
 let modbusTCPRouter = require('./routes/ModbusTCP/index')
+let signalRRouter = require('./routes/signalR/index')
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bridge', opcuaBridgeRouter);
 app.use('/modbus', modbusTCPRouter);
+app.use('/signalR', signalRRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
