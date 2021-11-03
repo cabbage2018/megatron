@@ -1,0 +1,1 @@
+{"err":"ModbusException","message":"A Modbus Exception Occurred - See Response Body","response":{"_id":1,"_protocol":0,"_bodyLength":3,"_unitId":126,"_body":{"_fc":3,"_code":2}},"uri":{"ip":"192.168.2.135","port":502,"sub":126,"start":"2021-11-03T09:57:01.793Z"},"space":{"desc":"4.5.29 Data set DS 167: Daylight saving change","fc":3,"reg":42753,"cnt":47,"addr":42752}}

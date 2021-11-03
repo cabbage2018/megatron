@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 /*
   set up log4js
 */
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
       "debug": {
         "type": "dateFile",
         "filename": path.join(process.cwd(), './logs/livre.log'),
-        "pattern": "yyyy-MM-dd",
+        "pattern": "yyyy-MM-dd.log",
         "compress": true,
         "alwaysIncludePattern": true,
       },
@@ -51,7 +52,7 @@ if (process.env.NODE_ENV === 'development') {
       request: {
         type: 'dateFile',
         filename: path.join(process.cwd(), './logs/request'),
-        pattern: 'yyyy-MM-dd',
+        pattern: 'yyyy-MM-dd.log',
         compress : true,
         alwaysIncludePattern: true,
       },
@@ -102,7 +103,7 @@ if (process.env.NODE_ENV === 'development') {
 const log = log4js.getLogger('bin:www')
 
 if (process.env.NODE_ENV === 'development') {
-  log.error(`${process.env.NODE_ENV}`)
+  log.info(`${process.env.NODE_ENV}`)
   log.mark(`${process.env.npm_package_env}`)
 } else {
   log.error(process.env)  
@@ -114,12 +115,13 @@ if (process.env.NODE_ENV === 'development') {
  */
 
 var app = require('../app');
-var debug = require('debug')('fieldbridge:server');
+var debug = require('debug')('agentmodbus:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

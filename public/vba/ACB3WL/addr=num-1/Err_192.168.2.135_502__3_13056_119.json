@@ -1,0 +1,1 @@
+{"errno":"EADDRINUSE","code":"EADDRINUSE","syscall":"connect","address":"192.168.2.135","port":502,"ip":"192.168.2.135","uri":{"ip":"192.168.2.135","port":502,"sub":126,"start":"2021-11-03T09:53:27.639Z"},"space":{"desc":"4.5.2 Data set DS 51: Main overview(length 119 Modbus registers, read only).","fc":3,"reg":13057,"cnt":119,"addr":13056}}

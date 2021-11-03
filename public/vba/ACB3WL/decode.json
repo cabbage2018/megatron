@@ -1,0 +1,4646 @@
+[
+	{
+		"x": 4840,
+		"r": 17411,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.6 Data set DS 68: CubicleBUS Output Module Status",
+		"type": "TIME",
+		"d": "System time of the circuit breaker"
+	},
+	{
+		"x": 4841,
+		"r": 17409,
+		"c": 1,
+		"f": 6,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "INT",
+		"d": "Header; value 0x00 00 00 00"
+	},
+	{
+		"x": 4842,
+		"r": 17410,
+		"c": 1,
+		"f": 6,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "INT",
+		"d": "Header; value 0x00 00 00 00"
+	},
+	{
+		"x": 4843,
+		"r": 13057,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT15",
+		"d": "last 5 tripping operations-1"
+	},
+	{
+		"x": 4844,
+		"r": 13063,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT15",
+		"d": "last 5 tripping operations-2"
+	},
+	{
+		"x": 4845,
+		"r": 13069,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT15",
+		"d": "last 5 tripping operations-3"
+	},
+	{
+		"x": 4846,
+		"r": 13075,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT15",
+		"d": "last 5 tripping operations-4"
+	},
+	{
+		"x": 4847,
+		"r": 13081,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT15",
+		"d": "last 5 tripping operations-5"
+	},
+	{
+		"x": 4848,
+		"r": 13087,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-1"
+	},
+	{
+		"x": 4849,
+		"r": 13093,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-2"
+	},
+	{
+		"x": 4850,
+		"r": 13099,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-3"
+	},
+	{
+		"x": 4851,
+		"r": 13105,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-4"
+	},
+	{
+		"x": 4852,
+		"r": 13111,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-5"
+	},
+	{
+		"x": 4853,
+		"r": 13117,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-1"
+	},
+	{
+		"x": 4854,
+		"r": 13123,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-2"
+	},
+	{
+		"x": 4855,
+		"r": 13129,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-3"
+	},
+	{
+		"x": 4856,
+		"r": 13135,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-4"
+	},
+	{
+		"x": 4857,
+		"r": 13141,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "FORMAT16",
+		"d": "last 5 tripping operations-5"
+	},
+	{
+		"r": 13147,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13147_HIGH_3"
+	},
+	{
+		"x": 4858,
+		"layout": "13147_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "FORMAT18",
+		"d": "Controls the commands/functions of the communication module (e.g. clear or reset min./max. values)"
+	},
+	{
+		"r": 13148,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13148_HIGH_3"
+	},
+	{
+		"x": 4859,
+		"layout": "13148_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "FORMAT373",
+		"d": "Controls the outputs of thecommunication module (e.g.switching the breaker)"
+	},
+	{
+		"r": 13148,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13148_LOW_3"
+	},
+	{
+		"x": 4860,
+		"layout": "13148_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "INT",
+		"d": "Reserved"
+	},
+	{
+		"x": 4861,
+		"r": 13149,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "SIGNEDINT",
+		"d": "Average power factor, 3-phase"
+	},
+	{
+		"x": 4862,
+		"r": 13150,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Current in phase with maximum load"
+	},
+	{
+		"x": 4863,
+		"r": 13151,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Time until presumed overload trip"
+	},
+	{
+		"x": 4864,
+		"r": 13152,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Current in neutral conductor"
+	},
+	{
+		"x": 4865,
+		"r": 13153,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Current which flows to ground Ground current"
+	},
+	{
+		"x": 4866,
+		"r": 13154,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "TIME",
+		"d": "System time of the circuit breaker"
+	},
+	{
+		"r": 13158,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13158_LOW_3"
+	},
+	{
+		"x": 4867,
+		"layout": "13158_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT24",
+		"d": "Position of the circuit breaker inthe frame"
+	},
+	{
+		"r": 13158,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13158_HIGH_3"
+	},
+	{
+		"x": 4868,
+		"layout": "13158_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "FORMAT328",
+		"d": "Status of the circuit breaker (e.g. open/closed/charged)"
+	},
+	{
+		"x": 4869,
+		"r": 13159,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Overload parameter IR parameterset A (PS A)"
+	},
+	{
+		"x": 4870,
+		"r": 13160,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Overload parameter IR parameter set B (PS B)"
+	},
+	{
+		"x": 4871,
+		"r": 13160,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Overload/long-time pickup IR PS B"
+	},
+	{
+		"x": 4872,
+		"r": 13161,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "UNSIGNEDINT",
+		"d": "Rating plug value"
+	},
+	{
+		"r": 13162,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.2 Data set DS 51: Main overview",
+		"type": "13162_LOW_3"
+	},
+	{
+		"x": 4873,
+		"layout": "13162_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT370",
+		"d": "Active parameter set"
+	},
+	{
+		"x": 4874,
+		"r": 13569,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 1"
+	},
+	{
+		"x": 4875,
+		"r": 13575,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 2"
+	},
+	{
+		"x": 4876,
+		"r": 13581,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 3"
+	},
+	{
+		"x": 4877,
+		"r": 13587,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 4"
+	},
+	{
+		"x": 4878,
+		"r": 13593,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 5"
+	},
+	{
+		"x": 4879,
+		"r": 13599,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 6"
+	},
+	{
+		"x": 4880,
+		"r": 13605,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 7"
+	},
+	{
+		"x": 4881,
+		"r": 13611,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 8"
+	},
+	{
+		"x": 4882,
+		"r": 13617,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 9"
+	},
+	{
+		"x": 4883,
+		"r": 13623,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 10"
+	},
+	{
+		"x": 4884,
+		"r": 13629,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 11"
+	},
+	{
+		"x": 4885,
+		"r": 13635,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 13"
+	},
+	{
+		"x": 4886,
+		"r": 13641,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 13"
+	},
+	{
+		"x": 4887,
+		"r": 13647,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 14"
+	},
+	{
+		"x": 4888,
+		"r": 13653,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 15"
+	},
+	{
+		"x": 4889,
+		"r": 13659,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 16"
+	},
+	{
+		"x": 4890,
+		"r": 13665,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 17"
+	},
+	{
+		"x": 4891,
+		"r": 13671,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 18"
+	},
+	{
+		"x": 4892,
+		"r": 13677,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 19"
+	},
+	{
+		"x": 4893,
+		"r": 13683,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "FORMAT15",
+		"d": "last 20 trips with time stamp 20"
+	},
+	{
+		"r": 13689,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.3 Data set DS 53: Trip log",
+		"type": "13689_LOW_3"
+	},
+	{
+		"x": 4894,
+		"layout": "13689_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "last 20 trips with time stamp PB"
+	},
+	{
+		"x": 4895,
+		"r": 13825,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 1"
+	},
+	{
+		"x": 4896,
+		"r": 13831,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 2"
+	},
+	{
+		"x": 4897,
+		"r": 13837,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 3"
+	},
+	{
+		"x": 4898,
+		"r": 13843,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 4"
+	},
+	{
+		"x": 4899,
+		"r": 13849,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 5"
+	},
+	{
+		"x": 4900,
+		"r": 13855,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 6"
+	},
+	{
+		"x": 4901,
+		"r": 13861,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 7"
+	},
+	{
+		"x": 4902,
+		"r": 13867,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 8"
+	},
+	{
+		"x": 4903,
+		"r": 13873,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 9"
+	},
+	{
+		"x": 4904,
+		"r": 13879,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 10"
+	},
+	{
+		"x": 4905,
+		"r": 13885,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 11"
+	},
+	{
+		"x": 4906,
+		"r": 13891,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 12"
+	},
+	{
+		"x": 4907,
+		"r": 13897,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 13"
+	},
+	{
+		"x": 4908,
+		"r": 13903,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 14"
+	},
+	{
+		"x": 4909,
+		"r": 13909,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 15"
+	},
+	{
+		"x": 4910,
+		"r": 13915,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 16"
+	},
+	{
+		"x": 4911,
+		"r": 13921,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 17"
+	},
+	{
+		"x": 4912,
+		"r": 13927,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 18"
+	},
+	{
+		"x": 4913,
+		"r": 13933,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 19"
+	},
+	{
+		"x": 4914,
+		"r": 13939,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "FORMAT15",
+		"d": "last 20 events with time 20"
+	},
+	{
+		"r": 13945,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.4 Data set DS 54: Event log",
+		"type": "13945_LOW_3"
+	},
+	{
+		"x": 4915,
+		"layout": "13945_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "last 20 trips with time stamp PB"
+	},
+	{
+		"x": 4916,
+		"r": 16385,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 1"
+	},
+	{
+		"x": 4917,
+		"r": 16387,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 2"
+	},
+	{
+		"x": 4918,
+		"r": 16389,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 3"
+	},
+	{
+		"x": 4919,
+		"r": 16391,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 4"
+	},
+	{
+		"x": 4920,
+		"r": 16393,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 5"
+	},
+	{
+		"x": 4921,
+		"r": 16395,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 6"
+	},
+	{
+		"x": 4922,
+		"r": 16397,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 7"
+	},
+	{
+		"x": 4923,
+		"r": 16399,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 8"
+	},
+	{
+		"x": 4924,
+		"r": 16401,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 9"
+	},
+	{
+		"x": 4925,
+		"r": 16403,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 10"
+	},
+	{
+		"x": 4926,
+		"r": 16405,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 11"
+	},
+	{
+		"x": 4927,
+		"r": 16407,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 12"
+	},
+	{
+		"x": 4928,
+		"r": 16409,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 13"
+	},
+	{
+		"x": 4929,
+		"r": 16411,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 14"
+	},
+	{
+		"x": 4930,
+		"r": 16413,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 15"
+	},
+	{
+		"x": 4931,
+		"r": 16415,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 16"
+	},
+	{
+		"x": 4932,
+		"r": 16417,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 17"
+	},
+	{
+		"x": 4933,
+		"r": 16419,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 18"
+	},
+	{
+		"x": 4934,
+		"r": 16421,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 19"
+	},
+	{
+		"x": 4935,
+		"r": 16423,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 20"
+	},
+	{
+		"x": 4936,
+		"r": 16425,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 21"
+	},
+	{
+		"x": 4937,
+		"r": 16427,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 22"
+	},
+	{
+		"x": 4938,
+		"r": 16429,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 23"
+	},
+	{
+		"x": 4939,
+		"r": 16431,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 24"
+	},
+	{
+		"x": 4940,
+		"r": 16433,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 25"
+	},
+	{
+		"x": 4941,
+		"r": 16435,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 26"
+	},
+	{
+		"x": 4942,
+		"r": 16437,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 27"
+	},
+	{
+		"x": 4943,
+		"r": 16439,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 28"
+	},
+	{
+		"x": 4944,
+		"r": 16441,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "FORMAT309",
+		"d": "Harmonics of current/voltage to the 29th harmonic 29"
+	},
+	{
+		"r": 16450,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.5 Data set DS 64: Data of the harmonics analysis",
+		"type": "16450_LOW_3"
+	},
+	{
+		"x": 4945,
+		"layout": "16450_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Harmonics of current/voltage to the 29th harmonic 29 PB"
+	},
+	{
+		"x": 4946,
+		"r": 23297,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.13 Data set DS 91: Statistical information",
+		"type": "UINT",
+		"d": "Number of open/close operations under load"
+	},
+	{
+		"x": 4947,
+		"r": 18433,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum current in phase 1"
+	},
+	{
+		"x": 4948,
+		"r": 18434,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current in phase 1"
+	},
+	{
+		"x": 4949,
+		"r": 18435,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum current in phase 2"
+	},
+	{
+		"x": 4950,
+		"r": 18436,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current in phase 2"
+	},
+	{
+		"x": 4951,
+		"r": 18437,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum current in phase 3"
+	},
+	{
+		"x": 4952,
+		"r": 18438,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current in phase 3"
+	},
+	{
+		"x": 4953,
+		"r": 18439,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current in neutral conductor"
+	},
+	{
+		"x": 4954,
+		"r": 18440,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current in neutral conductor"
+	},
+	{
+		"x": 4955,
+		"r": 18441,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum ground current"
+	},
+	{
+		"x": 4956,
+		"r": 18442,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum ground current"
+	},
+	{
+		"x": 4957,
+		"r": 18443,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum average 3- phase current"
+	},
+	{
+		"x": 4958,
+		"r": 18444,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum average 3- phase current"
+	},
+	{
+		"x": 4959,
+		"r": 18445,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum current demand"
+	},
+	{
+		"x": 4960,
+		"r": 18446,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum current demand"
+	},
+	{
+		"r": 18447,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "18447_LOW_3"
+	},
+	{
+		"x": 4961,
+		"layout": "18447_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Minimum crest factor"
+	},
+	{
+		"r": 18447,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "18447_HIGH_3"
+	},
+	{
+		"x": 4962,
+		"layout": "18447_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Maximum crest factor"
+	},
+	{
+		"r": 18448,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "18448_LOW_3"
+	},
+	{
+		"x": 4963,
+		"layout": "18448_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Minimum form factor"
+	},
+	{
+		"r": 18448,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "18448_HIGH_3"
+	},
+	{
+		"x": 4964,
+		"layout": "18448_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Maximum form factor"
+	},
+	{
+		"x": 4965,
+		"r": 18449,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum current in phase L1"
+	},
+	{
+		"x": 4966,
+		"r": 18453,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum current in phase L1"
+	},
+	{
+		"x": 4967,
+		"r": 18457,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum current in phase L2"
+	},
+	{
+		"x": 4968,
+		"r": 18461,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum current in phase L2"
+	},
+	{
+		"x": 4969,
+		"r": 18465,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum current in phase L3"
+	},
+	{
+		"x": 4970,
+		"r": 18469,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum current in phase L3"
+	},
+	{
+		"x": 4971,
+		"r": 18473,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum average value over 3 phases"
+	},
+	{
+		"x": 4972,
+		"r": 18477,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum average value over 3 phases"
+	},
+	{
+		"x": 4973,
+		"r": 18481,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum average current demand"
+	},
+	{
+		"x": 4974,
+		"r": 18485,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum average current demand"
+	},
+	{
+		"x": 4975,
+		"r": 18489,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum current in neutral conductor"
+	},
+	{
+		"x": 4976,
+		"r": 18493,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum current in neutral conductor"
+	},
+	{
+		"x": 4977,
+		"r": 18497,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum ground current"
+	},
+	{
+		"x": 4978,
+		"r": 18501,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum ground current"
+	},
+	{
+		"x": 4979,
+		"r": 18505,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum crest factor"
+	},
+	{
+		"x": 4980,
+		"r": 18509,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum crest factor"
+	},
+	{
+		"x": 4981,
+		"r": 18513,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS minimum form factor"
+	},
+	{
+		"x": 4982,
+		"r": 18517,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.8 Data set DS 72: Min./max. measured metered value log",
+		"type": "TIME",
+		"d": "TS maximum form factor"
+	},
+	{
+		"x": 4983,
+		"r": 18689,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.9 Data set DS 73: Min./max. measured values of the voltages",
+		"type": "UNSIGNEDINT16",
+		"d": "Minimum phase-tophase voltage L1-L2"
+	},
+	{
+		"x": 4984,
+		"r": 18945,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.10 Data set DS 74: Min./max. measured values of the powers",
+		"type": "SIGNEDINT16",
+		"d": "Minimum average power factor (3-phase)"
+	},
+	{
+		"x": 4985,
+		"r": 19457,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.11 Data set DS 76: Min./max. measured values of frequency and THD",
+		"type": "UNSIGNEDINT16",
+		"d": "Maximum frequency"
+	},
+	{
+		"r": 19713,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19713_LOW_3"
+	},
+	{
+		"x": 4986,
+		"layout": "19713_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "SIGNEDCHAR",
+		"d": "Minimum temperature in the cubicle"
+	},
+	{
+		"r": 19713,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19713_HIGH_3"
+	},
+	{
+		"x": 4987,
+		"layout": "19713_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "SIGNEDCHAR",
+		"d": "Maximum temperature in the cubicle"
+	},
+	{
+		"r": 19714,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19714_LOW_3"
+	},
+	{
+		"x": 4988,
+		"layout": "19714_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "SIGNEDCHAR",
+		"d": "Minimum temperature in the circuit breaker"
+	},
+	{
+		"r": 19714,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19714_HIGH_3"
+	},
+	{
+		"x": 4989,
+		"layout": "19714_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "SIGNEDCHAR",
+		"d": "Maximum temperature in the circuit breaker"
+	},
+	{
+		"r": 19738,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19738_LOW_3"
+	},
+	{
+		"x": 4990,
+		"layout": "19738_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Minimum temperature in the cubicle"
+	},
+	{
+		"r": 19738,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.12 Data set DS 77: Min./max. measured values of the temperatures",
+		"type": "19738_HIGH_3"
+	},
+	{
+		"x": 4991,
+		"layout": "19738_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Maximum temperature in the cubicle"
+	},
+	{
+		"x": 4992,
+		"r": 23297,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.13 Data set DS 91: Statistical information",
+		"type": "UNSIGNEDINT16",
+		"d": "Number of open/close operations under load"
+	},
+	{
+		"x": 4993,
+		"r": 23298,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.13 Data set DS 91: Statistical information",
+		"type": "UNSIGNEDINT16",
+		"d": "Number of open/close operations caused by trips"
+	},
+	{
+		"x": 4994,
+		"r": 23300,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.13 Data set DS 91: Statistical information",
+		"type": "UNSIGNEDLONG32",
+		"d": "Runtime meter (when closed + current > 0)"
+	},
+	{
+		"x": 4995,
+		"r": 23555,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "HEXSTRING",
+		"d": "SENTRON identification number (0x0E05)"
+	},
+	{
+		"r": 23556,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "23556_LOW_3"
+	},
+	{
+		"x": 4996,
+		"layout": "23556_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Fixed value 0x42"
+	},
+	{
+		"r": 23556,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "23556_HIGH_3"
+	},
+	{
+		"x": 4997,
+		"layout": "23556_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "External diagnostic bit  1 = Diagnosis ? 0 = No diagnosis"
+	},
+	{
+		"x": 4998,
+		"r": 23557,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "HEXSTRING",
+		"d": "Fixed header; value 0x05 82 00 00 00"
+	},
+	{
+		"r": 23559,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "23559_HIGH_3"
+	},
+	{
+		"x": 4999,
+		"layout": "23559_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Reserved"
+	},
+	{
+		"x": 5000,
+		"r": 23563,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "FORMAT88",
+		"d": "Modules connected to the CubicleBUS"
+	},
+	{
+		"x": 5001,
+		"r": 23567,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.14 Data set DS 92: Diagnostic data",
+		"type": "FORMAT307",
+		"d": "Count of trips by extended protective functions"
+	},
+	{
+		"x": 5002,
+		"r": 23811,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.15 Data set DS 93: Controlling the circuit breakers",
+		"type": "FORMAT406",
+		"d": "Controls the trip unit"
+	},
+	{
+		"r": 23813,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.15 Data set DS 93: Controlling the circuit breakers",
+		"type": "23813_LOW_5"
+	},
+	{
+		"x": 5003,
+		"layout": "23813_LOW_5",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT121",
+		"d": "Controls digital output module 1"
+	},
+	{
+		"r": 23813,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.15 Data set DS 93: Controlling the circuit breakers",
+		"type": "23813_HIGH_5"
+	},
+	{
+		"x": 5004,
+		"layout": "23813_HIGH_5",
+		"o": 8,
+		"b": 8,
+		"type": "FORMAT126",
+		"d": "Controls digital output module 2"
+	},
+	{
+		"r": 24065,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.16 Data set DS 94: Current measured values",
+		"type": "24065_LOW_3"
+	},
+	{
+		"x": 5005,
+		"layout": "24065_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Phase unbalance current (%)"
+	},
+	{
+		"r": 24065,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.16 Data set DS 94: Current measured values",
+		"type": "24065_HIGH_3"
+	},
+	{
+		"x": 5006,
+		"layout": "24065_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Reserved"
+	},
+	{
+		"x": 5007,
+		"r": 24066,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.16 Data set DS 94: Current measured values",
+		"type": "UNSIGNEDINT16",
+		"d": "3-phase current demand"
+	},
+	{
+		"x": 5008,
+		"r": 24080,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.16 Data set DS 94: Current measured values",
+		"type": "UNSIGNEDINT16",
+		"d": "Line-to-neutral voltage L1"
+	},
+	{
+		"x": 5009,
+		"r": 24129,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.16 Data set DS 94: Current measured values",
+		"type": "UNSIGNEDLONG32",
+		"d": "Reactive energy in reverse direction [kVARh]"
+	},
+	{
+		"x": 5010,
+		"r": 24833,
+		"c": 9,
+		"f": 3,
+		"dataset": "4.5.17 Data set DS 97: Detailed identification",
+		"type": "HEXSTRING",
+		"d": "Part number of the trip unit"
+	},
+	{
+		"x": 5011,
+		"r": 25603,
+		"c": 4,
+		"f": 3,
+		"dataset": "4.5.18 Data set DS 100: Identification overview",
+		"type": "TIME",
+		"d": "Test date of the circuit breaker"
+	},
+	{
+		"x": 5012,
+		"r": 25607,
+		"c": 10,
+		"f": 3,
+		"dataset": "4.5.18 Data set DS 100: Identification overview",
+		"type": "STRING",
+		"d": "Manufacturer (SIEMENS)"
+	},
+	{
+		"x": 5013,
+		"r": 25617,
+		"c": 12,
+		"f": 3,
+		"dataset": "4.5.18 Data set DS 100: Identification overview",
+		"type": "STRING",
+		"d": "Device name (SENTRON WL)"
+	},
+	{
+		"r": 32771,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32771_LOW_3"
+	},
+	{
+		"x": 5014,
+		"layout": "32771_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT162",
+		"d": "Voltage transformer primary connection  star/wye or delta"
+	},
+	{
+		"x": 5015,
+		"r": 32772,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "UNSIGNEDINT16",
+		"d": "Voltage transformer primary rating"
+	},
+	{
+		"r": 32773,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32773_LOW_3"
+	},
+	{
+		"x": 5016,
+		"layout": "32773_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Voltage transformer secondary rating"
+	},
+	{
+		"r": 32773,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32773_HIGH_3"
+	},
+	{
+		"x": 5017,
+		"layout": "32773_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Length of period for calculating demand"
+	},
+	{
+		"x": 5018,
+		"r": 32775,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "UNSIGNEDINT16",
+		"d": "Underflow limit1)"
+	},
+	{
+		"r": 32771,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32771_LOW_5"
+	},
+	{
+		"x": 5019,
+		"layout": "32771_LOW_5",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT162",
+		"d": "Voltage transformer primary connection  star/wye or delta"
+	},
+	{
+		"x": 5020,
+		"r": 32772,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "UNSIGNEDINT16",
+		"d": "Voltage transformer primary rating"
+	},
+	{
+		"r": 32773,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32773_LOW_5"
+	},
+	{
+		"x": 5021,
+		"layout": "32773_LOW_5",
+		"o": 0,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Voltage transformer secondary rating"
+	},
+	{
+		"r": 32773,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "32773_HIGH_5"
+	},
+	{
+		"x": 5022,
+		"layout": "32773_HIGH_5",
+		"o": 8,
+		"b": 8,
+		"type": "UNSIGNEDCHAR",
+		"d": "Length of period for calculating demand"
+	},
+	{
+		"x": 5023,
+		"r": 32775,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.19 Data set DS 128: Parameters of the metering function and enhanced protection function",
+		"type": "UNSIGNEDINT16",
+		"d": "Underflow limit1)"
+	},
+	{
+		"x": 5024,
+		"r": 33027,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Overload/long-time pickup IR PS A"
+	},
+	{
+		"x": 5025,
+		"r": 33028,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Neutral overload pickup IN PS A"
+	},
+	{
+		"x": 5026,
+		"r": 33029,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Overload/long-time delay tR PS A"
+	},
+	{
+		"x": 5027,
+		"r": 33027,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Overload/long-time pickup IR PS A"
+	},
+	{
+		"x": 5028,
+		"r": 33028,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Neutral overload pickup IN PS A"
+	},
+	{
+		"x": 5029,
+		"r": 33029,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.20 Data set DS 129: Parameters of the protection function and settings for load shed threshold and load pickup",
+		"type": "UNSIGNEDINT16",
+		"d": "Overload/long-time delay tR PS A"
+	},
+	{
+		"x": 5030,
+		"r": 33283,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Active power in normal direction"
+	},
+	{
+		"x": 5031,
+		"r": 33284,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Active power in reverse direction"
+	},
+	{
+		"x": 5032,
+		"r": 33285,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Power factor, capacitive"
+	},
+	{
+		"x": 5033,
+		"r": 33283,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Active power in normal direction"
+	},
+	{
+		"x": 5034,
+		"r": 33284,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Active power in reverse direction"
+	},
+	{
+		"x": 5035,
+		"r": 33285,
+		"c": 1,
+		"f": 5,
+		"dataset": "4.5.21 Data set DS 130: Parameters for the alarm setpoint values",
+		"type": "UNSIGNEDINT16",
+		"d": "Power factor, capacitive"
+	},
+	{
+		"r": 33539,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.22 Data set DS 131: Parameters to activate/deactivate extended protective functions and alarm setpoint functions",
+		"type": "33539_LOW_3"
+	},
+	{
+		"x": 5036,
+		"layout": "33539_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Overload/long-time pickup IR PS A"
+	},
+	{
+		"r": 33539,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.22 Data set DS 131: Parameters to activate/deactivate extended protective functions and alarm setpoint functions",
+		"type": "33539_HIGH_3"
+	},
+	{
+		"x": 5037,
+		"layout": "33539_HIGH_3",
+		"o": 8,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Neutral overload pickup IN PS A"
+	},
+	{
+		"r": 33540,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.22 Data set DS 131: Parameters to activate/deactivate extended protective functions and alarm setpoint functions",
+		"type": "33540_LOW_3"
+	},
+	{
+		"x": 5038,
+		"layout": "33540_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Instantaneous short-circuit pickup Ii PS A"
+	},
+	{
+		"r": 40964,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.23 Data set DS 160: Parameters for communication",
+		"type": "40964_LOW_3"
+	},
+	{
+		"x": 5039,
+		"layout": "40964_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "HEXSTRING",
+		"d": "Basic type of Modbus TCP data transfer"
+	},
+	{
+		"x": 5040,
+		"r": 40965,
+		"c": 14,
+		"f": 3,
+		"dataset": "4.5.23 Data set DS 160: Parameters for communication",
+		"type": "FORMAT7",
+		"d": "Data in the cyclic profile of Modbus TCP"
+	},
+	{
+		"r": 40997,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.23 Data set DS 160: Parameters for communication",
+		"type": "40997_LOW_3"
+	},
+	{
+		"x": 5041,
+		"layout": "40997_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  Basic type of Modbus TCP data transfer"
+	},
+	{
+		"x": 5042,
+		"r": 41220,
+		"c": 6,
+		"f": 3,
+		"dataset": "4.5.24 Data set DS 161: Parameters for communication",
+		"type": "FORMAT476",
+		"d": "Structure for IPv4 device address, network mask and gateway of the COM35"
+	},
+	{
+		"x": 5043,
+		"r": 41226,
+		"c": 2,
+		"f": 3,
+		"dataset": "4.5.24 Data set DS 161: Parameters for communication",
+		"type": "UNSIGNEDLONG32",
+		"d": "SNTP server IPv4 device address"
+	},
+	{
+		"x": 5044,
+		"r": 41475,
+		"c": 8,
+		"f": 3,
+		"dataset": "4.5.25 Data set DS 162: Device configuration",
+		"type": "STRING",
+		"d": "ID number of the COM35"
+	},
+	{
+		"x": 5045,
+		"r": 41483,
+		"c": 10,
+		"f": 3,
+		"dataset": "4.5.25 Data set DS 162: Device configuration",
+		"type": "FORMAT103",
+		"d": "Part number of circuit breaker"
+	},
+	{
+		"r": 41493,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.25 Data set DS 162: Device configuration",
+		"type": "41493_LOW_3"
+	},
+	{
+		"x": 5046,
+		"layout": "41493_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "FORMAT138",
+		"d": "Type (metering function, metering function PLUS)"
+	},
+	{
+		"x": 5047,
+		"r": 41731,
+		"c": 120,
+		"f": 3,
+		"dataset": "4.5.26 Data set DS 163: Profinet device name",
+		"type": "STRING",
+		"d": "PROFINET device name"
+	},
+	{
+		"r": 41751,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.26 Data set DS 163: Profinet device name",
+		"type": "41751_LOW_3"
+	},
+	{
+		"x": 5048,
+		"layout": "41751_LOW_3",
+		"o": 0,
+		"b": 8,
+		"type": "PROPERTYBYTE",
+		"d": "Property byte  PROFINET device name"
+	},
+	{
+		"x": 5049,
+		"r": 42243,
+		"c": 32,
+		"f": 3,
+		"dataset": "4.5.27 Data set DS 165: Identification comment",
+		"type": "STRING",
+		"d": "User text (freely editable)"
+	},
+	{
+		"x": 5050,
+		"r": 42275,
+		"c": 32,
+		"f": 3,
+		"dataset": "4.5.27 Data set DS 165: Identification comment",
+		"type": "STRING",
+		"d": "Plant identifier (freely editable)"
+	},
+	{
+		"x": 5051,
+		"r": 42499,
+		"c": 100,
+		"f": 3,
+		"dataset": "4.5.28 Data set DS 166: IP white list",
+		"type": "FORMAT508",
+		"d": "White list IP addresses"
+	},
+	{
+		"x": 5052,
+		"r": 42755,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.29 Data set DS 167: Daylight saving change",
+		"type": "SIGNEDINT16",
+		"d": "Offset from UTC"
+	},
+	{
+		"x": 5053,
+		"r": 42756,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.29 Data set DS 167: Daylight saving change",
+		"type": "UNSIGNEDINT16",
+		"d": "Switch daylight saving change on/off"
+	},
+	{
+		"x": 5054,
+		"r": 42757,
+		"c": 1,
+		"f": 3,
+		"dataset": "4.5.29 Data set DS 167: Daylight saving change",
+		"type": "UNSIGNEDINT16",
+		"d": "If daylight saving is active"
+	},
+	{
+		"x": 5055,
+		"layout": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"d": "Trips by the extended protective functions (metering)",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 0,
+		"enumVal": "0 / 1 0x0000 No trip"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 1,
+		"enumVal": "0 / 1 0x0001 Phase unbalance current"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 2,
+		"enumVal": "0 / 1 0x0002 Phase unbalance voltage"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 4,
+		"enumVal": "0 / 1 0x0004 Active power in normal direction"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 8,
+		"enumVal": "0 / 1 0x0008 Active power in reverse direction"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 64,
+		"enumVal": "0 / 1 0x0040 Overvoltage"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 128,
+		"enumVal": "0 / 1 0x0080 Undervoltage"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 256,
+		"enumVal": "0 / 1 0x0100 Overfrequency"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 512,
+		"enumVal": "0 / 1 0x0200 Underfrequency"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 1024,
+		"enumVal": "0 / 1 0x0400 THD current"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 2048,
+		"enumVal": "0 / 1 0x0800 THD voltage"
+	},
+	{
+		"parent": "FORMAT307",
+		"o": 0,
+		"b": 16,
+		"enumKey": 4096,
+		"enumVal": "0 / 1 0x1000 Change in direction of phase rotation"
+	},
+	{
+		"x": 5056,
+		"layout": "FORMAT95",
+		"o": 0,
+		"b": 8,
+		"d": "Market",
+		"next": "BITS"
+	},
+	{
+		"x": 5057,
+		"layout": "FORMAT95",
+		"o": 0,
+		"b": 1,
+		"d": "0 1 IEC 60947-2",
+		"next": "BITS"
+	},
+	{
+		"x": 5058,
+		"layout": "FORMAT95",
+		"o": 1,
+		"b": 1,
+		"d": "0 2 UL489",
+		"next": "BITS"
+	},
+	{
+		"x": 5059,
+		"layout": "FORMAT95",
+		"o": 2,
+		"b": 1,
+		"d": "0 3 ANSI (UL1066)",
+		"next": "BITS"
+	},
+	{
+		"x": 5060,
+		"layout": "FORMAT88",
+		"o": 0,
+		"b": 1,
+		"d": "CubicleBUS modules 0 0 COM15 _ COM16 _ COM35",
+		"next": "BITS"
+	},
+	{
+		"x": 5061,
+		"layout": "FORMAT88",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 Trip unit ETU",
+		"next": "BITS"
+	},
+	{
+		"x": 5062,
+		"layout": "FORMAT88",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 ZSI module",
+		"next": "BITS"
+	},
+	{
+		"x": 5063,
+		"layout": "FORMAT88",
+		"o": 8,
+		"b": 1,
+		"d": "1 0 Configurable digital output module",
+		"next": "BITS"
+	},
+	{
+		"x": 5064,
+		"layout": "FORMAT88",
+		"o": 10,
+		"b": 1,
+		"d": "1 2 Digital output module No. 2",
+		"next": "BITS"
+	},
+	{
+		"x": 5065,
+		"layout": "FORMAT88",
+		"o": 11,
+		"b": 1,
+		"d": "1 3 Digital input module No. 2",
+		"next": "BITS"
+	},
+	{
+		"x": 5066,
+		"layout": "FORMAT88",
+		"o": 12,
+		"b": 1,
+		"d": "1 4 Breaker Status Sensor BSS",
+		"next": "BITS"
+	},
+	{
+		"x": 5067,
+		"layout": "FORMAT88",
+		"o": 13,
+		"b": 1,
+		"d": "1 5 Digital output module No. 1",
+		"next": "BITS"
+	},
+	{
+		"x": 5068,
+		"layout": "FORMAT88",
+		"o": 14,
+		"b": 1,
+		"d": "1 6 Digital input module No. 1",
+		"next": "BITS"
+	},
+	{
+		"x": 5069,
+		"layout": "FORMAT88",
+		"o": 17,
+		"b": 1,
+		"d": "2 1 BDA PLUS",
+		"next": "BITS"
+	},
+	{
+		"x": 5070,
+		"layout": "FORMAT88",
+		"o": 19,
+		"b": 1,
+		"d": "2 3 Graphical display ETU76B_ETU776",
+		"next": "BITS"
+	},
+	{
+		"x": 5071,
+		"layout": "FORMAT88",
+		"o": 20,
+		"b": 1,
+		"d": "2 4 Analog output module No. 2",
+		"next": "BITS"
+	},
+	{
+		"x": 5072,
+		"layout": "FORMAT88",
+		"o": 21,
+		"b": 1,
+		"d": "2 5 Analog output module No. 1",
+		"next": "BITS"
+	},
+	{
+		"x": 5073,
+		"layout": "FORMAT88",
+		"o": 22,
+		"b": 1,
+		"d": "2 6 Metering function or metering function PLUS",
+		"next": "BITS"
+	},
+	{
+		"x": 5074,
+		"layout": "FORMAT309",
+		"o": 0,
+		"b": 8,
+		"d": "Harmonic current  Exponent",
+		"next": "SIGNEDCHAR"
+	},
+	{
+		"x": 5075,
+		"layout": "FORMAT309",
+		"o": 8,
+		"b": 8,
+		"d": "Harmonic current  Value",
+		"next": "UNSIGNEDCHAR"
+	},
+	{
+		"x": 5076,
+		"layout": "FORMAT309",
+		"o": 16,
+		"b": 8,
+		"d": "Harmonic voltage  Exponent",
+		"next": "SIGNEDCHAR"
+	},
+	{
+		"x": 5077,
+		"layout": "FORMAT309",
+		"o": 24,
+		"b": 8,
+		"d": "Harmonic voltage  Value",
+		"next": "UNSIGNEDCHAR"
+	},
+	{
+		"parent": "FORMAT370",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "Parameter set A active"
+	},
+	{
+		"parent": "FORMAT370",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "Parameter set B active"
+	},
+	{
+		"x": 5078,
+		"layout": "FORMAT373",
+		"o": 0,
+		"b": 1,
+		"d": "_Phase number_ 0 0 Phase L1",
+		"next": "BITS"
+	},
+	{
+		"x": 5079,
+		"layout": "FORMAT373",
+		"o": 1,
+		"b": 1,
+		"d": "_Phase number_ 0 1 Phase L2",
+		"next": "BITS"
+	},
+	{
+		"x": 5080,
+		"layout": "FORMAT373",
+		"o": 2,
+		"b": 1,
+		"d": "_Phase number_ 0 2 Phase L3",
+		"next": "BITS"
+	},
+	{
+		"x": 5081,
+		"layout": "FORMAT373",
+		"o": 3,
+		"b": 1,
+		"d": "_Phase number_ 0 3 N-conductor",
+		"next": "BITS"
+	},
+	{
+		"x": 5082,
+		"layout": "FORMAT373",
+		"o": 4,
+		"b": 1,
+		"d": "_Phase number_ 0 4 Ground fault",
+		"next": "BITS"
+	},
+	{
+		"x": 5083,
+		"layout": "FORMAT19",
+		"o": 8,
+		"b": 1,
+		"d": "0 0 Set user output",
+		"next": "BITS"
+	},
+	{
+		"x": 5084,
+		"layout": "FORMAT19",
+		"o": 9,
+		"b": 1,
+		"d": "0 1 Reset user output",
+		"next": "BITS"
+	},
+	{
+		"x": 5085,
+		"layout": "FORMAT19",
+		"o": 10,
+		"b": 1,
+		"d": "0 2 Open circuit breaker",
+		"next": "BITS"
+	},
+	{
+		"x": 5086,
+		"layout": "FORMAT19",
+		"o": 11,
+		"b": 1,
+		"d": "0 3 Close the circuit breaker",
+		"next": "BITS"
+	},
+	{
+		"x": 5087,
+		"layout": "FORMAT19",
+		"o": 12,
+		"b": 1,
+		"d": "0 4 Switch user output mode to trip message",
+		"next": "BITS"
+	},
+	{
+		"x": 5088,
+		"layout": "FORMAT19",
+		"o": 13,
+		"b": 1,
+		"d": "Status of user output mode 1 = 0 Trip is output 0 5 =1 Actuation by user",
+		"next": "BITS"
+	},
+	{
+		"x": 5089,
+		"layout": "FORMAT19",
+		"o": 14,
+		"b": 1,
+		"d": "0 6 Read status of user output",
+		"next": "BITS"
+	},
+	{
+		"x": 5090,
+		"layout": "FORMAT19",
+		"o": 15,
+		"b": 1,
+		"d": "0 7 Read status of user input (COM16 only)",
+		"next": "BITS"
+	},
+	{
+		"x": 5091,
+		"layout": "FORMAT16",
+		"o": 0,
+		"b": 8,
+		"d": "Year",
+		"next": "BITS"
+	},
+	{
+		"x": 5092,
+		"layout": "FORMAT16",
+		"o": 8,
+		"b": 8,
+		"d": "Month",
+		"next": "BITS"
+	},
+	{
+		"x": 5093,
+		"layout": "FORMAT16",
+		"o": 16,
+		"b": 8,
+		"d": "Day",
+		"next": "BITS"
+	},
+	{
+		"x": 5094,
+		"layout": "FORMAT16",
+		"o": 24,
+		"b": 8,
+		"d": "Hour",
+		"next": "BITS"
+	},
+	{
+		"x": 5095,
+		"layout": "FORMAT16",
+		"o": 32,
+		"b": 8,
+		"d": "Minute",
+		"next": "BITS"
+	},
+	{
+		"x": 5096,
+		"layout": "FORMAT16",
+		"o": 40,
+		"b": 8,
+		"d": "Seconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5097,
+		"layout": "FORMAT16",
+		"o": 48,
+		"b": 8,
+		"d": "Low-order digits of milliseconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5098,
+		"layout": "FORMAT16",
+		"o": 56,
+		"b": 4,
+		"d": "Weekday (1 =Sunday, ..., 7 = Saturday) 0 - 3",
+		"next": "BITS"
+	},
+	{
+		"x": 5099,
+		"layout": "FORMAT16",
+		"o": 60,
+		"b": 4,
+		"d": "Higher-order digits of milliseconds (4MSB) 4 - 7",
+		"next": "BITS"
+	},
+	{
+		"x": 5100,
+		"layout": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"d": "Reason for tripping operation",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "1 2 Overload warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "1 2 Overload warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 3,
+		"enumVal": "3 4 Overload warning N-conductor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "3 4 Overload warning N-conductor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 5,
+		"enumVal": "5 6 Load shedding alarm"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 6,
+		"enumVal": "5 6 Load shedding alarm"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 7,
+		"enumVal": "7 8 Load pick up message"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 8,
+		"enumVal": "7 8 Load pick up message"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 9,
+		"enumVal": "9 10 Phase unbalance warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 10,
+		"enumVal": "9 10 Phase unbalance warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 11,
+		"enumVal": "11 12 Fault in trip unit"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 12,
+		"enumVal": "11 12 Fault in trip unit"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 13,
+		"enumVal": "13 14 Ground fault warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 14,
+		"enumVal": "13 14 Ground fault warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 15,
+		"enumVal": "15 16 Overtemperature warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 16,
+		"enumVal": "15 16 Overtemperature warning"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 17,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 18,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 19,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 20,
+		"enumVal": "20 〞 Switch on"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 21,
+		"enumVal": "21 〞 Switch off"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 22,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 23,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 24,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 25,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 26,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 27,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 28,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 29,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 30,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 31,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 32,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 33,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 34,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 35,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 36,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 37,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 38,
+		"enumVal": "-"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 39,
+		"enumVal": "+"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 40,
+		"enumVal": "40 41 Threshold warning TV current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 41,
+		"enumVal": "40 41 Threshold warning TV current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 42,
+		"enumVal": "42 43 TV ground fault"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 43,
+		"enumVal": "42 43 TV ground fault"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 44,
+		"enumVal": "44 45 TV overcurrent N-conductor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 45,
+		"enumVal": "44 45 TV overcurrent N-conductor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 46,
+		"enumVal": "46 47 TV unbalance current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 47,
+		"enumVal": "46 47 TV unbalance current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 48,
+		"enumVal": "48 49 TV long-time mean value for current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 49,
+		"enumVal": "48 49 TV long-time mean value for current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 50,
+		"enumVal": "50 51 TV undervoltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 51,
+		"enumVal": "50 51 TV undervoltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 52,
+		"enumVal": "52 53 TV unbalance voltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 53,
+		"enumVal": "52 53 TV unbalance voltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 54,
+		"enumVal": "54 55 TV overvoltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 55,
+		"enumVal": "54 55 TV overvoltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 56,
+		"enumVal": "56 57 TV long-time mean value for active power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 57,
+		"enumVal": "56 57 TV long-time mean value for active power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 58,
+		"enumVal": "58 59 TV long-time mean value for apparent power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 59,
+		"enumVal": "58 59 TV long-time mean value for apparent power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 60,
+		"enumVal": "60 61 TV long-time mean value for reactive power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 61,
+		"enumVal": "60 61 TV long-time mean value for reactive power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 62,
+		"enumVal": "62 63 TV reactive power in normal direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 63,
+		"enumVal": "62 63 TV reactive power in normal direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 64,
+		"enumVal": "64 65 TV reactive power in reverse direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 65,
+		"enumVal": "64 65 TV reactive power in reverse direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 66,
+		"enumVal": "66 67 TV apparent power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 67,
+		"enumVal": "66 67 TV apparent power"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 68,
+		"enumVal": "68 69 TV overfrequency"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 69,
+		"enumVal": "68 69 TV overfrequency"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 70,
+		"enumVal": "70 71 TV underfrequency"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 71,
+		"enumVal": "70 71 TV underfrequency"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 72,
+		"enumVal": "72 73 TV under power factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 73,
+		"enumVal": "72 73 TV under power factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 74,
+		"enumVal": "74 75 TV over power factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 75,
+		"enumVal": "74 75 TV over power factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 76,
+		"enumVal": "76 77 TV THD current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 77,
+		"enumVal": "76 77 TV THD current"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 78,
+		"enumVal": "78 79 TV THD voltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 79,
+		"enumVal": "78 79 TV THD voltage"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 80,
+		"enumVal": "80 81 TV peak factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 81,
+		"enumVal": "- 80 81 TV peak factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 82,
+		"enumVal": "82 83 TV form factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 83,
+		"enumVal": "- 82 83 TV form factor"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 84,
+		"enumVal": "84 85 TV active power in normal direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 85,
+		"enumVal": "- 84 85 TV active power in normal direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 86,
+		"enumVal": "86 87 TV active power in reverse direction"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 72,
+		"b": 8,
+		"enumKey": 87,
+		"enumVal": "- 86 87 TV active power in reverse direction"
+	},
+	{
+		"x": 5101,
+		"layout": "FORMAT16",
+		"o": 80,
+		"b": 8,
+		"d": "Source of 1st tripping operation",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 80,
+		"b": 8,
+		"enumKey": 14,
+		"enumVal": "14 = Meter. function/M. PLUS"
+	},
+	{
+		"parent": "FORMAT16",
+		"o": 80,
+		"b": 8,
+		"enumKey": 25,
+		"enumVal": "25 = Trip unit"
+	},
+	{
+		"x": 5102,
+		"layout": "FORMAT15",
+		"o": 0,
+		"b": 8,
+		"d": "Year",
+		"next": "BITS"
+	},
+	{
+		"x": 5103,
+		"layout": "FORMAT15",
+		"o": 8,
+		"b": 8,
+		"d": "Month",
+		"next": "BITS"
+	},
+	{
+		"x": 5104,
+		"layout": "FORMAT15",
+		"o": 16,
+		"b": 8,
+		"d": "Day",
+		"next": "BITS"
+	},
+	{
+		"x": 5105,
+		"layout": "FORMAT15",
+		"o": 24,
+		"b": 8,
+		"d": "Hour",
+		"next": "BITS"
+	},
+	{
+		"x": 5106,
+		"layout": "FORMAT15",
+		"o": 32,
+		"b": 8,
+		"d": "Minute",
+		"next": "BITS"
+	},
+	{
+		"x": 5107,
+		"layout": "FORMAT15",
+		"o": 40,
+		"b": 8,
+		"d": "Seconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5108,
+		"layout": "FORMAT15",
+		"o": 48,
+		"b": 8,
+		"d": "Low-order digits of milliseconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5109,
+		"layout": "FORMAT15",
+		"o": 56,
+		"b": 4,
+		"d": "Weekday (1 =Sunday, ..., 7 = Saturday) 0 - 3",
+		"next": "BITS"
+	},
+	{
+		"x": 5110,
+		"layout": "FORMAT15",
+		"o": 60,
+		"b": 4,
+		"d": "Higher-order digits of milliseconds (4MSB) 4 - 7",
+		"next": "BITS"
+	},
+	{
+		"x": 5111,
+		"layout": "FORMAT15",
+		"o": 64,
+		"b": 8,
+		"d": "8 〞 Reserved 0x00",
+		"next": "BITS"
+	},
+	{
+		"x": 5112,
+		"layout": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"d": "Reason for tripping operation",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "1 = overload"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "2 = instantaneous Short circuit"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 3,
+		"enumVal": "3 = delayed Short-circuit"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "4 = Ground fault"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 5,
+		"enumVal": "5 = Ext. protection function"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 6,
+		"enumVal": "6 = Overload N-conductor"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 7,
+		"enumVal": "7 = ETU self-protection (analog override)"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 8,
+		"enumVal": "8 = Overtemperature"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 20,
+		"enumVal": "20 = Unbalance Current"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 21,
+		"enumVal": "21 = Unbalance Voltage"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 22,
+		"enumVal": "22 = Active power in normal dir."
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 23,
+		"enumVal": "23 = Active power in reverse dir."
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 24,
+		"enumVal": "24 = Overvoltage"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 25,
+		"enumVal": "25 = Undervoltage"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 26,
+		"enumVal": "26 = Overfrequency"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 27,
+		"enumVal": "27 = Underfrequency"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 28,
+		"enumVal": "28 = THD current"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 29,
+		"enumVal": "29 = THD voltage"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 72,
+		"b": 8,
+		"enumKey": 30,
+		"enumVal": "30 = Change in phase dir. of rot."
+	},
+	{
+		"x": 5113,
+		"layout": "FORMAT15",
+		"o": 80,
+		"b": 8,
+		"d": "Source of 1st tripping operation",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 80,
+		"b": 8,
+		"enumKey": 14,
+		"enumVal": "14 = Meter. function/M. PLUS"
+	},
+	{
+		"parent": "FORMAT15",
+		"o": 80,
+		"b": 8,
+		"enumKey": 25,
+		"enumVal": "25 = Trip unit"
+	},
+	{
+		"x": 5114,
+		"layout": "FORMAT15",
+		"o": 88,
+		"b": 8,
+		"d": "8 〞 Reserved 0x00",
+		"next": "BITS"
+	},
+	{
+		"x": 5115,
+		"layout": "TIME",
+		"o": 0,
+		"b": 8,
+		"d": "Year",
+		"next": "BITS"
+	},
+	{
+		"x": 5116,
+		"layout": "TIME",
+		"o": 8,
+		"b": 8,
+		"d": "Month",
+		"next": "BITS"
+	},
+	{
+		"x": 5117,
+		"layout": "TIME",
+		"o": 16,
+		"b": 8,
+		"d": "Day",
+		"next": "BITS"
+	},
+	{
+		"x": 5118,
+		"layout": "TIME",
+		"o": 24,
+		"b": 8,
+		"d": "Hour",
+		"next": "BITS"
+	},
+	{
+		"x": 5119,
+		"layout": "TIME",
+		"o": 32,
+		"b": 8,
+		"d": "Minute",
+		"next": "BITS"
+	},
+	{
+		"x": 5120,
+		"layout": "TIME",
+		"o": 40,
+		"b": 8,
+		"d": "Seconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5121,
+		"layout": "TIME",
+		"o": 48,
+		"b": 8,
+		"d": "Low-order digits of milliseconds",
+		"next": "BITS"
+	},
+	{
+		"x": 5122,
+		"layout": "TIME",
+		"o": 56,
+		"b": 4,
+		"d": "Weekday (1 =Sunday, ..., 7 = Saturday) 0 - 3",
+		"next": "BITS"
+	},
+	{
+		"x": 5123,
+		"layout": "TIME",
+		"o": 60,
+		"b": 4,
+		"d": "Higher-order digits of milliseconds (4MSB) 4 - 7",
+		"next": "BITS"
+	},
+	{
+		"x": 5124,
+		"layout": "FORMAT24",
+		"o": 0,
+		"b": 1,
+		"d": "0 0 Disconnected position",
+		"next": "BITS"
+	},
+	{
+		"x": 5125,
+		"layout": "FORMAT24",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 Connected position",
+		"next": "BITS"
+	},
+	{
+		"x": 5126,
+		"layout": "FORMAT24",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 Test position",
+		"next": "BITS"
+	},
+	{
+		"x": 5127,
+		"layout": "FORMAT24",
+		"o": 3,
+		"b": 1,
+		"d": "0 3 Switch not available",
+		"next": "BITS"
+	},
+	{
+		"x": 5128,
+		"layout": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"d": "Status of the circuit breaker",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 Circuit breaker open"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Circuit breaker closed"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "0 2 Circuit breaker has tripped (trip alarm switch)"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 3,
+		"enumVal": "0 3 Circuit breaker ready to close"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "0 4 Spring energy store charged"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 5,
+		"enumVal": "0 5 First auxiliary release (shunt trip) operated"
+	},
+	{
+		"parent": "FORMAT328",
+		"o": 0,
+		"b": 8,
+		"enumKey": 6,
+		"enumVal": "0 6 Second auxiliary release (UVR) operated"
+	},
+	{
+		"x": 5129,
+		"layout": "FORMAT343",
+		"o": 0,
+		"b": 8,
+		"d": "I2t characteristic for short-time delayed overcurrent",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT343",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 I2t characteristic for delayed short-circuit protection switched off (default)."
+	},
+	{
+		"parent": "FORMAT343",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 I2t characteristic for delayed short-circuit protection switched on."
+	},
+	{
+		"x": 5130,
+		"layout": "FORMAT344",
+		"o": 0,
+		"b": 8,
+		"d": "I2t characteristic for ground-fault protection",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT344",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 I2t characteristic for ground-fault protection switched off (default)."
+	},
+	{
+		"parent": "FORMAT344",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 I2t characteristic for ground-fault protection switched on."
+	},
+	{
+		"x": 5131,
+		"layout": "FORMAT345",
+		"o": 0,
+		"b": 8,
+		"d": "I4t characteristic for Long-time_Overload protection",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT345",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 I4t characteristic for long-time/overload protection switched off (default)."
+	},
+	{
+		"parent": "FORMAT345",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 I4t characteristic for overload protection switched on."
+	},
+	{
+		"x": 5132,
+		"layout": "FORMAT346",
+		"o": 0,
+		"b": 8,
+		"d": "Thermal memory",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT346",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 Thermal memory deactivated (default)"
+	},
+	{
+		"parent": "FORMAT346",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Thermal memory activated"
+	},
+	{
+		"x": 5133,
+		"layout": "FORMAT347",
+		"o": 0,
+		"b": 8,
+		"d": "Phase loss sensitivity",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT347",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 Phase loss sensitivity deactivated (default)"
+	},
+	{
+		"parent": "FORMAT347",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Phase loss sensitivity activated"
+	},
+	{
+		"x": 5134,
+		"layout": "FORMAT370",
+		"o": 0,
+		"b": 8,
+		"d": "Active parameter set",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT370",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 Parameter set A active"
+	},
+	{
+		"parent": "FORMAT370",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Parameter set B active"
+	},
+	{
+		"x": 5135,
+		"layout": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"d": "Phase number",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 Phase L1"
+	},
+	{
+		"parent": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Phase L2"
+	},
+	{
+		"parent": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "0 2 Phase L3"
+	},
+	{
+		"parent": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"enumKey": 3,
+		"enumVal": "0 3 Neutral conductor"
+	},
+	{
+		"parent": "FORMAT373",
+		"o": 0,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "0 4 Ground-fault"
+	},
+	{
+		"x": 5136,
+		"layout": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"d": "Trip unit  Trips lastunacknowledged trip",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0x00 No trip"
+	},
+	{
+		"parent": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 0x01 Overload/long-time (L)"
+	},
+	{
+		"parent": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "0 0x02 Instantaneous trip (I)"
+	},
+	{
+		"parent": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "0 0x04 Short-time delay trip (S)"
+	},
+	{
+		"parent": "FORMAT401",
+		"o": 0,
+		"b": 8,
+		"enumKey": 8,
+		"enumVal": "0 0x08 Ground-fault (G)"
+	},
+	{
+		"x": 5137,
+		"layout": "FORMAT402",
+		"o": 0,
+		"b": 16,
+		"d": "Warnings",
+		"next": "BITS"
+	},
+	{
+		"x": 5138,
+		"layout": "FORMAT402",
+		"o": 0,
+		"b": 1,
+		"d": "0 0 Overload",
+		"next": "BITS"
+	},
+	{
+		"x": 5139,
+		"layout": "FORMAT402",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 Overload neutral conductor",
+		"next": "BITS"
+	},
+	{
+		"x": 5140,
+		"layout": "FORMAT402",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 Load shed threshold",
+		"next": "BITS"
+	},
+	{
+		"x": 5141,
+		"layout": "FORMAT402",
+		"o": 3,
+		"b": 1,
+		"d": "0 3 Load pickup level",
+		"next": "BITS"
+	},
+	{
+		"x": 5142,
+		"layout": "FORMAT402",
+		"o": 4,
+		"b": 1,
+		"d": "0 4 Phase unbalance current",
+		"next": "BITS"
+	},
+	{
+		"x": 5143,
+		"layout": "FORMAT402",
+		"o": 5,
+		"b": 1,
+		"d": "0 5 Microprocessor error",
+		"next": "BITS"
+	},
+	{
+		"x": 5144,
+		"layout": "FORMAT402",
+		"o": 6,
+		"b": 1,
+		"d": "0 6 Ground-fault",
+		"next": "BITS"
+	},
+	{
+		"x": 5145,
+		"layout": "FORMAT402",
+		"o": 7,
+		"b": 1,
+		"d": "0 7 Overtemperature",
+		"next": "BITS"
+	},
+	{
+		"x": 5146,
+		"layout": "FORMAT402",
+		"o": 8,
+		"b": 1,
+		"d": "1 0 Leading signal of overload trip",
+		"next": "BITS"
+	},
+	{
+		"x": 5147,
+		"layout": "FORMAT402",
+		"o": 9,
+		"b": 1,
+		"d": "1 1 Average current",
+		"next": "BITS"
+	},
+	{
+		"x": 5148,
+		"layout": "FORMAT405",
+		"o": 0,
+		"b": 8,
+		"d": "Contact condition",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT405",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 No maintenance necessary yet on main contacts Note:Despite this, the main contacts must be checked after every overcurrent tripping operation."
+	},
+	{
+		"parent": "FORMAT405",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Perform immediate visual inspection on main contacts."
+	},
+	{
+		"parent": "FORMAT405",
+		"o": 0,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "0 2 Prepare maintenance of the main contacts."
+	},
+	{
+		"x": 5149,
+		"layout": "FORMAT406",
+		"o": 0,
+		"b": 16,
+		"d": "Control trip unit",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT406",
+		"o": 0,
+		"b": 16,
+		"enumKey": 2,
+		"enumVal": "0 / 1 0x0002 Delete last trip message in trip unit"
+	},
+	{
+		"parent": "FORMAT406",
+		"o": 0,
+		"b": 16,
+		"enumKey": 34,
+		"enumVal": "0 / 1 0x0022 Reset counter and statistical information of the trip unit"
+	},
+	{
+		"x": 5150,
+		"layout": "FORMAT410",
+		"o": 0,
+		"b": 8,
+		"d": "Ground-fault sensing method",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT410",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 GF sensing with external iron-core CT"
+	},
+	{
+		"parent": "FORMAT410",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 GF sensing via residual method (vector summation)"
+	},
+	{
+		"parent": "FORMAT410",
+		"o": 0,
+		"b": 8,
+		"enumKey": 2,
+		"enumVal": "0 2 Reserved"
+	},
+	{
+		"x": 5151,
+		"layout": "FORMAT411",
+		"o": 0,
+		"b": 8,
+		"d": "Neutral sensor",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT411",
+		"o": 0,
+		"b": 8,
+		"enumKey": 0,
+		"enumVal": "0 0 No neutral sensor installed"
+	},
+	{
+		"parent": "FORMAT411",
+		"o": 0,
+		"b": 8,
+		"enumKey": 1,
+		"enumVal": "0 1 Neutral sensor installed"
+	},
+	{
+		"x": 5152,
+		"layout": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"d": "Trip unit type for 3WL",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 4,
+		"enumVal": "0 4 IEC ETU45B"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 5,
+		"enumVal": "0 5 IEC ETU45B with display"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 6,
+		"enumVal": "0 6 IEC ETU45B with ground-fault protection"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 7,
+		"enumVal": "0 7 IEC ETU45B with display and ground-fault protection"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 13,
+		"enumVal": "0 13 IEC ETU76B"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 14,
+		"enumVal": "0 14 IEC ETU76B with ground-fault protection"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 17,
+		"enumVal": "0 17 UL ETU748"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 18,
+		"enumVal": "0 18 UL ETU748 with display"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 19,
+		"enumVal": "0 19 UL ETU748 with ground-fault protection"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 20,
+		"enumVal": "0 20 UL ETU748 with display and ground-fault protection"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 22,
+		"enumVal": "0 22 UL ETU776"
+	},
+	{
+		"parent": "FORMAT412",
+		"o": 0,
+		"b": 8,
+		"enumKey": 23,
+		"enumVal": "0 23 UL ETU745"
+	},
+	{
+		"x": 5153,
+		"layout": "FORMAT421",
+		"o": 0,
+		"b": 1,
+		"d": "0 0 ZSI for short-time active",
+		"next": "BITS"
+	},
+	{
+		"x": 5154,
+		"layout": "FORMAT421",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 ZSI for ground-fault active",
+		"next": "BITS"
+	},
+	{
+		"x": 5155,
+		"layout": "FORMAT421",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 Not used",
+		"next": "BITS"
+	},
+	{
+		"x": 5156,
+		"layout": "FORMAT421",
+		"o": 3,
+		"b": 1,
+		"d": "0 3 Not used",
+		"next": "BITS"
+	},
+	{
+		"x": 5157,
+		"layout": "FORMAT421",
+		"o": 4,
+		"b": 2,
+		"d": "0 4 ＃ 5 0 ZSI disabled",
+		"next": "BITS"
+	},
+	{
+		"x": 5158,
+		"layout": "FORMAT421",
+		"o": 6,
+		"b": 1,
+		"d": "0 6 Not used",
+		"next": "BITS"
+	},
+	{
+		"x": 5159,
+		"layout": "FORMAT421",
+		"o": 7,
+		"b": 1,
+		"d": "0 7 Not used",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT421",
+		"o": 4,
+		"b": 2,
+		"enumKey": 0,
+		"enumVal": "0 ZSI disabled"
+	},
+	{
+		"parent": "FORMAT421",
+		"o": 4,
+		"b": 2,
+		"enumKey": 1,
+		"enumVal": "1 ZSI input and output active"
+	},
+	{
+		"parent": "FORMAT421",
+		"o": 4,
+		"b": 2,
+		"enumKey": 2,
+		"enumVal": "2 ZSI output active"
+	},
+	{
+		"x": 5160,
+		"layout": "FORMAT426",
+		"o": 0,
+		"b": 1,
+		"d": "0 0 Communication bit 1",
+		"next": "BITS"
+	},
+	{
+		"x": 5161,
+		"layout": "FORMAT426",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 Communication bit 2",
+		"next": "BITS"
+	},
+	{
+		"x": 5162,
+		"layout": "FORMAT426",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 Communication bit 3",
+		"next": "BITS"
+	},
+	{
+		"x": 5163,
+		"layout": "FORMAT426",
+		"o": 3,
+		"b": 1,
+		"d": "0 3 Communication bit 4",
+		"next": "BITS"
+	},
+	{
+		"x": 5164,
+		"layout": "FORMAT426",
+		"o": 4,
+		"b": 1,
+		"d": "0 4 Communication bit 5",
+		"next": "BITS"
+	},
+	{
+		"x": 5165,
+		"layout": "FORMAT426",
+		"o": 5,
+		"b": 1,
+		"d": "0 5 Communication bit 6",
+		"next": "BITS"
+	},
+	{
+		"x": 5166,
+		"layout": "FORMAT476",
+		"o": 0,
+		"b": 16,
+		"d": "IPv4 suite",
+		"next": "BITS"
+	},
+	{
+		"x": 5167,
+		"layout": "FORMAT476",
+		"o": 0,
+		"b": 3,
+		"d": "0 ＃ 3 IPv4 host address",
+		"next": "BITS"
+	},
+	{
+		"x": 5168,
+		"layout": "FORMAT476",
+		"o": 4,
+		"b": 7,
+		"d": "4 ＃ 7 IPv4 sub net mask",
+		"next": "BITS"
+	},
+	{
+		"x": 5169,
+		"layout": "FORMAT476",
+		"o": 8,
+		"b": 11,
+		"d": "8 ＃ 11 IPv4 gateway address",
+		"next": "BITS"
+	},
+	{
+		"x": 5170,
+		"layout": "FORMAT478",
+		"o": 0,
+		"b": 1,
+		"d": "0 0 Set the user output manually.",
+		"next": "BITS"
+	},
+	{
+		"x": 5171,
+		"layout": "FORMAT478",
+		"o": 1,
+		"b": 1,
+		"d": "0 1 Reset the user output manually.",
+		"next": "BITS"
+	},
+	{
+		"x": 5172,
+		"layout": "FORMAT478",
+		"o": 2,
+		"b": 1,
+		"d": "0 2 Activate _OPEN_ output (for 500 ms)",
+		"next": "BITS"
+	},
+	{
+		"x": 5173,
+		"layout": "FORMAT478",
+		"o": 3,
+		"b": 1,
+		"d": "0 3 Activate _CLOSE_ output (for 500 ms)",
+		"next": "BITS"
+	},
+	{
+		"x": 5174,
+		"layout": "FORMAT478",
+		"o": 4,
+		"b": 1,
+		"d": "0 4 Set user output _FREE_ to tripped indication.",
+		"next": "BITS"
+	},
+	{
+		"x": 5175,
+		"layout": "FORMAT478",
+		"o": 5,
+		"b": 1,
+		"d": "0 5 Set user output _FREE_ to Parameter Set B.",
+		"next": "BITS"
+	},
+	{
+		"x": 5176,
+		"layout": "FORMAT478",
+		"o": 6,
+		"b": 1,
+		"d": "0 6 Set user output _FREE_ to manual activation.",
+		"next": "BITS"
+	},
+	{
+		"x": 5177,
+		"layout": "FORMAT478",
+		"o": 7,
+		"b": 1,
+		"d": "0 7 Set user output _FREE_ to switch parameter sets.",
+		"next": "BITS"
+	},
+	{
+		"x": 5178,
+		"layout": "FORMAT478",
+		"o": 8,
+		"b": 2,
+		"d": "Mode of user output",
+		"next": "BITS"
+	},
+	{
+		"x": 5179,
+		"layout": "FORMAT478",
+		"o": 10,
+		"b": 1,
+		"d": "Mode of the free user input _FREE_",
+		"next": "BITS"
+	},
+	{
+		"x": 5180,
+		"layout": "FORMAT478",
+		"o": 11,
+		"b": 1,
+		"d": "1 3 Read status of user output",
+		"next": "BITS"
+	},
+	{
+		"x": 5181,
+		"layout": "FORMAT478",
+		"o": 12,
+		"b": 1,
+		"d": "1 4 Read status of user input",
+		"next": "BITS"
+	},
+	{
+		"x": 5182,
+		"layout": "FORMAT478",
+		"o": 13,
+		"b": 1,
+		"d": "1 5 Switch over user output mode to manual operation",
+		"next": "BITS"
+	},
+	{
+		"x": 5183,
+		"layout": "FORMAT478",
+		"o": 14,
+		"b": 2,
+		"d": "1 6 ＃ 7 Reserved",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT478",
+		"o": 8,
+		"b": 2,
+		"enumKey": 0,
+		"enumVal": "00 User output mode = tripped indication"
+	},
+	{
+		"parent": "FORMAT478",
+		"o": 8,
+		"b": 2,
+		"enumKey": 1,
+		"enumVal": "01 User output mode = manual activation (bit 0 set)"
+	},
+	{
+		"parent": "FORMAT478",
+		"o": 8,
+		"b": 2,
+		"enumKey": 2,
+		"enumVal": "10 User output mode = switch parameter sets (bit 1 set)"
+	},
+	{
+		"parent": "FORMAT478",
+		"o": 10,
+		"b": 1,
+		"enumKey": 0,
+		"enumVal": "0 Parameter set switchover inactive"
+	},
+	{
+		"parent": "FORMAT478",
+		"o": 10,
+		"b": 1,
+		"enumKey": 1,
+		"enumVal": "1 Parameter set switchover active"
+	},
+	{
+		"x": 5184,
+		"layout": "FORMAT18",
+		"o": 0,
+		"b": 1,
+		"d": "Control communication module",
+		"next": "BITS"
+	},
+	{
+		"parent": "FORMAT18",
+		"o": 0,
+		"b": 1,
+		"enumKey": 0,
+		"enumVal": "0 = Communication active;"
+	},
+	{
+		"parent": "FORMAT18",
+		"o": 0,
+		"b": 1,
+		"enumKey": 1,
+		"enumVal": "1 = Communication inactive"
+	},
+	{
+		"x": 5185,
+		"layout": "FORMAT18",
+		"o": 1,
+		"b": 1,
+		"d": "The communication module has no valid MODBUS RTU address",
+		"next": "BITS"
+	},
+	{
+		"x": 5186,
+		"layout": "FORMAT18",
+		"o": 2,
+		"b": 1,
+		"d": "Modbus RTU address can no longer be changed",
+		"next": "BITS"
+	},
+	{
+		"x": 5187,
+		"layout": "FORMAT18",
+		"o": 10,
+		"b": 1,
+		"d": "Format (18) _Control communication module_-Deletes the maintenance counters",
+		"next": "BITS"
+	},
+	{
+		"x": 5188,
+		"layout": "FORMAT18",
+		"o": 11,
+		"b": 1,
+		"d": "Format (18) _Control communication module_-Deletes the min._max. temperatures",
+		"next": "BITS"
+	},
+	{
+		"x": 5189,
+		"layout": "FORMAT18",
+		"o": 12,
+		"b": 1,
+		"d": "Format (18) _Control communication module_-Deletes all min._max. values except temperature",
+		"next": "BITS"
+	},
+	{
+		"x": 5190,
+		"layout": "FORMAT18",
+		"o": 13,
+		"b": 1,
+		"d": "Format (18) _Control communication module_-Synchronizes the clock to xx 30 00.000",
+		"next": "BITS"
+	},
+	{
+		"x": 5191,
+		"layout": "FORMAT18",
+		"o": 14,
+		"b": 1,
+		"d": "Format (18) _Control communication module_-Deletes the contents of the trip log and event log",
+		"next": "BITS"
+	},
+	{
+		"x": 5192,
+		"layout": "PROPERTYBYTE",
+		"o": 0,
+		"b": 2,
+		"d": "Data point read_write",
+		"next": "BITS"
+	},
+	{
+		"parent": "PROPERTYBYTE",
+		"o": 0,
+		"b": 2,
+		"enumKey": 0,
+		"enumVal": "0 Data point read/write"
+	},
+	{
+		"parent": "PROPERTYBYTE",
+		"o": 0,
+		"b": 2,
+		"enumKey": 1,
+		"enumVal": "1 Data point read only, but can be reset (e.g. maintenance)"
+	},
+	{
+		"parent": "PROPERTYBYTE",
+		"o": 0,
+		"b": 2,
+		"enumKey": 2,
+		"enumVal": "2 Data point read only, can only be written at the factory"
+	},
+	{
+		"parent": "PROPERTYBYTE",
+		"o": 0,
+		"b": 2,
+		"enumKey": 3,
+		"enumVal": "3 Data point read only"
+	},
+	{
+		"x": 5193,
+		"layout": "PROPERTYBYTE",
+		"o": 2,
+		"b": 1,
+		"d": "2 每 Bit not used",
+		"next": "BITS"
+	},
+	{
+		"x": 5194,
+		"layout": "PROPERTYBYTE",
+		"o": 3,
+		"b": 1,
+		"d": "3 每 Bit not used",
+		"next": "BITS"
+	},
+	{
+		"x": 5195,
+		"layout": "PROPERTYBYTE",
+		"o": 4,
+		"b": 1,
+		"d": "4 每 Data point value in valid range",
+		"next": "BITS"
+	},
+	{
+		"x": 5196,
+		"layout": "PROPERTYBYTE",
+		"o": 5,
+		"b": 1,
+		"d": "5 每 Data point_option activated.",
+		"next": "BITS"
+	},
+	{
+		"x": 5197,
+		"layout": "PROPERTYBYTE",
+		"o": 6,
+		"b": 1,
+		"d": "6 每 Data point_option available.",
+		"next": "BITS"
+	},
+	{
+		"x": 5198,
+		"layout": "PROPERTYBYTE",
+		"o": 7,
+		"b": 1,
+		"d": "7 每 Bit not used",
+		"next": "BITS"
+	}
+]

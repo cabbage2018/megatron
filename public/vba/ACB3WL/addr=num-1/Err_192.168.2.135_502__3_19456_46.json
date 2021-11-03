@@ -1,0 +1,1 @@
+{"errno":"EADDRINUSE","code":"EADDRINUSE","syscall":"connect","address":"192.168.2.135","port":502,"ip":"192.168.2.135","uri":{"ip":"192.168.2.135","port":502,"sub":126,"start":"2021-11-03T09:53:27.639Z"},"space":{"desc":"4.5.11 Data set DS 76: Min./max. measured values of frequency and THD (length 46 Modbus registers, read only)","fc":3,"reg":19457,"cnt":46,"addr":19456}}
