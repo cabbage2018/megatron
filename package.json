@@ -1,0 +1,75 @@
+{
+  "name": "labs",
+  "email": "mindspherebasic@126.com",
+  "version": "22.08.04",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cabbage2018/labs.git"
+  },
+  "engines": {
+    "node": ">=0.80 <=10"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "pm2": "pm2 start bin/www",
+    "pm2-stop": "pm2 stop all",
+    "build": "set NODE_ENV=production",
+    "pkg": "pkg ./bin/www  -t win --out-path=dist/",
+    "dev": "cross-env NODE_ENV=develop pm2 --no-daemon start ./bin/www --watch ",
+    "stage": "cross-env NODE_ENV=stage pm2 --no-daemon start ./bin/www --watch ",
+    "test": "mocha --max_old_space_size=90000 ./test/**/*.js --timeout 15000"
+  },
+  "bin": "bin/www",
+  "main": "bin/www",
+  "pkg": {
+    "scripts": "routes/**/*.js",
+    "assets": [
+      "public/**/*",
+      "views/**/*",
+      "views/*"
+    ],
+    "targets": [
+      "node8-windows-x64"
+    ],
+    "outputPath": "pkg/"
+  },
+  "author": "fungi0",
+  "keywords": [
+    "pubsub",
+    "redis"
+  ],
+  "devDependencies": {
+    "supertest": "~6.1.0",
+    "superagent": "~6.1.0",
+    "signalr": "2.4.2",
+    "@microsoft/signalr": "*",
+    "@aspnet/signalr": "*",
+    "node-signalr": "2.0.6",
+    "httpntlm": "1.7.7",
+    "soap": "0.35.0",
+    "chai": "^4.2.0",
+    "mocha": "~7.2.0"
+  },
+  "https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
+  "dependencies": {
+    "markdown-js": "~0.0.1",
+    "gray-matter": "*",
+    "uuid": "~8.3.2",
+    "net": "~1.0.2",
+    "jsmodbus": "^4.0.6",
+    "pm2": "5.1.0",
+    "redis": "~2.8.0",
+    "node-opcua": "~2.47.0",
+    "nodemailer": "~6.6.2",
+    "node-cron": "^3.0.0",
+    "mqtt": "4.2.8",
+    "log4js": "~6.3.0",
+    "@log4js-node/smtp": "1.1.0",
+    "ejs": "~2.6.1",
+    "cookie-parser": "~1.4.5",
+    "express": "~4.16.1",
+    "http-errors": "~1.8.0",
+    "morgan": "~1.9.1"
+  }
+}
