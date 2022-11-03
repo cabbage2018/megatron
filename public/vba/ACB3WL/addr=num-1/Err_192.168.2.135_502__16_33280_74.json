@@ -1,1 +1,0 @@
-{"errno":"EADDRINUSE","code":"EADDRINUSE","syscall":"connect","address":"192.168.2.135","port":502,"ip":"192.168.2.135","uri":{"ip":"192.168.2.135","port":502,"sub":126,"start":"2021-11-03T09:53:27.639Z"},"space":{"desc":"4.5.21 Data set DS 130: Parameters for the alarm setpoint values (length 74 Modbus registers, readand write)","fc":16,"reg":33281,"cnt":74,"addr":33280}}
