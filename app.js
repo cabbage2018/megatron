@@ -6,15 +6,16 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var blogRouter = require('./routes/blog/index');
+var blogRouter = require('./routes/markdown/index');
+var modelsRouter = require('./routes/models');
 
 var app = express();
 
-app.configure(function () {
-	app.use(express.static(__dirname + '/public', { maxAge: 1000 * 60 * 60 }));
-	app.use(express.directory(__dirname + '/public'));
-	app.use(express.errorHandler());
-});
+// app.configure(function () {
+// 	app.use(express.static(__dirname + '/public', { maxAge: 1000 * 60 * 60 }));
+// 	app.use(express.directory(__dirname + '/public'));
+// 	app.use(express.errorHandler());
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
+app.use('/models', modelsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

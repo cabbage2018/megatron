@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-</head>
-<body>
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <h5>单文件上传</h5>
-    <p>Location: <input name="location" type="file" id="fileSelector" accept="pdf/*"></p>   
-    <input type="submit" value="submit" />
-    <p><!--%= response %--></p>
-  </form>
-  
-  <span></span>
 
-  <form action="/upload/postd" method="post" enctype="multipart/form-data">
-    <h5>字符串输入上传</h5>
-    <p><input type="input" name="location" ></p>
-    <input type="submit" value="submit" />
-  </form>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		<%= title %>
+	</title>
+</head>
+
+<body>
+	<form action="/upload" method="post" enctype="multipart/form-data">
+		<h5>单文件上传</h5>
+		<p>Location: <input name="location" type="file" id="fileSelector" accept="pdf/*"></p>
+		<input type="submit" value="submit" />
+		<p>
+			<!--%= response %-->
+		</p>
+	</form>
+
+	<span></span>
+	<form action="/upload/postd" method="post" enctype="multipart/form-data">
+		<h5>字符串输入上传</h5>
+		<p><input type="input" name="location"></p>
+		<input type="submit" value="submit" />
+	</form>
+	<span></span>
 
 </body>
+
 </html>
 
 <script>
-  const formData = new FormData()
-  formData.append('sth', '111')
-  
-  fileInput.addEventListener('change', (e) => {
-    console.log(fileInput.files);
-    const file = fileInput.files[0]
-    formData.append(file.name, file)
-  })
-  submit.addEventListener('click', () => {
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', '/file')
-    xhr.send(formData)
-  })
+	const formData = new FormData()
+	formData.append('sth', '111')
+
+	fileInput.addEventListener('change', (e) => {
+		console.log(fileInput.files);
+		const file = fileInput.files[0]
+		formData.append(file.name, file)
+	})
+	submit.addEventListener('click', () => {
+		const xhr = new XMLHttpRequest()
+		xhr.open('POST', '/file')
+		xhr.send(formData)
+	})
 </script>

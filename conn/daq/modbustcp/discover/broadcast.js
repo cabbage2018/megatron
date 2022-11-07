@@ -5,19 +5,46 @@ let log = log4js.getLogger('routes::modbustcp::discover')
 let dgram = require("dgram")
 let talker = dgram.createSocket("udp4")
 let port = 17009
+talker.bind(port)
+// // UDP
+// talker.on("error", function (err) {
+// 	log.error(err)
+// 	talker.close()
+// })
+// talker.on("message", function (msg, remote) {
+// 	if (msg) {
+// 		log.debug(msg.toString(), `port: ${port}, `, remote, msg)
+// 	}
+// })
+// talker.on("listening", function () {
+// 	log.info(`listening: ${address}, `, address.address, address.port)
+// 	var address = talker.address()
+// })
+setTimeout(function () {
+	talker.setBroadcast(true)
+	// magic is here
+	let message = Buffer.from([0x31, 0x1, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff])
+	let result = talker.send(message, 0, message.length, 17008, "255.255.255.255", (error, bytes) => {
+		if (!error) {
+			log.mark(`msg:${bytes.toString('hex')} bytes:${bytes} port:${port}`)
+		} else {
+			log.error(`error:${error}`)
+		}
+	})
+}, 1000 * 25)
+
+// Hand-shake
 let modbustcp = require("../modbus")
-
 let onlineIps = new Map()
-
 // MODBUS 
+let subnetPrefix = "192.168.2"
 setTimeout(async function () {
 	const startMoment = new Date().getTime()
-	let refip = "192.168.2"
 	for (var j = 1; j < 255; j++) {
 		await sleep(6000)
 			.then(async () => {
-				let ipstr = refip + "." + j;
-				await modbustcp.acquire(ipstr)
+				let ipstr = subnetPrefix + "." + j;
+				await modbustcp.access(ipstr)
 					.then((_response) => {
 						onlineIps.set(ipstr, new Date())
 					})
@@ -32,37 +59,6 @@ setTimeout(async function () {
 	const endMoment = new Date().getTime()
 	log.warn("Profiling broadcast: ", endMoment - startMoment, " millisecond")
 }, 9000)
-
-// UDP
-talker.on("error", function (err) {
-	log.error(err)
-	talker.close()
-})
-
-talker.on("message", function (msg, remote) {
-	if (msg) {
-		log.debug(msg.toString(), `port: ${port}, `, remote, msg)
-	}
-})
-
-talker.on("listening", function () {
-	log.info(`listening: ${address}, `, address.address, address.port)
-	var address = talker.address()
-})
-
-talker.bind(port)
-
-setTimeout(function () {
-	talker.setBroadcast(true)
-	let message = Buffer.from([0x31, 0x1, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]) // magic is here
-	let result = talker.send(message, 0, message.length, 17008, "255.255.255.255", (error, bytes) => {
-		if (!error) {
-			log.mark(`msg:${bytes.toString()} bytes:${bytes} port:${port}`)
-		} else {
-			log.error(`error:${error}`)
-		}
-	})
-}, 1000 * 25)
 
 // list2html
 function list2html(array) {
