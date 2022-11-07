@@ -15,8 +15,6 @@ router.get('/', function (req, res, next) {
 	res.write('<p><a href="./blog">My blog</a></p>')
 	res.end()
 });
-let path = require('path')
-let fs = require('fs')
 // gray-matter to read the .md files better
 const matter = require('gray-matter');
 // use markdown-it to convert content to HTML

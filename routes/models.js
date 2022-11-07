@@ -1,13 +1,8 @@
 'use strict'
 var express = require('express');
-var router = express.Router();
-// let actuator = require('./actuator');
-let path = require('path')
-let fs = require('fs')
-
-var express = require('express');
 var server = express.Router();
 let fs = require('fs')
+
 /* GET home page. */
 server.get('/', function (req, res, next) {
 	res.render('upload', { title: 'List file upload' });
@@ -44,7 +39,6 @@ router.get('/tree', function (req, res, next) {
 	})
 })
 module.exports = router;
-
 
 router.post('/', function (request, response, next) {
 	console.log(request.url)

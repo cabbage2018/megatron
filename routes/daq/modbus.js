@@ -1,6 +1,8 @@
 'use strict'
 var express = require('express');
 var router = express.Router();
+let path = require('path');
+let fs = require('fs');
 
 /*
   MODBUSTCP
@@ -11,7 +13,7 @@ let {
 	measure,
 	tariff,
 	schedule,
-	commission } = require('../conn/daq/modbustcp');
+	commission } = require('../../conn/daq/modbustcp');
 ///modbus/access?ip='10.34.59.228'&port=503&subnum=126
 router.get("/modbus/access/:ip/:port/:subnum", async (req, res, next) => {
 	let physical = {};

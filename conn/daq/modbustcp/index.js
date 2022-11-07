@@ -8,22 +8,22 @@ let {
 	tariff,
 	schedule,
 } = require('./commissioning')
-let { acquire, access } = require('./modbus')
+let {
+	acquire,
+	access
+} = require('./modbus')
 
 module.exports = {
-	// present2html: function () { },
 	acquire: acquire,
 	access: access,
 	measure: measure,
 	tariff: tariff,
 	schedule: schedule,
-
 	commission: async function (req, res, next) {
 		if (res.physicals && res.physicals.length > 0) {
 		}
 		return
 	},
-
 	instantiate: function (req, res, next) {
 		if (req.candidates) {
 			for (let i = 0; i < req.candidates.length; i = i + 1) {
@@ -75,7 +75,6 @@ module.exports = {
 		// query
 		for (var i = 0; i < array.length; i++) {
 			let e = array[i]
-			// log.info(e)
 			if (e.ip && e.port && e.subordinatorNumber && e.functioncode && e.register && e.quantity && e.timeoutMillisecond) {
 				await inventory.acquire(
 					e.ip,
@@ -110,32 +109,11 @@ module.exports = {
 						// datasourceUnreachable.set(e, error)
 						log.error(error)
 					})
-
 			} else {
 				throw new Error(`missing parameters: ${__filename}`)
 			}
 		}
-
-		// serialize to disk
-		serialize(datasourceOnline)
-		log.infor(datasourceOnline)
-
-		// alarm
-		log.warn(datasourceUnreachable)
-
-		// all further work will only deal with the deserialized json object
-		// res.end()
 		return
 	},
 
-	updatePersistFile: function () {
-		let arr = []
-		for (var addrPair of datasourceOnline) {
-			arr.push(addrPair[0])
-			log.debug(`--> ${addrPair[1]}`)
-		}
-		serialize(arr)
-	},
-	// mapGood: datasourceOnline, 
-	// mapFailed: datasourceUnreachable,
 }
