@@ -1,17 +1,17 @@
 'use strict'
 var express = require('express');
 var router = express.Router();
+
 let path = require('path')
 let fs = require('fs')
 let log4js = require('log4js')
 let log = log4js.getLogger('routes::daq::simocode')
 // const { readCertificate, readCertificateRevocationList, exploreCertificateInfo } = require("node-opcua-crypto");
 const async = require("async");
-const addArr = require('../daq/SIMOCODE(SIRIUS)1.json')
+const addArr = require('./SIMOCODE(SIRIUS)1.json')
 //const { OPCUAClient, makeBrowsePath, AttributeIds, resolveNodeId, TimestampsToReturn } = require("node-opcua");
 const { MessageSecurityMode, SecurityPolicy, OPCUAClient } = require("node-opcua");
-const endpointUrl = require('../daq/SIMOCODE(url)1.json');
-module.exports = router;
+const endpointUrl = require('./SIMOCODE(url)1.json').ep;
 
 /* GET listing. */
 router.get('/simocode', function (req, res, next) {
@@ -107,3 +107,5 @@ _client.connect(endpointUrl, function (err) {
 	}
 })
 /* a remaining issue connecting to SIMOCODE is its CA will be rejected if the device time is incorrect! */
+
+module.exports = router;

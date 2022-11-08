@@ -1,10 +1,10 @@
 'use strict'
-var express = require('express');
-var server = express.Router();
+let express = require('express');
+let router = express.Router();
 let fs = require('fs')
 
 /* GET home page. */
-server.get('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
 	res.render('upload', { title: 'List file upload' });
 	next()
 });
@@ -38,7 +38,6 @@ router.get('/tree', function (req, res, next) {
 		items: map,
 	})
 })
-module.exports = router;
 
 router.post('/', function (request, response, next) {
 	console.log(request.url)

@@ -8,7 +8,7 @@ var indexRouter = require('./routes/daq/modbus');
 var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/markdown/index');
 var modelsRouter = require('./routes/models');
-var simocodeRouter = require('./routes/daq/simocode');
+var simocodeRouter = require('./routes/model/simocode');
 
 var app = express();
 
