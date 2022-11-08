@@ -8,6 +8,7 @@ var indexRouter = require('./routes/daq/modbus');
 var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/markdown/index');
 var modelsRouter = require('./routes/models');
+var simocodeRouter = require('./routes/daq/simocode');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/models', modelsRouter);
+app.use('/simocode', simocodeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
