@@ -13,11 +13,12 @@ const {
 
 module.exports = {
 	/*SOME DEVICE LIKE SIMOCODE PROV PN HAS VERY SMALL LIMIT; but SCADA has bigger*/
-	acquire: async function (endpointUrl, nodeArray, bulkSize = 1000) {
+	acquire: async function (endpointUrl, nodeArray/*, bulkSize = 1000*/) {
 		var arr = [];
 		for (var i = 0; i < nodeArray.length; i += 1) {
 			arr.push({ nodeId: nodeArray[i].nodeid, attributeId: AttributeIds.Value });
 		}
+
 		let promisePhysicalLayer = new Promise(function (resolve, reject) {
 			const client = OPCUAClient.create({
 				endpoint_must_exist: false,
@@ -40,22 +41,26 @@ module.exports = {
 			collect.arr = [];
 			collect['url'] = endpointUrl;
 			collect['nodes'] = nodeArray;
-			if (bulkSize > 1) {
-				const BATCH_SIZE = bulkSize;
-				for (var i = 0; i < arr.length / BATCH_SIZE; i += 1) {
-					const start = i * BATCH_SIZE
-					const stop = (i === arr.length / BATCH_SIZE) ? arr.length : (i + 1) * BATCH_SIZE
-					var resp = await session.readVariableValue(arr.slice(start, stop));//read
-					collect.arr.concat(resp)
-				}
-				resolve(collect)
-			} else {
-				for (var i = 0; i < arr.length; i++) {
-					const tmp = await session.read(arr[i])
-					collect.arr.push(tmp)
-				}
-				resolve(collect)
-			}
+
+			// if (bulkSize > 1) {
+			// 	const BATCH_SIZE = bulkSize;
+			// 	for (var i = 0; i < arr.length / BATCH_SIZE; i += 1) {
+			// 		const start = i * BATCH_SIZE
+			// 		const stop = (i === arr.length / BATCH_SIZE) ? arr.length : (i + 1) * BATCH_SIZE
+			// 		var resp = await session.readVariableValue(arr.slice(start, stop));//read
+			// 		collect.arr.concat(resp)
+			// 	}
+			// 	resolve(collect)
+			// } else {
+			// 	for (var i = 0; i < arr.length; i++) {
+			// 		const tmp = await session.read(arr[i])
+			// 		collect.arr.push(tmp)
+			// 	}
+			// 	resolve(collect)
+			// }
+
+			collect.resp = await session.read(arr);
+
 			log.debug(" closing session")
 			if (session) {
 				await session.close();
@@ -65,6 +70,8 @@ module.exports = {
 				await client.disconnect();
 				client = null;
 			}
+			resolve(collect);
+
 		})
 		return promisePhysicalLayer;
 	}

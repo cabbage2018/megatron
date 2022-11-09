@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/daq/modbus');
-var usersRouter = require('./routes/users');
-var blogRouter = require('./routes/markdown/index');
-var modelsRouter = require('./routes/models');
-var simocodeRouter = require('./routes/model/simocode');
+let indexRouter = require('./routes/daq/modbus');
+let usersRouter = require('./routes/users');
+let blogRouter = require('./routes/markdown/index');
+let modelsRouter = require('./routes/models');
+// let simocodeRouter = require('./routes/model/simocode');
+let deviceRouter = require('./routes/device');
 
-var app = express();
+let app = express();
 
 // app.configure(function () {
 // 	app.use(express.static(__dirname + '/public', { maxAge: 1000 * 60 * 60 }));
@@ -32,7 +33,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/models', modelsRouter);
-app.use('/simocode', simocodeRouter);
+// app.use('/simocode', simocodeRouter);
+app.use('/device', deviceRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
