@@ -10,3 +10,11 @@ let {
 } = require('../../conn/daq/snap7');
 
 module.exports = router
+
+// function connect() { }
+
+// function discovery() { }
+
+// function acquire() { }
+
+// function disconnect() { }

@@ -1,2 +1,2 @@
-let server = require('./server')
-let terminal = require('./terminal')
+let server = require('./udpserver')
+let terminal = require('./udpterminal')
