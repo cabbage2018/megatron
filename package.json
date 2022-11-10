@@ -54,7 +54,6 @@
 	},
 	"https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
 	"dependencies": {
-		"node-opcua-types": "~2.0.*",
 		"async": "~3.2.4",
 		"markdown-js": "~0.0.1",
 		"gray-matter": "*",
@@ -63,7 +62,7 @@
 		"jsmodbus": "^4.0.6",
 		"pm2": "5.1.0",
 		"redis": "~2.8.0",
-		"node-opcua": "~2.50.0",
+		"node-opcua": "~2.64.1",
 		"nodemailer": "~6.6.2",
 		"node-cron": "^3.0.0",
 		"mqtt": "4.2.8",

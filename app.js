@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 let indexRouter = require('./routes/');
 let modbusRouter = require('./routes/daq/modbus');
+let opcuaRouter = require('./routes/daq/opcua');
 let usersRouter = require('./routes/users');
 let blogRouter = require('./routes/markdown/index');
 let modelsRouter = require('./routes/models');
@@ -37,6 +38,7 @@ app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/models', modelsRouter);
 app.use('/modbus', modbusRouter);
+app.use('/opcua', opcuaRouter);
 // app.use('/simocode', simocodeRouter);
 app.use('/device', deviceRouter);
 

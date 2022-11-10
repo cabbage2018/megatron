@@ -4,7 +4,7 @@ var router = express.Router();
 let path = require('path');
 let fs = require('fs');
 let log4js = require('log4js');
-let log = log4js.getLogger('routes::daq');
+let log = log4js.getLogger('routes::daq::modbus');
 let modbus = require('../../conn/daq/modbustcp/modbus');
 
 router.get('/', function (req, res, next) {
