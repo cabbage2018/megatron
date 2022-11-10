@@ -29,7 +29,7 @@ log4js.configure({
 		}
 	},
 	"categories": {
-		"default": { "appenders": ["out", "debug"], "level": "all" },
+		"default": { "appenders": ["console", "debug"], "level": "all" },
 		"email": { "appenders": ["out"], "level": "error" }
 	}
 });

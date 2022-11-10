@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-let indexRouter = require('./routes/daq/modbus');
+let indexRouter = require('./routes/');
+let modbusRouter = require('./routes/daq/modbus');
 let usersRouter = require('./routes/users');
 let blogRouter = require('./routes/markdown/index');
 let modelsRouter = require('./routes/models');
@@ -27,12 +28,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'))
+// app.use(express.static(path.join(process.cwd(), './public')));
+// app.use(express.static(__dirname + '/public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/models', modelsRouter);
+app.use('/modbus', modbusRouter);
 // app.use('/simocode', simocodeRouter);
 app.use('/device', deviceRouter);
 
