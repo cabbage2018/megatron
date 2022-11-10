@@ -52,12 +52,16 @@ router.get('/add', function (req, res, next) {
 	let modelStr = req.query.model;
 	log.debug(modelStr);
 
-	res.write('Adding a device of:' + req.query.model, 'utf8', () => {
-		console.log("Writing Dynamic Data Confirmed: " + req.query.model);
-	});
-	// Prints Output on the browser in response
-	res.end('ok');
-	// res.redirect('/')
+	res.render('channel', {
+		title: 'Configure',
+		modelType: modelStr,
+	})
+})
+
+router.post('/add', function (req, res, next) {
+	log.debug(req.body);
+	log.debug(req.body.Host);
+	res.send('post请求成功' + req.body.Host)
 })
 
 module.exports = router;
