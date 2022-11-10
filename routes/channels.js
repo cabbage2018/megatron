@@ -9,13 +9,14 @@ let router = new Routers()
 // seems have to be the last line in the file
 module.exports = router
 
-let log4js = require('log4js')
-let log = log4js.getLogger('routes::daq')
-
+let matrix = new Map()
+if (arrayOfList !== null && arrayOfList !== undefined) {
+	matrix = new Map(arrayOfList)
+}
+// tracer.debug(JSON.stringify([...matrix]))
 router.get('/channel', (req, res) => {
 	tracer.debug(req.params)
 	var idString = req.params.id
-
 
 	let map = new Map()
 	const files = fs.readdirSync(path.join(process.cwd(), './routes/daq/')).filter(item => !fs.statSync(path.join(path.join(process.cwd(), './routes/daq/'), item)).isDirectory())
@@ -27,10 +28,3 @@ router.get('/channel', (req, res) => {
 		items: map
 	})
 })
-
-
-let matrix = new Map()
-if (arrayOfList !== null && arrayOfList !== undefined) {
-	matrix = new Map(arrayOfList)
-}
-// tracer.debug(JSON.stringify([...matrix]))

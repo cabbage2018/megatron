@@ -3,55 +3,42 @@ var express = require('express');
 var router = express.Router();
 let path = require('path');
 let fs = require('fs');
+let log4js = require('log4js');
+let log = log4js.getLogger('routes::daq');
+let modbus = require('../../conn/daq/modbustcp/modbus');
 
+router.get('/', function (req, res, next) {
+	res.render('modbus', {
+		title: 'Acquire',
+		channelType: 'tcp',
+	})
+});
 /*
-  MODBUSTCP
+  MODBUSTCP TCP
 */
-let {
-	acquire,
-	access,
-	measure,
-	tariff,
-	schedule,
-	commission } = require('../../conn/daq/modbustcp');
-///modbus/access?ip='10.34.59.228'&port=503&subnum=126
-router.get("/modbus/access/:ip/:port/:subnum", async (req, res, next) => {
-	let physical = {};
-	physical.ip = req.query.ip ? req.query.ip : '127.0.0.1';
-	physical.port = req.query.port ? req.query.port : 502;
-	physical.subnum = req.query.subnum ? req.query.subnum : 127;
-	physical.responses = [];
-	await access(physical.ip, physical.port, physical.subnum)
+router.post("/tcp", async (req, res, next) => {
+	log.debug(req.body);
+	log.debug(req.body.Url);
+	log.debug(req.body.Target);
+	log.debug(req.body.Endian);
+	res.write('<p>' + req.body.Url + '</p>');
+	res.write('<p>' + req.body.Target + '</p>');
+	res.write('<p>' + req.body.Endian + '</p>');
+	let urls = req.body.Url.split(':');
+	let tars = req.body.Target.split(':');
+	log.debug(urls, tars);
+	modbus.acquire(urls[0], parseInt(urls[1]), parseInt(urls[2]),
+		parseInt(tars[0]), parseInt(tars[1]), parseInt(tars[2]), 3000, [31, 255])
 		.then((response) => {
 			log.mark(response);
-			physical['responses'].push(response);
+			res.write('<p>' + response + '</p>');
+			res.end();
 		})
 		.catch((error) => {
-			log.error(error)
-			physical.offline = error;
+			log.error(error);
+			res.write('<p>' + JSON.stringify(error) + '</p>');
+			res.end();
 		})
+	log.debug('modbus command issued...');
 })
-///modbus/access?ip='10.34.59.228'&port=503&subnum=126&fc=3&ireg=201&quantity=100&timeout=6000&flash=[255,0,129]
-router.get("/modbus/acquire/:uri", async (req, res, next) => {
-	// let uri = req.params('uri') ?? '';
-	let x = {};
-	x.ip = req.params('ip') ? req.params('ip') : '127.0.0.1';
-	x.port = req.params('port') ? req.params('port') : 502;
-	x.subnum = req.params('subnum') ? req.params('subnum') : 127;
-	x.fc = req.params('fc') ? req.params('fc') : 3;
-	x.reg = req.params('reg') ? req.params('reg') : 3021;
-	x.quantity = req.params('quantity') ? req.params('quantity') : 127;
-	x.timeout = req.params('timeout') ? req.params('timeout') : 6000;
-	x.flash = req.params('flash') ? req.params('flash') : [255, 0, 129];
-	x.responses = [];
-	await acquire(x.ip, x.port, x.subnum, x.fc, x.reg, x.quantity, x.timeout, x.flash/**/)
-		.then((response) => {
-			log.mark(response);
-			x['responses'].push(response);
-		})
-		.catch((error) => {
-			log.error(error)
-			x['offline'] = error;
-		})
-})
-module.exports = router
+module.exports = router;
