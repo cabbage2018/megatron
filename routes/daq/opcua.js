@@ -13,40 +13,44 @@ router.get('/', function (req, res, next) {
 	res.render('opcua', {
 		title: 'Acquire',
 		channelType: 'OPC-UA',
+		nodeIds: JSON.stringify(["ns=2;i=102", "ns=2;i=30"])
 	})
 });
 /*
   OPCUA
 */
-// let physicals = JSON.parse(fs.readFileSync(path.join(__dirname, './SIMOCODE(SIRIUS)1.json')));
-// console.log(physicals);
-// physicals.responses = []
-// let epurl = JSON.parse(fs.readFileSync(path.join(__dirname, './SIMOCODE(URL)2.json')))
-// console.log(physicals);
 router.post("/", async (req, res, next) => {
 	res.write('<p>' + req.body.Url + '</p>');
 	res.write('<p>' + req.body.Target + '</p>');
 	log.debug(req.body);
 	let endpointUrl = req.body.Url;
-	let addr = [{ "nodeid": "ns=2;i=88" }, { "nodeid": "ns=2;i=102" }];
-	// let addr = JSON.parse(req.body.Target);
+	// let addr = [{ "nodeid": "ns=2;i=88" }, { "nodeid": "ns=2;i=102" }];
+	let addr = JSON.parse(req.body.Target);
 	log.debug(endpointUrl, addr);
-	acquire(endpointUrl, addr)
-		.then((response) => {
-			log.mark(response);
-			res.write('<p>');
-			res.write(JSON.stringify(response));
-			res.write('</p>');
-			res.end();
-		})
-		.catch((error) => {
-			log.error(error);
-			res.write('<p>');
-			res.write(JSON.stringify(error));
-			res.write('</p>');
-			res.end();
+	addr.forEach(async (element, index) => {
+		await acquire(endpointUrl, [element])
+			.then((response) => {
+				log.mark(response);
+				// let arr = JSON.parse(response);
+				for (let i = 0; i < response.length; i = i + 1) {
+					res.write('<p>');
+					res.write(JSON.stringify(response[i]));
+					res.write('</p>');
+				}
+			})
+			.catch((error) => {
+				log.error(error);
+				res.write('<p>');
+				res.write(JSON.stringify(error));
+				res.write('</p>');
+				// res.end();
+			})
+		res.write('opcua command issued...');
+	});
 
-		})
-	res.write('opcua command issued...');
+	setTimeout(() => {
+		// res.end();
+	}, 60000);
+
 })
 module.exports = router

@@ -13,7 +13,7 @@ module.exports = {
 	acquire: function (endpointUrl, nodeArray/*, bulkSize = 1000*/) {
 		var arr = [];
 		for (var i = 0; i < nodeArray.length; i += 1) {
-			arr.push({ nodeId: nodeArray[i].nodeid, attributeId: AttributeIds.Value });
+			arr.push({ nodeId: nodeArray[i]/*.nodeid*/, attributeId: AttributeIds.Value });
 		}
 
 		let promisePhysicalLayer = new Promise(async function (resolve, reject) {
