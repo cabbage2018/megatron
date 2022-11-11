@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
 	log.debug('read command issued...');
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", (req, res, next) => {
 	res.write('<p>' + req.body.Url + '</p>');
 	res.write('<p>' + req.body.Target + '</p>');
 	log.debug(req.body);
@@ -44,15 +44,16 @@ router.post("/", async (req, res, next) => {
 
 		// make segments to array
 		if ((i + 1) % 100 === 0) {
-			await acquire(endpointUrl, segmentedArr)
+			acquire(endpointUrl, segmentedArr)
 				.then((response) => {
 					log.mark(response);
-					let arr = JSON.parse(response);
-					for (let i = 0; i < arr.length; i = i + 1) {
-						res.write('<p>');
-						res.write(JSON.stringify(arr[i]));
-						res.write('</p>');
-					}
+					// let arr = JSON.parse(response);
+					res.write('<p>' + '...' + JSON.stringify(response) + '</p>');
+					// for (let i = 0; i < arr.length; i = i + 1) {
+					// 	res.write('<p>');
+					// 	res.write(JSON.stringify(arr[i]));
+					// 	res.write('</p>');
+					// }
 				})
 				.catch((error) => {
 					log.error(error);
@@ -63,20 +64,21 @@ router.post("/", async (req, res, next) => {
 				})
 			res.write('<p>' + '...' + JSON.stringify(segmentedArr) + '</p>');
 			segmentedArr = [];
-			continue;
+			// continue;
 		}
 	}
 	// left remaining
 	if (segmentedArr.length > 0) {
-		await acquire(endpointUrl, segmentedArr)
+		acquire(endpointUrl, segmentedArr)
 			.then((response) => {
 				log.mark(response);
 				// let arr = JSON.parse(response);
-				for (let i = 0; i < response.length; i = i + 1) {
-					res.write('<p>');
-					res.write(JSON.stringify(response[i]));
-					res.write('</p>');
-				}
+				res.write('<p>' + '...' + JSON.stringify(response) + '</p>');
+				// for (let i = 0; i < response.length; i = i + 1) {
+				// 	res.write('<p>');
+				// 	res.write(JSON.stringify(response[i]));
+				// 	res.write('</p>');
+				// }
 			})
 			.catch((error) => {
 				log.error(error);
@@ -87,9 +89,8 @@ router.post("/", async (req, res, next) => {
 		res.write('<p>' + '...' + JSON.stringify(segmentedArr) + '</p>');
 		segmentedArr = [];
 	}
-
 	setTimeout(() => {
 		// res.end();
-	}, 60000);
+	}, 30000);
 })
 module.exports = router;

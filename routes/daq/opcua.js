@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 	res.render('opcua', {
 		title: 'Acquire',
 		channelType: 'OPC-UA',
-		nodeIds: JSON.stringify(["ns=2;i=102", "ns=2;i=30"])
+		nodeIds: JSON.stringify(["ns=2;i=102", "ns=2;i=30", "ns=2;i=69", "ns=2;i=92", "ns=2;i=73", "ns=2;i=52"])
 	})
 });
 /*
@@ -27,8 +27,10 @@ router.post("/", async (req, res, next) => {
 	// let addr = [{ "nodeid": "ns=2;i=88" }, { "nodeid": "ns=2;i=102" }];
 	let addr = JSON.parse(req.body.Target);
 	log.debug(endpointUrl, addr);
-	addr.forEach(async (element, index) => {
-		await acquire(endpointUrl, [element])
+	addr.forEach(/*async*/(element, index) => {
+		// await 
+		log.debug([element]);
+		acquire(endpointUrl, [element])
 			.then((response) => {
 				log.mark(response);
 				// let arr = JSON.parse(response);
@@ -43,14 +45,11 @@ router.post("/", async (req, res, next) => {
 				res.write('<p>');
 				res.write(JSON.stringify(error));
 				res.write('</p>');
-				// res.end();
 			})
-		res.write('opcua command issued...');
+		res.write('<p>' + JSON.stringify([element]) + '</p>');
 	});
-
 	setTimeout(() => {
 		// res.end();
-	}, 60000);
-
+	}, 30000);
 })
 module.exports = router

@@ -15,9 +15,7 @@ module.exports = {
 		for (var i = 0; i < nodeArray.length; i += 1) {
 			arr.push({ nodeId: nodeArray[i]/*.nodeid*/, attributeId: AttributeIds.Value });
 		}
-
 		let promisePhysicalLayer = new Promise(async function (resolve, reject) {
-
 			let client = OPCUAClient.create({
 				endpoint_must_exist: false,
 				connectionStrategy: {
@@ -26,7 +24,6 @@ module.exports = {
 					maxDelay: 10 * 1000
 				}
 			})
-
 			client.on("backoff", (retry, delay) => {
 				reject('backoff')
 			})
@@ -54,16 +51,20 @@ module.exports = {
 							session.read(arr, maxAge, function (err, dataValue) {
 								if (!err) {
 									// let dca = JSON.parse(JSON.stringify(dataValue))//deep cloned array
-									log.mark("->:", dataValue)
-									resolve(dataValue);
-
-									log.debug(" closing session")
+									// log.mark("->:", dataValue)
 									if (session) {
+										log.debug(" closing session");
 										session.close();
 									}
 									if (client) {
 										client.disconnect();
 									}
+
+									setTimeout(() => {
+										dataValue.addr = nodeArray;
+										resolve(dataValue);
+									}, 10);
+
 								} else {
 									reject(err)
 								}
