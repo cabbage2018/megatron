@@ -13,14 +13,17 @@ let blogRouter = require('./routes/markdown/index');
 let modelsRouter = require('./routes/models');
 // let simocodeRouter = require('./routes/model/simocode');
 let deviceRouter = require('./routes/device');
+let chartRouter = require('./routes/chart');
 
 let app = express();
 
 // app.configure(function () {
-// 	app.use(express.static(__dirname + '/public', { maxAge: 1000 * 60 * 60 }));
-// 	app.use(express.directory(__dirname + '/public'));
-// 	app.use(express.errorHandler());
 // });
+console.log(__dirname, "*** project's __dirname ***");
+app.use(express.static(__dirname, { maxAge: 1000 * 60 * 60 }));
+app.use(express.static(__dirname));
+// app.use(express.directory(__dirname + '/public'));
+// app.use(express.errorHandler());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,6 +45,7 @@ app.use('/modbus', modbusRouter);
 app.use('/opcua', opcuaRouter);
 app.use('/simocode', simocodeRouter);
 app.use('/device', deviceRouter);
+app.use('/chart', chartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -42,7 +42,7 @@
 	],
 	"devDependencies": {
 		"supertest": "~6.1.0",
-		"superagent": "~6.1.0",
+		"superagent": "~7.0.2",
 		"signalr": "2.4.2",
 		"@microsoft/signalr": "*",
 		"@aspnet/signalr": "*",
