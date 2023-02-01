@@ -11,4 +11,10 @@ router.get('/', function (req, res, next) {
     // log.debug(req, res, next);
 })
 
+router.get('/ts', function (req, res, next) {
+    res.render('timeseries', {
+        title: 'Presentation',
+    })
+    // log.debug(req, res, next);
+})
 module.exports = router;
