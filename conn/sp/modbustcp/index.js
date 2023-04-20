@@ -3,7 +3,6 @@ const net = require('net')
 const modbus = require('jsmodbus')
 const netServer = new net.Server()
 
-
 const holding = Buffer.alloc(100)
 const server = new modbus.server.TCP(netServer, {
 	holding: holding
