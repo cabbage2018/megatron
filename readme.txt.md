@@ -32,3 +32,5 @@ $ npm config set registry http://registry.npmmirror.com
 npm config set registry https://registry.npmjs.org
 检测是否安装成功：
 npm config get registry
+
+make conn as plugins entry, including 'daq' and 'sp'
