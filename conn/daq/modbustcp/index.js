@@ -7,9 +7,20 @@ const path = require('path')
 const fs = require('fs')
 const log4js = require('log4js')
 const log = log4js.getLogger(':modbustcp:')
+let modbus = require('jsmodbus')// Master or initiator
+let net = require('net')
 
 class modbustcp {
 	/**
+	 * must have: ip, port, 
+	 * 
+	 * ambiguous: slave#, 
+	 * 
+	 * optional: fc, register, count, 
+	 * 
+	 * timeout, 
+	 * write buffer
+	 * ::promisePhysicalLayer
 	 * 
 	 */
 	constructor() {
@@ -35,6 +46,26 @@ class modbustcp {
 		this.disconnect()
 		.then()
 		.catch();
+	}
+
+	test(options){
+		let that = this;
+		return new Promise(function (resolve, reject) {
+			that.socket = new net.Socket();
+			that.client = new modbus.client.TCP(that.socket, that.slave, that.timeoutMilli);
+			socket.on('connect', function (resp) {
+				resolve(resp)
+			});
+			socket.on('error', (error) => {
+				socket.end();
+				reject(error);
+				console.log(error);
+			})
+			socket.connect({
+				'host': that.ip,                             //'192.168.2.42',
+				'port': that.port,                           //'502'
+			})
+		})
 	}
 
 	connect(options = null) {
@@ -170,4 +201,4 @@ class modbustcp {
 	}
 }
 util.inherits(modbustcp, events.EventEmitter)
-exports.modbustcp = modbustcp
+module.exports/*.modbustcp*/ = modbustcp
