@@ -2,7 +2,7 @@
 let modbus = require('jsmodbus')// Master or initiator
 let net = require('net')
 const log4js = require('log4js')
-const tracer = log4js.getLogger('daq:modbus')
+// const tracer = log4js.getLogger('daq:modbus')
 let log4js = require('log4js')
 let tracer = log4js.getLogger('routes::schedule')
 let fs = require('fs')
