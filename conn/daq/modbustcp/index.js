@@ -25,6 +25,7 @@ class modbustcp {
 	 */
 	constructor() {
 		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.protocol = "modbustcp";
 		this.identity = "modbustcp plugin";
 		this.client = undefined;
 	}

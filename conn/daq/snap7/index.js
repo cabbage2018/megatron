@@ -21,6 +21,7 @@ class snap7 {
 	 */
 	constructor() {
 		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.protocol = "snap7";
 		this.identity = "snap7 plugin";
 		this.client = undefined;
 	}

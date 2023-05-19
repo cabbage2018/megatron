@@ -20,6 +20,7 @@ class opcua {
 	 */
 	constructor() {
 		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.protocol = "opcua";
 		this.identity = "opcua plugin";
 		this.client = undefined;
 	}

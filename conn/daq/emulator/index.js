@@ -14,6 +14,7 @@ class emulator {
 	 */
 	constructor() {
 		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.protocol = "emu";
 		this.identity = "emulator plugin";
 	}
 

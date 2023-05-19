@@ -10,6 +10,7 @@ const events = require('events')
 class probe {
 	constructor() {
 		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.protocol = "restful";
 		this.identity = "modbustcp plugin";
 		this.crawler = undefined;
 	}
