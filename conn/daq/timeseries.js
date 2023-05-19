@@ -1,3 +1,32 @@
+'use strict'
+let modbustcp = require('./modbustcp')
+let opcua = require('./opcua')
+let snap7 = require('./snap7')
+let {probe} = require('./restful');
+let emulator = require('./emulator')
+// compose response from each protocol
+let instances = [modbustcp, opcua, snap7, probe, emulator];
+let array = [];
+(async ()=>{
+  for (var i = 0; i < instances.length; i++) {
+		let remote = instances[i];
+        console.log(`synchronously run: `, remote.identity + remote.uri);
+        
+        const jsonObj = await remote.commissioning(remote.spaces);
+        
+        const output = {
+            dev: remote.uri,
+            model: remote.model,
+            protocol: remote.protocol,
+            v: jsonObj,
+            q: 0x0,
+            t: new Date(),
+        }
+        array.push(output);
+	}
+})
+
+/*
 module.exports = {
     samples:
     [
@@ -117,4 +146,4 @@ module.exports = {
         },
     }
 }
-;
+*/
