@@ -1,81 +1,76 @@
 'use strict'
-let Routers = require('express-promise-router')
-// create a new express-promise-router
-// this has the same API as the normal express router except
-// it allows you to use async functions as route handlers
-let router = new Routers()
+const request = require('supertest')
+const path = require('path')
+const fs = require('fs')
+const log4js = require('log4js')
+const log = log4js.getLogger(':RESTful:')
+const util = require('util')
+const events = require('events')
 
-// export our router to be mounted by the parent application
-// seems have to be the last line in the file
-module.exports = router
-
-let fs = require('fs')
-let path = require('path')
-let log4js = require('log4js')
-let tracer = log4js.getLogger('routes::entrance')
-let cache = require('../cache')
-
-tracer.info("/***----------------------[" + __filename + "]------------------------**/")
-
-router.post('/', parseForm, csrfProtection, async function (req, res, next/**/) {
-
-	try {
-		cache.connect()
-			.then((client) => {
-				client.set('framework', 'AngularJS')
-				client.get('framework', function (err, reply) {
-					redisClient.lpush("Power-6", "")
-					console.log(reply);
-				});
-			})
-			.catch()
-	} catch (e) {
-		res.status(507).send('not connected to local cache')
+class probe {
+	constructor() {
+		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.identity = "modbustcp plugin";
+		this.crawler = undefined;
 	}
-	next()
-})
 
-router.get('/', csrfProtection, async function (req, res, next/**/) {
-	tracer.warn(req.csrfToken())
-	res.render('agents', {
-		title: __filename,
-		arrayJsonObj: infoArray,
-		context: new Date().toISOString(),
-		csrfToken: req.csrfToken("XSRF-TOKEN")
-	})
-	// pass the csrfToken to the view
-	next()
-})
+	register(callback) {
+	}
 
-router.delete('/', (req, res) => {
-	res.render('dictionary', {
-		title: __filename + new Date().toISOString(),
-		items: obj
-	})
-})
+	heartbeat() {
+		console.log(`it is alive @${__filename},`);
+	}
 
-router.put('/', (req, res) => {
-	var redisValues = [];
+	disconnect() {
+		return new Promise(function (resolve, reject) {
+			setTimeout(resolve, 0);
+		});
+	}
 
-	client.keys('*', function (err, keys) {
-		if (err) return console.log(err);
-		if (keys) {
-			async.map(keys, function (key, cb) {
-				client.get(key, function (error, value) {
-					if (error) return cb(error);
-					var redisObj = {};
-					redisObj[key] = value;
-					redisValues.push(redisObj);
-				});
-			});
-		}
-	});
+	close() {
+		this.disconnect()
+		.then()
+		.catch();
+	}
 
-	res.render('dictionary', {
-		title: __filename + new Date().toISOString(),
-		items: obj
-	})
-})
+	test(options){
+		let that = this;
+	}
 
+	connect(options = null) {
+		let that = this;
+	}
+
+	commissioning(spaces){
+		let that = this;
+		// let url = `https://${this.host}:${this.port}/${this.midamble}`
+		// let requestId = this.requestId
+		// let connectionId = this.connectionId
+		// let access_token = this.access_token
+		return new Promise(function (resolve, reject) {
+			request(spaces.url)
+				.post(`${spaces.serverPath}`)
+				.set('Access-Control-Allow-Origin', '*')
+				.set('Content-Type', 'application/json')
+				.set('Authorization', `Bearer ${spaces.token}`)
+				.send('')
+				.end(function (err, res) {
+					if (err) {
+						access.error(`url:${url}, post, ${spaces.serverPath}, ${err}`)
+						reject(err)
+					} else {
+						access.debug(`url:${url}, res:${res.body}`)
+						resolve(res.body)
+					}
+				})
+		})
+	}
+
+}
+
+util.inherits(probe, events.EventEmitter)
+module.exports = probe
 // A RESTful API is an architectural style for an application program interface(API) that uses HTTP requests to access and use data.That data can be used to GET, PUT, POST and DELETE data types, which refers to the reading, updating, creating and deleting of operations concerning resources.
 // Representational State Transfer
+
+// 2023.04.24:17:
