@@ -5,28 +5,88 @@ let fs = require('fs')
 //https://www.npmjs.com/package/node-snap7
 let snap7 = require('node-snap7');
 let s7client = new snap7.S7Client();
-module.exports = {
-	/*SOME DEVICE LIKE SIMOCODE PROV PN HAS VERY SMALL LIMIT; but SCADA has bigger*/
-	acquire: async function (ip, rack, slot) {
-		let promisePhysicalLayer = new Promise(function (resolve, reject) {
+const log4js = require('log4js')
+const log = log4js.getLogger('snap7');
+
+class snap7 {
+	/**
+	 * must have: ip, rack, slot
+	 * 
+	 * spaces: , 
+	 * 
+	 * timeout, 
+	 * write buffer
+	 * ::promisePhysicalLayer
+	 * 
+	 */
+	constructor() {
+		this.des = "save ecosystem with limiting usage of resource and energy";
+		this.identity = "snap7 plugin";
+		this.client = undefined;
+	}
+
+	register(callback) {
+	}
+
+	heartbeat() {
+		console.log(`it is alive @${__filename},`);
+	}
+
+	disconnect() {
+		return new Promise(function (resolve, reject) {
+			setTimeout(resolve, 0);
+		});
+	}
+
+	close() {
+		this.disconnect()
+		.then()
+		.catch();
+	}
+
+	test(options){
+		let that = this;
+		return new Promise(function (resolve, reject) {
+		})
+	}
+
+	connect(options = null) {
+		let that = this;
+		return new Promise(function (resolve, reject) {
+			that.s7client.ConnectTo(/*'192.168.1.12', 0, 1*/ip, rack, slot, function (err) {
+				if (err) {
+					reject(err)
+				} else {
+					resolve(s7client)
+
+				}
+			});
+		})
+
+	}
+
+	commissioning(spaces){
+		let that = this;
+		return new Promise(function (resolve, reject) {
 			s7client.ConnectTo(/*'192.168.1.12', 0, 1*/ip, rack, slot, function (err) {
 				if (err) {
 					reject(err)
 				} else {
 					// Read the first byte from PLC process outputs...
-					s7client.ABRead(0, 1, function (err2, res) {
-						if (err2) {
-							console.log(' >> ABRead failed. Code #' + err2 + ' - ' + s7client.ErrorText(err2));
-							reject(err2)
+					s7client.ABRead(0, 1, function (fault, res) {
+						if (fault) {
+							console.log(' >> ABRead failed. Code #' + fault + ' - ' + s7client.ErrorText(fault));
+							reject(fault)
 						} else {
-							// ... and write it to stdout
 							console.log(res)
 							resolve(res)
 						}
 					});
 				}
 			});
+
 		})
-		return promisePhysicalLayer;
 	}
 }
+util.inherits(snap7, events.EventEmitter)
+module.exports = snap7

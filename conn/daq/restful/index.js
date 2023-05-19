@@ -23,13 +23,10 @@ router.post('/', parseForm, csrfProtection, async function (req, res, next/**/) 
 		cache.connect()
 			.then((client) => {
 				client.set('framework', 'AngularJS')
-
 				client.get('framework', function (err, reply) {
 					redisClient.lpush("Power-6", "")
-
 					console.log(reply);
 				});
-
 			})
 			.catch()
 	} catch (e) {

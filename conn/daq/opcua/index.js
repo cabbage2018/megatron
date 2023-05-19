@@ -1,4 +1,3 @@
-
 'use strict'
 const log4js = require('log4js')
 const log = log4js.getLogger('opcua')
