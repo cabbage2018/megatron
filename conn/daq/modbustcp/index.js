@@ -72,23 +72,26 @@ class modbustcp {
 
 	connect(options = null) {
 		let that = this;
+		let ip = options.Ip;
+		let port = options.Port;
+		let slave = options.Slave;	
 
 		return new Promise(function (resolve, reject) {
-			const socket = new net.Socket();
-			that.client = new modbus.client.TCP(socket, options.slave, options.timeoutMilli);
+			that.socket = new net.Socket();
+			that.client = new modbus.client.TCP(that.socket, options.slave?options.slave:127, options.timeoutMilli?options.timeoutMilli:4000);
 
-			socket.on('connect', function () {
+			that.socket.on('connect', function () {
 				resolve(that.client);
 			});
 
-			socket.on('error', (error) => {
-				error.ip = ip
-				error.port = port
-				socket.end()
+			that.socket.on('error', (error) => {
+				// error.ip = ip
+				// error.port = port
+				that.socket.end()
 				reject(error)
 			});
 
-			socket.connect({
+			that.socket.connect({
 				'host': ip,                             //'192.168.2.42',
 				'port': port,                           //'502'
 			});
