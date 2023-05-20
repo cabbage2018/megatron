@@ -45,11 +45,12 @@ class snap7 {
 		.catch();
 	}
 
-	test(options){
+	testOnline(options){
 		let that = this;
 		return new Promise(function (resolve, reject) {
 		})
 	}
+	sn(){}
 
 	connect(options = null) {
 		let that = this;

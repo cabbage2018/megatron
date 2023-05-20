@@ -46,6 +46,8 @@ class emulator {
 		.then()
 		.catch();
 	}
+	testOnline(){}
+	sn(){}
 
 	connect(url = null) {
 		return new Promise(function (resolve, reject) {

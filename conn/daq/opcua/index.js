@@ -9,7 +9,7 @@ const {
 
 class opcua {
 	/**
-	 * must have: uri(ip, port, uri: tcp.udp://iot.azure.winccoa.com.cn:48400/UAServer)
+	 * must have: uri(ip, port, uri: tcp.opc://iot.azure.winccoa.com.cn:48400/UAServer)
 	 * 
 	 * spaces: ["ns=2;i=19847", "ns=3;s=\"scada.screw.dump\""], 
 	 * 

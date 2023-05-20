@@ -34,10 +34,11 @@ class probe {
 		.catch();
 	}
 
-	test(options){
+	testOnline(options){
 		let that = this;
 	}
 
+	sn(){}
 	connect(options = null) {
 		let that = this;
 	}

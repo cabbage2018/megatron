@@ -49,7 +49,7 @@ class modbustcp {
 		.catch();
 	}
 
-	test(options){
+	testOnline(options){
 		let that = this;
 		return new Promise(function (resolve, reject) {
 			that.socket = new net.Socket();
@@ -68,6 +68,7 @@ class modbustcp {
 			})
 		})
 	}
+	sn(){}
 
 	connect(options = null) {
 		let that = this;
