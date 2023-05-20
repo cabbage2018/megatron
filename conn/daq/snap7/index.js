@@ -7,6 +7,8 @@ let snap7 = require('node-snap7');
 let s7client = new snap7.S7Client();
 const log4js = require('log4js')
 const log = log4js.getLogger('snap7');
+const util = require('util');
+const events = require('events');
 
 class snap7 {
 	/**

@@ -5,14 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 let indexRouter = require('./routes/');
-let modbusRouter = require('./routes/daq/modbus');
-let opcuaRouter = require('./routes/daq/opcua');
+let modbusRouter = require('./routes/protocols/modbustcp');
+let opcuaRouter = require('./routes/protocols/opcua');
 let simocodeRouter = require('./routes/model/simocode');
 let usersRouter = require('./routes/users');
 let blogRouter = require('./routes/markdown/index');
 let modelsRouter = require('./routes/models');
 // let simocodeRouter = require('./routes/model/simocode');
-let deviceRouter = require('./routes/device');
+// let deviceRouter = require('./routes/device');
 let chartRouter = require('./routes/chart');
 
 let app = express();
@@ -44,7 +44,7 @@ app.use('/models', modelsRouter);
 app.use('/modbus', modbusRouter);
 app.use('/opcua', opcuaRouter);
 app.use('/simocode', simocodeRouter);
-app.use('/device', deviceRouter);
+// app.use('/device', deviceRouter);
 app.use('/chart', chartRouter);
 
 // catch 404 and forward to error handler

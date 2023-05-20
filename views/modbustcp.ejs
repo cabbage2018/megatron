@@ -1,4 +1,4 @@
-<!-- views/datasources.ejs -->
+<!-- views/modbustcp.ejs -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,16 +46,17 @@
 	</header>
 	<main>
 		<span> --- </span>
-		Select a physical channel:<br>
+		Modbus-TCP physical channel:<br>
 		<div>
 			<form action="/modbus/tcp" method="POST">
 				<div>
 					<%=channelType %>
-				</div> <br>
-				URL: <input type="text" name="Url" value="192.168.200.103:502:125" /> <br>
-				Target: <input type="text" name="Target" value="3:201:100" /> <br>
-				Endian: <input type="text" name="Endian" value="abcd->badc" /> <br>
-				<input type="submit" value="Insert" />
+				</div> 
+				<br>
+				ip: <input type="text" name="Ip" value="192.168.200.103:502:125" /> <br>
+				port: <input type="text" name="Port" value="3:201:100" /> <br>
+				slave: <input type="text" name="Slave" value="abcd->badc" /> <br>
+				<input type="submit" value="Append" />
 			</form>
 		</div>
 		<span> --- </span>

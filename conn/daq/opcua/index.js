@@ -1,4 +1,6 @@
 'use strict'
+const util = require('util');
+const events = require('events');
 const log4js = require('log4js')
 const log = log4js.getLogger('opcua')
 const {
@@ -87,7 +89,7 @@ class opcua {
 		for (var i = 0; i < spaces.nodeArray.length; i += 1) {
 			arr.push({ nodeId: spaces.nodeArray[i], attributeId: AttributeIds.Value });
 		}
-		that.bulkSize = spaces.bulkSize??100;
+		that.bulkSize = spaces.bulkSize?spaces.bulkSize:100;
 
 		return new Promise(function (resolve, reject) {	
 			// resolve(client)
