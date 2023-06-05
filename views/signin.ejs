@@ -1,0 +1,140 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>登录网页</title>
+  <script type="text/javascript" src="/javascripts/jquery-3.5.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/sha256.js"></script>
+  <script type="text/javascript">
+    const browseAt = document.getElementsByTagName("anchor")[0];
+    window.onload = function () {
+      // alert('加载完毕');
+      function preset() {
+        var testTsObj = document.getElementById("token2").innerText;
+        alert(new Date(testTsObj).toDateString())
+      }
+      preset();
+    };
+  </script>
+  <script>
+    $(function () {
+      $('#submit').click(function () {
+        let s1 = $("#username").val();
+        // let s2 = document.getElementById("password").innerText;
+        let obj = { email: s1, password: 's2' };
+        $.ajax({
+          type: 'post',
+          url: '/users/signin',
+          data: { email: $("#username").val(), password: $("#password").val() },
+          dataType: 'json',
+          success: function (data) {
+            alert('get submit data success!', data)
+          }
+        });
+      });
+    });
+  </script>
+  <style>
+    *all {
+      margin: 0;
+      padding: 0;
+    }
+
+    div.inner,
+    table {
+      position: absolute;
+    }
+
+    .outer {
+      height: 100%;
+    }
+
+    .inner {
+      border: 1px solid blue;
+      border-radius: 20px;
+      width: 400px;
+      height: 200px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url(/images/001.png);
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    .table {
+      top: 30%;
+      left: 20%;
+    }
+
+    .under {
+      position: fixed;
+      left: 0px;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .Time {
+      top: 65%;
+      left: 36%;
+      position: fixed;
+      width: 400px;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div name="verify1" id="token2">
+    <%= registerAt %>
+  </div>
+  <p>
+    <anchor2>
+      <%= browseAt %>
+    </anchor2>
+  </p>
+
+  <div class="outer">
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <td>账&nbsp;&nbsp;&nbsp;号</td>
+          <td><input type="text" name="username" id="username" /> </td>
+        </tr>
+        <tr>
+          <td>密&nbsp;&nbsp;&nbsp;码</td>
+          <td><input type="password" name="password" id="password" /> </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="right">
+            <input type='button' value="               登陆                 " id="submit" />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <span class="Time">
+      服务器时间：<%= browseAt.getFullYear() %>-<%= browseAt.getMonth() + 1 %>-<%= browseAt.getDate() %>
+            <%= browseAt.getHours() %>:<%= browseAt.getMinutes() %>
+                (<%if(browseAt.getHours() < 8){%>
+                  早上好
+                  <%} else if(browseAt.getHours() < 12) {%>
+                    上午好
+                    <%} else if(browseAt.getHours() < 14) {%>
+                      中午好
+                      <%} else if(browseAt.getHours() < 18) {%>
+                        下午好
+                        <%} else {%>
+                          晚上好
+                          <%}%>)
+    </span>
+    <div class="under"><span>显示器分辨率要求≥1024*768，请使用Firefox浏览器（<a href="http://www.firefox.com.cn/"
+          target="_blank">官网下载</a>），可以获得最佳显示效果，Chrome浏览器次之，IE浏览器则要求10或以上版本，其他浏览器较慢且有卡顿等现象。</span></div>
+  </div>
+  <script type="text/javascript">
+  </script>
+
+</body>
+
+</html>

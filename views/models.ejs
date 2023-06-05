@@ -2,97 +2,90 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<% include ./head %>
-		<title>
-			<%= title %>
-		</title>
+    <% include ./head %>
+    <title><%= title %></title>
 
-		<script type="text/javascript">
+    <script type="text/javascript">
 
-			//onclick事件传入value值和id
-			function button2(value, id) {
-				//判断点击的按钮的id是否存在,不存在则创建,存在则alert
-				if (!document.getElementById(id)) {
-					//创建input元素
-					var inp = document.createElement("input");
-					inp.type = "button";
-					//传入点击按钮的value值到新的按钮
-					inp.value = value;
-					//传入点击按钮的id到新的按钮(传入是id+1防止重复)
-					inp.id = id;
-					//当方法有参数时，用onclick = 方法名(参数)时就有错了，需要在方法名前面加function()
-					inp.onclick = function () {
-						click(id);
-					};
-					document.getElementById("div").appendChild(inp);
-				} else {
-					alert("已存在" + id)
-				}
-			}
-			function click(id) {
-				var flag = confirm("确认删除?");
-				if (flag) {
-					document.getElementById(id).remove();
-				}
-			}
-		</script>
+        //onclick事件传入value值和id
+            function button2(value, id) {
+            //判断点击的按钮的id是否存在,不存在则创建,存在则alert
+                if(!document.getElementById(id)) {
+                //创建input元素
+                    var inp = document.createElement("input");
+                    inp.type = "button";
+                    //传入点击按钮的value值到新的按钮
+                    inp.value = value;
+                    //传入点击按钮的id到新的按钮(传入是id+1防止重复)
+                    inp.id = id;
+                    //当方法有参数时，用onclick = 方法名(参数)时就有错了，需要在方法名前面加function()
+                    inp.onclick = function() {
+                        click(id);
+                    };
+                    document.getElementById("div").appendChild(inp);
+                } else {
+                    alert("已存在" + id)
+                }
+            }
+            function click(id) {
+                var flag = confirm("确认删除?");
+                if(flag) {
+                    document.getElementById(id).remove();
+                }
+            }
+        </script>
 
 </head>
-
 <body class="container">
-	<header>
-		<% include ./header %>
-	</header>
-	<main>
-		<span> --- </span>
+    <header>
+        <% include ./header %>
+    </header>
+    <main>
+        <span> --- </span>
 
-		<div>
-			<table class="table table-hover usertable">
-				<tr>
-					<th>index</th>
-					<th>item</th>
-					<th>acquire</th>
-					<th>callback</th>
-				</tr>
-				<% for(var i=0; i<items.length; i=i+1){ %>
-					<tr>
-						<td>
-							<%= i%>
-						</td>
-						<td>
-							<%=items[i]%>
-						</td>
-						<td>
-							<form method="post" action="/modbus/instances">
-								<input type="test" name="field2" value=<%=items[i]%> >
-								<input type="submit">
-							</form>
-						</td>
+        <div>
+            <table class="table table-hover usertable">
+                <tr>
+                    <th>index</th>
+                    <th>item</th>
+                    <th>acquire</th>
+                    <th>callback</th>
+                </tr>
+                <%for(var i=0; i<items.length; i= i+1){%>
+                <tr>
+                    <td><%=i%></td>
+                    <td><%=items[i]%></td>
+                    <td> 
+                        <form method="post" action="/modbus/instances">
+                            <input type="test" name="field2" value=<%=items[i]%> >
+                            <input type="submit">
+                        </form>
+                    </td>
 
-						<td>
-							<input type="button" id=<%=items[i]%> value="体育" onclick="button2( this.value, this.id )" />
-							<div>
-								<%= foo(this.id) %>
-							</div>
-						</td>
+                    <td>
 
-					</tr>
-					<%}%>
+                        <input type="button" id= <%=items[i]%> value="体育" onclick="button2( this.value, this.id )" />
+                        <div><%= foo(this.id) %></div>
+                                        
+                    </td>
 
-			</table>
-		</div>
-
-		<span> --- </span>
-
-		<h1>
-			add <%=items.length %>
-		</h1>
-	</main>
-	<footer>
-		<% include ./footer %>
-	</footer>
+                </tr>
+                <%}%>
+        
+            </table>
+        </div>
+        
+        <span> --- </span>
+        
+        <h1>
+            add <%=items.length %>
+        </h1>
+    </main>
+    <footer>
+        <% include ./footer %>
+    </footer>
 </body>
-
 </html>
+
+
