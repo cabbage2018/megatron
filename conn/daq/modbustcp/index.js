@@ -45,11 +45,11 @@ class modbustcp {
 
 	close() {
 		this.disconnect()
-		.then()
-		.catch();
+			.then()
+			.catch();
 	}
 
-	testOnline(options){
+	testOnline(options) {
 		let that = this;
 		return new Promise(function (resolve, reject) {
 			that.socket = new net.Socket();
@@ -68,17 +68,17 @@ class modbustcp {
 			})
 		})
 	}
-	sn(){}
+	sn() { }
 
 	connect(options = null) {
 		let that = this;
 		let ip = options.Ip;
 		let port = options.Port;
-		let slave = options.Slave;	
+		let slave = options.Slave;
 
 		return new Promise(function (resolve, reject) {
 			that.socket = new net.Socket();
-			that.client = new modbus.client.TCP(that.socket, options.slave?options.slave:127, options.timeoutMilli?options.timeoutMilli:4000);
+			that.client = new modbus.client.TCP(that.socket, options.slave ? options.slave : 127, options.timeoutMilli ? options.timeoutMilli : 4000);
 
 			that.socket.on('connect', function () {
 				resolve(that.client);
@@ -99,10 +99,10 @@ class modbustcp {
 		});
 	}
 
-	commissioning(spaces){
+	commissioning(spaces) {
 		let that = this;
-		return new Promise(function (resolve, reject) {			
-			if(that.client){
+		return new Promise(function (resolve, reject) {
+			if (that.client) {
 				let client = that.client;
 
 				switch (spaces.fc) {
@@ -116,7 +116,7 @@ class modbustcp {
 							reject(error)
 						})
 						break;
-	
+
 					case 2:
 						client.readDiscreteInputs(register, count).then(function (resp) {
 							socket.end()
@@ -127,7 +127,7 @@ class modbustcp {
 							reject(error)
 						})
 						break;
-	
+
 					case 3:
 						client.readHoldingRegisters(register, count).then(function (resp) {
 							socket.end()
@@ -138,7 +138,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					case 4:
 						client.readInputRegisters(register, count).then(function (resp) {
 							socket.end()
@@ -149,7 +149,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					case 5:
 						client.writeSingleCoil(register, outputs).then(function (resp) {
 							socket.end()
@@ -160,7 +160,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					case 6:
 						client.writeSingleRegister(register, outputs).then(function (resp) {
 							socket.end()
@@ -171,7 +171,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					case 15:
 						client.writeMultipleCoils(register, outputs).then(function (resp) {
 							socket.end()
@@ -182,7 +182,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					case 16:
 						client.writeMultipleRegisters(register, outputs).then(function (resp) {
 							socket.end()
@@ -193,7 +193,7 @@ class modbustcp {
 							reject(error)
 						});
 						break;
-	
+
 					default:
 						socket.end()
 						reject('Unsupported function code =' + fc + '##')
@@ -207,3 +207,30 @@ class modbustcp {
 }
 util.inherits(modbustcp, events.EventEmitter)
 module.exports/*.modbustcp*/ = modbustcp
+
+module.exports = (sequelize, DataTypes) => {
+	const Protocol = sequelize.define('Protocol', {
+		id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			unique: true,
+			primaryKey: true
+		},
+		uri: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		addressBook: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		procedureCall: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+	}, {
+		timestamps: true,
+		freezeTableName: true
+	});
+	return Protocol;
+};
