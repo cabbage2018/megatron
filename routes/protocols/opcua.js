@@ -1,6 +1,6 @@
 'use strict'
-var express = require('express');
-var router = express.Router();
+// var express = require('express');
+// var router = express.Router();
 let path = require('path');
 let fs = require('fs');
 let log4js = require('log4js');

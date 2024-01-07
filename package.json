@@ -54,27 +54,26 @@
 	},
 	"https_proxy": "http://'tenantuser':'123Abc!@#'@19.0.2.235:8083",
 	"dependencies": {
-
-        "nodehaystack": "2.0.3",
-
+		"@log4js-node/smtp": "1.1.0",
 		"async": "~3.2.4",
-		"markdown-js": "~0.0.1",
+		"cookie-parser": "~1.4.5",
+		"ejs": "~2.6.1",
+		"express": "~4.16.1",
 		"gray-matter": "*",
-		"uuid": "~8.3.2",
-		"net": "~1.0.2",
+		"http-errors": "~1.8.0",
 		"jsmodbus": "^4.0.6",
+		"log4js": "~6.3.0",
+		"markdown-js": "~0.0.1",
+		"morgan": "~1.9.1",
+		"mqtt": "4.2.8",
+		"ncc": "^0.3.6",
+		"net": "~1.0.2",
+		"node-cron": "^3.0.0",
+		"node-opcua": "~2.64.1",
+		"nodehaystack": "2.0.3",
+		"nodemailer": "~6.6.2",
 		"pm2": "5.1.0",
 		"redis": "~2.8.0",
-		"node-opcua": "~2.64.1",
-		"nodemailer": "~6.6.2",
-		"node-cron": "^3.0.0",
-		"mqtt": "4.2.8",
-		"log4js": "~6.3.0",
-		"@log4js-node/smtp": "1.1.0",
-		"ejs": "~2.6.1",
-		"cookie-parser": "~1.4.5",
-		"express": "~4.16.1",
-		"http-errors": "~1.8.0",
-		"morgan": "~1.9.1"
+		"uuid": "~8.3.2"
 	}
 }
