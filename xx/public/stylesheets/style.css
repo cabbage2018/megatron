@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+body div{
+display: inline-block;
+text-align: center;
+}
+.initImg{
+width: 75px;
+height: 40px;
+}
+.fillImg{
+object-fit: fill;
+}
+.containImg{
+object-fit: contain;
+}
+.coverImg{
+object-fit: cover;
+}
+.noneImg{
+object-fit: none;
+}
+.scaleDownImg{
+object-fit: scale-down;
+}

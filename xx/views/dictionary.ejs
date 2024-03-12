@@ -1,0 +1,55 @@
+<!-- views/dictionary.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ./partials/head %>
+        <title>
+            <%= title %>
+        </title>
+</head>
+
+<body class="container">
+    <header>
+        <% include ./header %>
+    </header>
+    <main>
+
+        <span> --- </span>
+
+        <div>
+            <table class="table table-hover usertable">
+                <tr>
+                    <th>Dictionary Key</th>
+                    <th>Value</th>
+                </tr>
+
+                <%for(var item of items){%>
+                    <tr>
+                        <td>
+                            <%=item[0]%>
+                        </td>
+                        <td>
+                            <%=item[1]%>
+                        </td>
+                    </tr>
+                    <%}%>
+
+            </table>
+        </div>
+
+        <span> --- </span>
+
+        <span> --- </span>
+
+        <h1>
+            add <%=items.size%>
+        </h1>
+    </main>
+    <footer>
+        <% include ./footer %>
+    </footer>
+</body>
+
+</html>

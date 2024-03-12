@@ -1,0 +1,56 @@
+<!-- views/dictionary.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ./head %>
+    <title>
+      <%= title %>
+    </title>
+    <title>jsTree view</title>
+    <!-- 2 load the theme CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+</head>
+
+<body class="container">
+  <!-- 3 setup a container element -->
+  <div id="jstree_div">
+    <!-- in this example the tree is populated from inline HTML -->
+    <ul>
+      <li>Root node 1
+        <ul>
+          <li id="child_node_1">Child node 1</li>
+          <li>Child node 2</li>
+        </ul>
+      </li>
+      <li>Root node 2</li>
+    </ul>
+  </div>
+  <button>demo button</button>
+  <h1>
+    statistics: <%=items.size%>
+  </h1>
+  <footer>
+    <% include ./footer %>
+  </footer>
+  <!-- 4 include the jQuery library -->
+  <script type="text/javascript" src="/javascripts/jquery-3.5.1.min.js"></script>
+  <!-- 5 include the minified jstree source -->
+  <script type="text/javascript" src="/javascripts/jstree.min.js"></script>
+  <script type="text/javascript">
+    $(function () { $('#jstree_div').jstree(); });
+    $('#jstree_div').on("changed.jstree", function (e, data) {
+      console.log(data.selected);
+    });
+    $('button').on('click', function () {
+      $('#jstree_div').jstree(true).select_node('child_node_1');
+      $('#jstree_div').jstree('select_node', 'child_node_1');
+      $.jstree.reference('#jstree_div').select_node('child_node_1');
+    });
+  </script>
+</body>
+
+</html>
